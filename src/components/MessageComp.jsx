@@ -19,7 +19,7 @@ function MessageComp() {
           style={{ width: "35px" }}
         />
         <span className="fs-6 fw-medium" onClick={() => setOpen(!open)}>
-          Messagistica
+          Messaggistica
         </span>
         <BsThreeDots className="ms-5" size={17} />
         <PiNotePencilDuotone className="ms-3" size={15} />
