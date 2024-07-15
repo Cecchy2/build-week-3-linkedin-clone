@@ -10,6 +10,11 @@ const initialState = {
   },
 };
 
-const profileReducer = (state = initialState, action) => {};
+const profileReducer = (state = initialState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
 
 export default profileReducer;
