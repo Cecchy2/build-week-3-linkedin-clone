@@ -68,7 +68,7 @@ function MyNavbar() {
         <div className="nav-divider"></div>
         <Nav.Link href="#work" className="nav-item-custom">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
-            <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4H3z"></path>
+            <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
           </svg>
           <span>Per le aziende <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="chevron-down" width="16" height="16"><path d="M12 14.5l-4-4h8z"></path></svg></span>
         </Nav.Link>
