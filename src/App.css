@@ -1,0 +1,118 @@
+/* NAVBAR */
+.navbar-custom {
+    height: 80px;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.navbar-brand-custom {
+    display: flex;
+    align-items: center;
+}
+
+.linkedin-icon {
+    color: #0a66c2;
+    width: 40px;
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+    width: 100%;
+    transition: max-width 0.5s ease-in-out;
+}
+
+.search-bar.active {
+    max-width: 400px;
+}
+
+.search-input-group {
+    width: 100%;
+}
+
+.search-icon {
+    background-color: #ffffff;
+    border: none;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding-left: 10px;
+}
+
+.nav-items-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px; /* Spaziatura tra gli elementi della griglia */
+    align-items: center;
+}
+
+.nav-items-container {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    color: #5c5c5c;
+    text-align: center;
+}
+
+.navbar-nav .nav-link span {
+    margin-top: 5px;
+    font-size: 1em;
+}
+
+.nav-divider {
+    height: 70px;
+    width: 1px;
+    background-color: #d1d0d0;
+    margin: 0 10px;
+}
+
+.nav-item-custom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item-custom span {
+    display: block;
+    margin-top: 5px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+}
+
+.profile-photo {
+    border-radius: 50%;
+}
+
+.chevron-down {
+    margin-left: 0px;
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+}
+/* END NAVBAR */
