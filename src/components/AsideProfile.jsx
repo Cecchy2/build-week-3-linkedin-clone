@@ -220,6 +220,7 @@ const Aside = () => {
 </div>
           
         </div>
+        <img className="img-sponsor" src="https://francescoursino.it/wp-content/uploads/2021/04/hero-barilla-1024x633.jpg" ></img>
           </div>
           
           
