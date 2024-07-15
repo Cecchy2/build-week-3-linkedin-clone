@@ -14,7 +14,7 @@
     border-right: 1px solid #e0e0e0;
     padding: 20px; 
     width: 400px; 
-    height: 100vh; 
+    height: 150vh; 
     position: sticky; 
     top: 0; 
     overflow-y: auto; 
@@ -29,4 +29,10 @@
     width: 150px;
   margin-bottom: 25px;
     margin-left: 50px;
+  }
+  .icon-pensil {
+    width:25px;
+    position: absolute;
+    right:30px;
+    
   }
