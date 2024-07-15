@@ -28,11 +28,10 @@ const Aside = () => {
           </div>
           <div className="profile-info mt-3">
           
-            <div>
+            <div className="mb-2">
             <span className="text-black fw-bold">
-          Persone che potresti conoscere
-        </span> <br></br>
-            <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
+          Altri profili simili
+        </span> 
           </div>
            
             
@@ -53,7 +52,7 @@ const Aside = () => {
           </span></p>
           
           </div>
-          <div className="btn-msg">Messaggio</div>
+          <div className="btn-msg"> <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
           <hr></hr>
           </div>
 </div>
@@ -73,7 +72,7 @@ const Aside = () => {
           </span></p>
           
           </div>
-          <div className="btn-msg">Messaggio</div>
+          <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
           <hr></hr>
           </div>
 </div>
@@ -93,7 +92,7 @@ const Aside = () => {
           </span></p>
           
           </div>
-          <div className="btn-msg">Messaggio</div>
+          <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
           <hr></hr>
           </div>
 </div>
@@ -113,12 +112,105 @@ const Aside = () => {
           </span></p>
           
           </div>
-          <div className="btn-msg">Messaggio</div>
+          <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
           <hr></hr>
           </div>
 </div>
             
           </div>
+          <div className="profile-info mt-3">
+          
+          <div>
+          <span className="text-black fw-bold">
+        Persone che potresti conoscere
+      </span> <br></br>
+          <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
+        </div>
+         
+          
+          
+            <div className="container">
+    <div className="row align-items-left">
+      <div className="col-md-2 ">
+      <img src={avatar}
+          alt="Descrizione" 
+          className="img-fluid" 
+          style={{ maxWidth: '50px' }} 
+        />
+      </div>
+      <div className="col-md-10">
+        <p className="text-black ms-4 fw-bold ">Marta N. <br/> <span className="text-secondary">
+        Studente presso Epicode
+        
+        </span></p>
+        
+        </div>
+        <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
+        <hr></hr>
+        </div>
+</div>
+<div className="container">
+    <div className="row align-items-left">
+      <div className="col-md-2 ">
+      <img src={avatar}
+          alt="Descrizione" 
+          className="img-fluid" 
+          style={{ maxWidth: '50px' }} 
+        />
+      </div>
+      <div className="col-md-10">
+        <p className="text-black ms-4 fw-bold ">Marta N. <br/> <span className="text-secondary">
+        Studente presso Epicode
+        
+        </span></p>
+        
+        </div>
+        <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
+        <hr></hr>
+        </div>
+</div>
+<div className="container">
+    <div className="row align-items-left">
+      <div className="col-md-2 ">
+      <img src={avatar}
+          alt="Descrizione" 
+          className="img-fluid" 
+          style={{ maxWidth: '50px' }} 
+        />
+      </div>
+      <div className="col-md-10">
+        <p className="text-black ms-4 fw-bold ">Marta N. <br/> <span className="text-secondary">
+        Studente presso Epicode
+        
+        </span></p>
+        
+        </div>
+        <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
+        <hr></hr>
+        </div>
+</div>
+<div className="container">
+    <div className="row align-items-left">
+      <div className="col-md-2 ">
+      <img src={avatar}
+          alt="Descrizione" 
+          className="img-fluid" 
+          style={{ maxWidth: '50px' }} 
+        />
+      </div>
+      <div className="col-md-10">
+        <p className="text-black ms-4 fw-bold ">Marta N. <br/> <span className="text-secondary o-3">
+        Studente presso Epicode
+        
+        </span></p>
+        
+        </div>
+        <div className="btn-msg"><i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio</div>
+        <hr></hr>
+        </div>
+</div>
+          
+        </div>
           </div>
           
           
