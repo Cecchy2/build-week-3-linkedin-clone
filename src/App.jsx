@@ -1,8 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import MessageComp from "./components/MessageComp";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <MessageComp />
+    </>
+  );
 }
 
 export default App;

@@ -1,0 +1,13 @@
+#messageTool{
+    bottom:0;
+    right:75px;
+    transform: translateY(100%) translateY(-48px);
+  
+}
+
+
+.dropdown-toggle::after {
+    display: none;
+  }
+  
+  
