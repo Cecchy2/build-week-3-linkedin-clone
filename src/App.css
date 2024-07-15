@@ -55,7 +55,7 @@
 .nav-items-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 10px; /* Spaziatura tra gli elementi della griglia */
+    gap: 10px;
     align-items: center;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .nav-divider {
-    height: 70px;
+    height: 80px;
     width: 1px;
     background-color: #d1d0d0;
     margin: 0 10px;
