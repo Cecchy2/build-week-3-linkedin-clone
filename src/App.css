@@ -26,12 +26,14 @@
 .messageDropDown {
   width: 100%;
 }
+.textCursor:hover{
+cursor: pointer;
+}
+
 
 .messageData {
   height: auto;
-  padding: 0.8rem 1.2rem 0.8rem 0.8rem;
   flex-grow: 1;
-  vertical-align: top;
   overflow: hidden;
 }
 
@@ -42,11 +44,16 @@
 .truncate {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  
 }
 
 .top-bar {
   background-color: white;
   width: 100%;
   position: relative;
+}
+#inputColor::-webkit-input-placeholder {
+  background-color: rgb(237, 243, 247);
+  background-size: contain
+ 
 }

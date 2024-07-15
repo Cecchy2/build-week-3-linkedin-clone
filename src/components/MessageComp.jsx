@@ -2,8 +2,10 @@ import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { RiArrowUpWideLine } from "react-icons/ri";
-import { Col, Container, Row, Button, InputGroup, Form, Placeholder } from "react-bootstrap";
+import { RiArrowDownWideLine } from "react-icons/ri";
+import { Col, Container, Row, Button, InputGroup, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { IoSearchOutline } from "react-icons/io5";
 
 function MessageComp() {
   const [open, setOpen] = useState(false);
@@ -17,7 +19,7 @@ function MessageComp() {
           className="border rounded-circle me-2"
           style={{ width: "35px" }}
         />
-        <span className="fs-6 fw-medium" onClick={() => setOpen(!open)}>
+        <span className="fs-6 fw-medium textCursor" onClick={() => setOpen(!open)}>
           Messaggistica
         </span>
         <BsThreeDots className="ms-5" size={17} />
@@ -29,15 +31,22 @@ function MessageComp() {
           aria-controls="message-collapse"
           aria-expanded={open}
         >
-          <RiArrowUpWideLine size={20} />
+          {open ? <RiArrowDownWideLine size={20} /> : <RiArrowUpWideLine size={20} />}
         </Button>
       </div>
       <div id="message-collapse" className="dropdown-menu-custom">
         <Container className="border-start border-end">
           <Row>
             <Col>
-              <InputGroup size="sm" className="my-3">
-                <Form.Control aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="cerca messaggi" />
+              <InputGroup size="lg" className="my-3 ">
+                <Form.Control
+                  aria-label="large"
+                  aria-describedby="inputGroup-sizing-lg"
+                  placeholder="cerca messaggi"
+                  variant="primary"
+                  id="inputColor"
+                  className="p-0 fs-6"
+                />
               </InputGroup>
             </Col>
           </Row>
