@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -8,6 +8,22 @@ import '../App.css';
 
 function MyNavbar() {
   const [searchExpanded, setSearchExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Initial check
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleFocus = () => setSearchExpanded(true);
   const handleBlur = () => setSearchExpanded(false);
@@ -20,16 +36,24 @@ function MyNavbar() {
             <path d="M22.23,0H1.77A1.77,1.77,0,0,0,0,1.77V22.23A1.77,1.77,0,0,0,1.77,24H22.23A1.77,1.77,0,0,0,24,22.23V1.77A1.77,1.77,0,0,0,22.23,0ZM7.06,20.45H3.56V9H7.06ZM5.31,7.54A2.07,2.07,0,1,1,7.37,5.48,2.07,2.07,0,0,1,5.31,7.54ZM20.44,20.45H17V14.54c0-1.42-.53-2.39-1.87-2.39a2,2,0,0,0-1.88,1.34,2.46,2.46,0,0,0-.12.86v6.1H9.56s.05-9.91,0-10.95h3.48V11a3.37,3.37,0,0,1,3-1.64c2.2,0,3.84,1.44,3.84,4.55Z"></path>
           </svg>
         </Navbar.Brand>
-        <Form inline className={`flex-grow-1 search-bar ${searchExpanded ? 'active' : ''}`}>
-          <FormControl 
-            type="text" 
-            placeholder="Cerca" 
-            className="mr-sm-2 search-input" 
-            onFocus={handleFocus} 
-            onBlur={handleBlur} 
-          />
-        </Form>
-        <div className="nav-items-grid">
+        {isMobile ? (
+          <Nav.Link href="#search" className="nav-item-custom">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
+              <path d="M10 2a8 8 0 106.32 12.9l5.38 5.38 1.41-1.41-5.38-5.38A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12z"></path>
+            </svg>
+          </Nav.Link>
+        ) : (
+          <Form inline className={`flex-grow-1 search-bar ${searchExpanded ? 'active' : ''}`}>
+            <FormControl 
+              type="text" 
+              placeholder="Cerca" 
+              className="mr-sm-2 search-input" 
+              onFocus={handleFocus} 
+              onBlur={handleBlur} 
+            />
+          </Form>
+        )}
+        <div className={`nav-items-grid ${isMobile ? 'mobile' : ''}`}>
           <Nav.Link href="#home" className="nav-item-custom">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
               <path d="M23 9v2h-2v7a3 3 0 01-3 3h-4v-6h-4v6H6a3 3 0 01-3-3v-7H1V9l11-7z"></path>
@@ -65,13 +89,17 @@ function MyNavbar() {
             <span>Tu <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="chevron-down" width="16" height="16"><path d="M12 14.5l-4-4h8z"></path></svg></span>
           </Nav.Link>
         </div>
-        <div className="nav-divider"></div>
-        <Nav.Link href="#work" className="nav-item-custom">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
-            <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
-          </svg>
-          <span>Per le aziende <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="chevron-down" width="16" height="16"><path d="M12 14.5l-4-4h8z"></path></svg></span>
-        </Nav.Link>
+        {!isMobile && (
+          <>
+            <div className="nav-divider"></div>
+            <Nav.Link href="#work" className="nav-item-custom">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
+                <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
+              </svg>
+              <span>Per le aziende <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="chevron-down" width="16" height="16"><path d="M12 14.5l-4-4h8z"></path></svg></span>
+            </Nav.Link>
+          </>
+        )}
       </div>
     </Navbar>
   );
