@@ -14,10 +14,10 @@
     border-right: 1px solid #e0e0e0;
     padding: 20px; 
     width: 400px; 
-    height: 150vh; 
+    height: 180vh; 
     position: sticky; 
     top: 0; 
-    overflow-y: auto; 
+    
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
   }
   .btn-msg { 
@@ -38,4 +38,8 @@
   }
   .img-sponsor{
     width:350px;
+    
+  }
+  p > span {
+    font-weight: 400;
   }
