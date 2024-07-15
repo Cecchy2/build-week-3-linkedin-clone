@@ -2,9 +2,8 @@ import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { RiArrowUpWideLine } from "react-icons/ri";
-import { Col, Container, Row, Button, InputGroup, Form } from "react-bootstrap";
+import { Col, Container, Row, Button, InputGroup, Form, Placeholder } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { IoSearchOutline } from "react-icons/io5";
 
 function MessageComp() {
   const [open, setOpen] = useState(false);
@@ -43,6 +42,24 @@ function MessageComp() {
             </Col>
           </Row>
           <Row className="align-items-center messageRow">
+            <Col xs="auto">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664199486611-3e1277e150cd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="immagine utente"
+                className="border rounded-circle img-fluid ms-1"
+                style={{ width: "50px", height: "50px" }}
+              />
+            </Col>
+            <Col className="messageData">
+              <p className="mb-0 truncate msgTxt">NOME COGNOME</p>
+              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell'utente</p>
+            </Col>
+            <Col xs="auto">
+              <p className="msgTxt me-1">15 Luglio 2024</p>
+            </Col>
+          </Row>
+          <hr className="ms-5" />
+          <Row className="align-items-center">
             <Col xs="auto">
               <img
                 src="https://plus.unsplash.com/premium_photo-1664199486611-3e1277e150cd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
