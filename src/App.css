@@ -1,15 +1,15 @@
 .messageTool {
   bottom: 0;
   right: 75px;
-  transition: bottom 0.3s ease-in-out; /* Smooth transition for bottom */
+  transition: bottom 0.3s ease-in-out; 
   position: fixed;
-  width: 300px; /* Fixed width */
+  width: 300px; 
   z-index: 10;
   background-color: white;
 }
 
 .messageTool.open {
-  bottom: 300px; /* Move up when open */
+  bottom: 300px; 
 }
 
 .dropdown-menu-custom {
