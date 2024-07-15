@@ -1,0 +1,32 @@
+
+.profile-info{
+    background-color: #fff; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    padding: 1.5rem;
+ margin-bottom: 0.5rem; 
+
+
+  }
+  .aside{
+    background-color: #f8f9fa; 
+    border-right: 1px solid #e0e0e0;
+    padding: 20px; 
+    width: 350px; 
+    height: 100vh; 
+    position: sticky; 
+    top: 0; 
+    overflow-y: auto; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+  }
+  .btn-msg { 
+   
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0px;
+    text-align: center;
+    width: 150px;
+  margin-bottom: 25px;
+    margin-left: 50px;
+  }
