@@ -1,13 +1,46 @@
-#messageTool{
-    bottom:0;
-    right:75px;
-    transform: translateY(100%) translateY(-48px);
-  
+#messageTool {
+  bottom: 0;
+  right: 75px;
+  transform: translateY(100%) translateY(-48px);
+  z-index: 1;
+  background-color: white; /* Ensure the top bar has a background color */
 }
 
-
 .dropdown-toggle::after {
-    display: none;
-  }
-  
-  
+  display: none;
+}
+
+.messageDropDown {
+  width: 302px;
+}
+
+.messageData {
+  height: auto;
+  padding: 0.8rem 1.2rem 0.8rem 0.8rem;
+  flex-grow: 1;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.dropdown-menu-custom {
+  transform: translate(-10px, -31px) !important;
+  background-color: white;
+  z-index: 0;
+}
+
+.msgTxt {
+  font-size: 0.8rem;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-bar {
+  z-index: 2; /* Ensure the top bar is above the dropdown */
+  background-color: white; /* Ensure the top bar has a background color */
+  width: 100%;
+  position: relative;
+}
