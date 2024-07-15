@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { RiArrowUpWideLine } from "react-icons/ri";
-import { Col, Container, Row, Button } from "react-bootstrap";
+import { Col, Container, Row, Button, InputGroup, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { IoSearchOutline } from "react-icons/io5";
 
 function MessageComp() {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,9 @@ function MessageComp() {
           className="border rounded-circle me-2"
           style={{ width: "35px" }}
         />
-        <span className="fs-6 fw-medium">Messagistica</span>
+        <span className="fs-6 fw-medium" onClick={() => setOpen(!open)}>
+          Messagistica
+        </span>
         <BsThreeDots className="ms-5" size={17} />
         <PiNotePencilDuotone className="ms-3" size={15} />
         <Button
@@ -32,7 +35,14 @@ function MessageComp() {
       </div>
       <div id="message-collapse" className="dropdown-menu-custom">
         <Container className="border-start border-end">
-          <Row className="align-items-center">
+          <Row>
+            <Col>
+              <InputGroup size="sm" className="my-3">
+                <Form.Control aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="cerca messaggi" />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row className="align-items-center messageRow">
             <Col xs="auto">
               <img
                 src="https://plus.unsplash.com/premium_photo-1664199486611-3e1277e150cd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -49,7 +59,7 @@ function MessageComp() {
               <p className="msgTxt me-1">15 Luglio 2024</p>
             </Col>
           </Row>
-          <hr className="w-75 ms-5" />
+          <hr className="ms-5" />
           <Row className="align-items-center">
             <Col xs="auto">
               <img
