@@ -48,7 +48,8 @@ p > span {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 88%;
+  margin-left: 30px;
 }
 
 .navbar-brand-custom {
