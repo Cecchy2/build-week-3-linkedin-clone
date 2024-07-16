@@ -1,14 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Aside from "./components/AsideProfile";
-import 'font-awesome/css/font-awesome.min.css';
+import MainProfile from "./components/MainProfile";
 
 function App() {
-  return <>
-  
+  return (
+    <>
+      <MainProfile />
       <Aside/>
-    
-  </>;
+    </>
+  );
 }
 
 export default App;
