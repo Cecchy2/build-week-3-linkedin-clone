@@ -1,4 +1,5 @@
 const initialState = {
+  listProfiles: [],
   user: {
     name: "",
     surname: "",
@@ -8,10 +9,21 @@ const initialState = {
     title: "",
     area: "",
   },
+  meUser: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "PROFILE_LIST":
+      return {
+        ...state,
+        listProfiles: state.listProfiles.concat(action.payload),
+      };
+    case "ME_USER":
+      return {
+        ...state,
+        meUser: action.payload,
+      };
     default:
       return state;
   }
