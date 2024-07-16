@@ -23,7 +23,7 @@ const MainProfile = () => {
             style={{ top: "100px", left: "50px" }}
           />
         </div>
-        <Container fluid>
+        <Container fluid className="mt-5">
           <div className="mt-5 w-50 ms-auto d-flex justify-content-end">
             <Button variant="link" onClick={handleShow} style={{ padding: 0 }}>
               <Image

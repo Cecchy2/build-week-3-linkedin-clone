@@ -5,7 +5,6 @@ import { RiArrowUpWideLine } from "react-icons/ri";
 import { RiArrowDownWideLine } from "react-icons/ri";
 import { Col, Container, Row, Button, InputGroup, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { IoSearchOutline } from "react-icons/io5";
 
 function MessageComp() {
   const [open, setOpen] = useState(false);
@@ -61,7 +60,7 @@ function MessageComp() {
             </Col>
             <Col className="messageData">
               <p className="mb-0 truncate msgTxt">NOME COGNOME</p>
-              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell'utente</p>
+              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell&aposutente</p>
             </Col>
             <Col xs="auto">
               <p className="msgTxt me-1">15 Luglio 2024</p>
@@ -79,7 +78,7 @@ function MessageComp() {
             </Col>
             <Col className="messageData">
               <p className="mb-0 truncate msgTxt">NOME COGNOME</p>
-              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell'utente</p>
+              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell&apos utente</p>
             </Col>
             <Col xs="auto">
               <p className="msgTxt me-1">15 Luglio 2024</p>
@@ -97,7 +96,7 @@ function MessageComp() {
             </Col>
             <Col className="messageData">
               <p className="mb-0 truncate msgTxt">NOME COGNOME</p>
-              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell'utente</p>
+              <p className="mb-0 truncate msgTxt">NOME: messaggio default dell&apos utente</p>
             </Col>
             <Col xs="auto">
               <p className="msgTxt me-1">15 Luglio 2024</p>

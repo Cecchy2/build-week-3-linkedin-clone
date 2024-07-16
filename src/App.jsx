@@ -1,17 +1,18 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
-import MainProfile from "./components/MainProfile";
-import Aside from "./components/AsideProfile";
+
 import MyNavbar from "./components/MyNavbar";
+
 import MessageComp from "./components/MessageComp";
+import HomeProfile from "./components/HomeProfile";
 
 function App() {
   return (
     <>
       <MyNavbar />
-      <MainProfile />
+      <HomeProfile />
       <MessageComp />
-      <Aside />
     </>
   );
 }
