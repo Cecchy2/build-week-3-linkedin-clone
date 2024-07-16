@@ -18,7 +18,7 @@ function MyNavbar() {
 
     window.addEventListener("resize", handleResize);
 
-    // Initial check
+ 
     handleResize();
 
     return () => {
