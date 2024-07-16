@@ -1,14 +1,27 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileMe } from "../redux/actions";
+import { createExp, getProfileMe } from "../redux/actions";
 
 const MainProfile = () => {
-  const [show, setShow] = useState(false);
-  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showExp, setShowExp] = useState(false);
+
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const experiences = useSelector(state => state.skills.experiences);
   const dispatch = useDispatch();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCloseEdit = () => {
+    setShowEdit(false);
+  };
+  const handleCloseExp = () => {
+    setShowExp(false);
+  };
+  const handleShowEdit = () => {
+    setShowEdit(true);
+  };
+  const handleShowExp = () => {
+    setShowExp(true);
+  };
 
   useEffect(() => {
     dispatch(getProfileMe());
@@ -38,14 +51,14 @@ const MainProfile = () => {
           </div>
           <Container fluid className="mt-5">
             <div className="mt-5 w-50 ms-auto d-flex justify-content-end">
-              <Button variant="link" onClick={handleShow} style={{ padding: 0 }}>
+              <Button variant="link" onClick={handleShowEdit} style={{ padding: 0 }}>
                 <Image
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
                   width="25"
                   height="25"
                 />
               </Button>
-              <Modal show={show} onHide={handleClose}>
+              <Modal show={showEdit} onHide={handleCloseEdit}>
                 <Modal.Header closeButton>
                   <Modal.Title>Modifica presentazione</Modal.Title>
                 </Modal.Header>
@@ -54,10 +67,10 @@ const MainProfile = () => {
                     <span>*</span>indica che è obbligatorio
                   </p>
                   <Form
-                  /* onSubmit={(e) => {
-                    e.preventDefault();
-                    dispatch(editUserAction(inputValue));
-                  }} */
+                    onSubmit={e => {
+                      e.preventDefault();
+                      dispatch(createExp(profileMe._id, profileMe));
+                    }}
                   >
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                       <Form.Label>Nome*</Form.Label>
@@ -88,11 +101,8 @@ const MainProfile = () => {
                       <Form.Control type="text" placeholder="area" autoFocus />
                     </Form.Group>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Close
-                      </Button>
-                      <Button variant="primary" onClick={handleClose} type="submit">
-                        Save Changes
+                      <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseEdit} type="submit">
+                        Save
                       </Button>
                     </Modal.Footer>
                   </Form>
@@ -147,6 +157,7 @@ const MainProfile = () => {
             <h4>Esperienza</h4>
             <button className="bg-transparent border-0">
               <svg
+                onClick={handleShowExp}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
@@ -159,6 +170,52 @@ const MainProfile = () => {
                 <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
               </svg>
             </button>
+            <Modal show={showExp} onHide={handleCloseExp}>
+              <Modal.Header closeButton>
+                <Modal.Title>Modifica presentazione</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p className="text-muted fs-6">
+                  <span>*</span> indica che è obbligatorio
+                </p>
+                <Form
+                /* onSubmit={(e) => {
+                    e.preventDefault();
+                    dispatch(editUserAction(inputValue));
+                  }} */
+                >
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Qualifica*</Form.Label>
+                    <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                    <Form.Label>Ruolo*</Form.Label>
+                    <Form.Control type="text" placeholder="cognome" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                    <Form.Label>Company</Form.Label>
+                    <Form.Control type="email" placeholder="name@example.com" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>Start Date</Form.Label>
+                    <Form.Control type="text" placeholder="username" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>End Date</Form.Label>
+                    <Form.Control type="text" placeholder="bio" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>Area</Form.Label>
+                    <Form.Control type="text" placeholder="area" autoFocus />
+                  </Form.Group>
+                  <Modal.Footer>
+                    <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseExp} type="submit">
+                      Save
+                    </Button>
+                  </Modal.Footer>
+                </Form>
+              </Modal.Body>
+            </Modal>
           </div>
           <Container className="border-bottom">
             <Row>

@@ -26,9 +26,10 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         meUser: action.payload,
       };
-    case "EDIT_USER":
+    case EDIT_USER:
       return {
         ...state,
+        user: action.payload,
       };
     default:
       return state;
