@@ -43,3 +43,218 @@
   p > span {
     font-weight: 400;
   }
+/* NAVBAR */
+.navbar-custom {
+    height: 80px;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  
+  .navbar-brand-custom {
+    display: flex;
+    align-items: center;
+  }
+  
+  .linkedin-icon {
+    color: #0a66c2;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+    width: 100%;
+    transition: max-width 0.5s ease-in-out, border-color 0.5s ease-in-out;
+  }
+  
+  .search-bar.active {
+    max-width: 400px;
+    border-color: black;
+  }
+  
+  .search-input-group {
+    width: 100%;
+  }
+  
+  .search-icon {
+    background-color: #ffffff;
+    border: none;
+  }
+  
+  .search-input {
+    flex-grow: 1;
+    padding-left: 10px;
+  }
+  
+  .nav-items-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .nav-items-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-nav .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+    color: #5c5c5c;
+    text-align: center;
+  }
+  
+  .navbar-nav .nav-link span {
+    margin-top: 5px;
+    font-size: 1em;
+  }
+  
+  .nav-divider {
+    height: 80px;
+    width: 1px;
+    background-color: #d1d0d0;
+    margin: 0 10px;
+  }
+  
+  .nav-item-custom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nav-item-custom span {
+    display: block;
+    margin-top: 5px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  .icon {
+    width: 30px;
+    height: 30px;
+    fill: grey;
+    transition: fill 0.3s ease;
+  }
+  
+  .icon:hover {
+    fill: black;
+  }
+  
+  .profile-photo {
+    border-radius: 50%;
+  }
+  
+  .chevron-down {
+    margin-left: 0px;
+    fill: grey;
+    width: 20px;
+    height: 20px;
+    transition: fill 0.3s ease;
+  }
+  
+  .chevron-down:hover {
+    fill: black;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 1200px) {
+    .icon {
+      width: 25px;
+      height: 25px;
+    }
+  
+    .chevron-down {
+      width: 18px;
+      height: 18px;
+    }
+  
+    .profile-photo {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-custom {
+      height: auto;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  
+    .search-bar {
+      display: none;
+    }
+  
+    .navbar-content {
+      margin-left: 0;
+      margin-right: 0;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .nav-items-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  
+    .nav-item-custom {
+      margin: 0;
+      flex-direction: column;
+    }
+  
+    .navbar-nav .nav-link {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 10px;
+      justify-content: center;
+      flex-direction: column;
+    }
+  
+    .nav-divider {
+      display: none;
+    }
+  
+    .linkedin-icon {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .chevron-down {
+      width: 16px;
+      height: 16px;
+    }
+  
+    .profile-photo {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .nav-item-custom span {
+      font-size: 0.8em; 
+    }
+  }
+  /* fine navbar */
