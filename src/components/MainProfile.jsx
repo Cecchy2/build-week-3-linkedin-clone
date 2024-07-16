@@ -25,6 +25,18 @@ const MainProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  useEffect(() => {
+    setInputValue({
+      name: profileMe?.name,
+      surname: profileMe?.surname,
+      email: profileMe?.email,
+      username: profileMe?.username,
+      bio: profileMe?.bio,
+      title: profileMe?.title,
+      area: profileMe?.area,
+    });
+  }, [profileMe]);
+
   return (
     profileMe && (
       <>
