@@ -18,7 +18,6 @@ function MyNavbar() {
 
     window.addEventListener("resize", handleResize);
 
- 
     handleResize();
 
     return () => {

@@ -37,21 +37,18 @@ body {
 p > span {
   font-weight: 400;
 }
-/* NAVBAR */
+
+/* Navbar */
 .navbar-custom {
   height: 60px;
   width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .navbar-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 90%;
 }
 
 .navbar-brand-custom {
@@ -119,7 +116,7 @@ p > span {
 }
 
 .nav-divider {
-  height: 80px;
+  height:60px;
   width: 1px;
   background-color: #d1d0d0;
   margin: 0 10px;
@@ -184,6 +181,75 @@ p > span {
   }
 }
 
+@media (max-width: 1024px) and (min-width: 769px) {
+  .navbar-custom {
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .search-bar {
+    display: flex;
+    max-width: 150px;
+  }
+
+  .search-bar.active {
+    max-width: 300px;
+  }
+
+  .navbar-content {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav-items-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-item-custom {
+    margin: 0;
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-link {
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .nav-divider {
+    display: none;
+  }
+
+  .linkedin-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .chevron-down {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile-photo {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-custom {
     height: auto;
@@ -198,6 +264,7 @@ p > span {
   .navbar-content {
     margin-left: 0;
     margin-right: 0;
+    width: 100%;
     flex-direction: row;
     justify-content: space-around;
   }
@@ -216,8 +283,6 @@ p > span {
   }
 
   .navbar-nav .nav-link {
-    margin-left: 0;
-    margin-right: 0;
     margin-bottom: 10px;
     justify-content: center;
     flex-direction: column;
@@ -248,9 +313,11 @@ p > span {
   }
 
   .nav-item-custom span {
-    font-size: 0.8em;
+    display: none;
   }
 }
+
+
 /* fine navbar */
 .messageTool {
   bottom: 0;
