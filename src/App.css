@@ -258,3 +258,62 @@
     }
   }
   /* fine navbar */
+.messageTool {
+  bottom: 0;
+  right: 75px;
+  transition: bottom 0.3s ease-in-out; 
+  position: fixed;
+  width: 300px; 
+  z-index: 10;
+  background-color: white;
+}
+.messageRow{
+  height: 70px;
+}
+
+.messageTool.open {
+  bottom: 0; 
+}
+
+.dropdown-menu-custom {
+  display: none;
+}
+
+.messageTool.open .dropdown-menu-custom {
+  display: block;
+}
+
+.messageDropDown {
+  width: 100%;
+}
+.textCursor:hover{
+cursor: pointer;
+}
+
+
+.messageData {
+  height: auto;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.msgTxt {
+  font-size: 0.8rem;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  
+}
+
+.top-bar {
+  background-color: white;
+  width: 100%;
+  position: relative;
+}
+#inputColor::-webkit-input-placeholder {
+  background-color: rgb(237, 243, 247);
+  background-size: contain
+ 
+}
