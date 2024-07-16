@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import profileReducer from "../reducers/profileReducer";
 
 const rootReducer = combineReducers({
-  user: profileReducer,
+  userProfile: profileReducer,
 });
 
 const store = configureStore({
