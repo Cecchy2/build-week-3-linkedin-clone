@@ -12,6 +12,18 @@ const Aside = () => {
     dispatch(getProfileData());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+  const fallbackImages  = [
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNK4d0igyhvVVsYW2LIAn45LUbcWZpewEerQ&s',
+    'https://img.freepik.com/vettori-premium/profilo-di-avatar-uomo-su-icona-rotonda_24640-14049.jpg',
+    'https://img.freepik.com/vettori-premium/profilo-di-avatar-donna-sull-icona-rotonda_24640-14042.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl6JPaMyl7e0oZfSdBa84_MTOUWwR50niJlLF79QPOlAIEYlSwWcWLG35W3EFI0iGzWFc&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA1lqDgPl7H0dLC70TEOK3luClj7HafIJBHP7WJZyKhv_TatYKCl-vc5Sgwco0dYAeuh8&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS1EUJhfkJFRPWrm0_xMgLz7rxsnr81oS5iZ3ly6AEujgWMbOoIFi8OBgkARmQhjl5X_Y&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgS9gt7bRQjO4-HPlDtfczUF7pOHNwDfqHnZgrbXm4qgyul1MgHkneswnmeMRUQNolJeM&usqp=CAU',
+    'https://img.freepik.com/vettori-premium/profilo-di-avatar-uomo-su-icona-rotonda_24640-14049.jpg'
+  ];
+
+  
 
   return (
     <Container>
@@ -49,17 +61,17 @@ const Aside = () => {
               </div>
 
               {listProfiles.length > 0 &&
-                listProfiles.slice(2, 6).map(profile => (
-                  <div className="container" key={profile._id}>
-                    <div className="row align-items-left">
-                      <div className="col-md-2 ">
-                        <img
-                          src={profile.image}
-                          alt="Descrizione"
-                          className="img-fluid rounded-circle"
-                          style={{ maxWidth: "50px" }}
-                        />
-                      </div>
+         listProfiles.slice(2, 6).map((profile, index) => (
+          <div className="container" key={profile._id}>
+            <div className="row align-items-left">
+              <div className="col-md-2">
+                <img
+                  src={fallbackImages[index % fallbackImages.length]}
+                  alt="Descrizione"
+                  className="img-fluid rounded-circle"
+                  style={{ maxWidth: '50px' }}
+                />
+              </div>
                       <div className="col-md-10">
                         <p className="text-black ms-4 fw-bold ">
                           {profile.name} {profile.surname} <br />{" "}
@@ -81,12 +93,12 @@ const Aside = () => {
                   <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
                 </div>
                 {listProfiles.length > 0 &&
-                  listProfiles.slice(6, 10).map(profile => (
+                  listProfiles.slice(6, 10).map((profile, index) => (
                     <div className="container" key={profile._id}>
                       <div className="row align-items-left">
                         <div className="col-md-2 ">
                           <img
-                            src={profile.image}
+                            src={fallbackImages[index % fallbackImages.length]}
                             alt="Descrizione"
                             className="img-fluid rounded-circle"
                             style={{ maxWidth: "50px" }}

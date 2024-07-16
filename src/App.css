@@ -1,5 +1,5 @@
 body {
-  background-color: f4f2ee;
+  background-color: #f4f2ee;
 }
 
 .profile-info {
@@ -308,3 +308,9 @@ p > span {
   background-color: rgb(237, 243, 247);
   background-size: contain;
 }
+
+@media (max-width: 768px) {
+  .messageTool {
+    display: none;
+  }
+} 
