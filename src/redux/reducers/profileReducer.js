@@ -1,34 +1,30 @@
-import { EDIT_USER } from "../actions";
+import { EDIT_USER, ME_USER, PROFILE_LIST } from "../actions";
 
 const initialState = {
   listProfiles: [],
-  user: {
-    name: "",
-    surname: "",
-    email: "",
-    username: "",
-    bio: "",
-    title: "",
-    area: "",
-  },
+
   meUser: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "PROFILE_LIST":
+    case PROFILE_LIST:
       return {
         ...state,
         listProfiles: state.listProfiles.concat(action.payload),
       };
-    case "ME_USER":
+    case ME_USER:
       return {
         ...state,
         meUser: action.payload,
       };
-    case "EDIT_USER":
+    case EDIT_USER:
       return {
         ...state,
+        meUser: {
+          ...state.meUser,
+          ...action.payload,
+        },
       };
     default:
       return state;
