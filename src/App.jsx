@@ -7,8 +7,9 @@ import Aside from "./components/AsideProfile";
 function App() {
   return (
     <>
-      <MainProfile />
       <MyNavbar />
+      <MainProfile />
+    
       <Aside/>
     </>)}
 
