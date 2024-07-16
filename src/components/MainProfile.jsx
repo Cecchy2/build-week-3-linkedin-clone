@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 const MainProfile = () => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -40,10 +41,15 @@ const MainProfile = () => {
                 <p className="text-muted fs-6">
                   <span>*</span>indica che è obbligatorio
                 </p>
-                <Form>
+                <Form
+                /* onSubmit={(e) => {
+                    e.preventDefault();
+                    dispatch(editUserAction(inputValue));
+                  }} */
+                >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Nome*</Form.Label>
-                    <Form.Control type="text" placeholder="nome" autoFocus />
+                    <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Cognome*</Form.Label>
@@ -69,16 +75,16 @@ const MainProfile = () => {
                     <Form.Label>Area</Form.Label>
                     <Form.Control type="text" placeholder="area" autoFocus />
                   </Form.Group>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose} type="submit">
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
                 </Form>
               </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>
             </Modal>
           </div>
           <h2>Andrea Geria</h2>
