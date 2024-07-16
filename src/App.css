@@ -278,6 +278,7 @@ p > span {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    margin-left: 40px;
     width: 100%;
   }
 
