@@ -5,7 +5,7 @@ import { getProfileMe } from "../redux/actions";
 
 const MainProfile = () => {
   const [show, setShow] = useState(false);
-  const profileMe = useSelector(state => state.userProfile.meUser);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,7 +37,7 @@ const MainProfile = () => {
             </Container>
           </div>
           <Container fluid className="mt-5">
-            <div className=" w-50 ms-auto d-flex justify-content-end">
+            <div className="mt-5 w-50 ms-auto d-flex justify-content-end">
               <Button variant="link" onClick={handleShow} style={{ padding: 0 }}>
                 <Image
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
@@ -47,28 +47,56 @@ const MainProfile = () => {
               </Button>
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                  <Modal.Title>Modal heading</Modal.Title>
+                  <Modal.Title>Modifica presentazione</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Form>
+                  <p className="text-muted fs-6">
+                    <span>*</span>indica che è obbligatorio
+                  </p>
+                  <Form
+                  /* onSubmit={(e) => {
+                    e.preventDefault();
+                    dispatch(editUserAction(inputValue));
+                  }} */
+                  >
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                      <Form.Label>Nome*</Form.Label>
+                      <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                      <Form.Label>Cognome*</Form.Label>
+                      <Form.Control type="text" placeholder="cognome" autoFocus />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                       <Form.Label>Email address</Form.Label>
                       <Form.Control type="email" placeholder="name@example.com" autoFocus />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                      <Form.Label>Example textarea</Form.Label>
-                      <Form.Control as="textarea" rows={3} />
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control type="text" placeholder="username" autoFocus />
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                      <Form.Label>Bio*</Form.Label>
+                      <Form.Control type="text" placeholder="bio" autoFocus />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                      <Form.Label>Title*</Form.Label>
+                      <Form.Control type="text" placeholder="title" autoFocus />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                      <Form.Label>Area</Form.Label>
+                      <Form.Control type="text" placeholder="area" autoFocus />
+                    </Form.Group>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={handleClose} type="submit">
+                        Save Changes
+                      </Button>
+                    </Modal.Footer>
                   </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleClose}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
               </Modal>
             </div>
             <h2>

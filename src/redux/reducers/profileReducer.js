@@ -1,3 +1,5 @@
+import { EDIT_USER } from "../actions";
+
 const initialState = {
   listProfiles: [],
   user: {
@@ -23,6 +25,10 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         meUser: action.payload,
+      };
+    case "EDIT_USER":
+      return {
+        ...state,
       };
     default:
       return state;
