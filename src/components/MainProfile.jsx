@@ -59,16 +59,15 @@ const MainProfile = () => {
                   style={{ bottom: "-70px", left: "50px" }}
                 />
               </Button>
-              <Modal
-                size="lg"
-                show={lgShow}
-                onHide={() => setLgShow(false)}
-                aria-labelledby="example-modal-sizes-title-lg"
-              >
-                <Modal.Header closeButton>
-                  <Modal.Title id="example-modal-sizes-title-lg">Large Modal</Modal.Title>
+              <Modal size="lg" show={showPicture} onHide={() => setShowPicture(false)}>
+                <Modal.Header closeButton className="dark text-white">
+                  <img
+                    src="https://images.unsplash.com/photo-1720543227828-ec5ae842633a?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="immagine profilo"
+                    className="border rounded-circle"
+                    style={{ width: "278px", height: "278px" }}
+                  />
                 </Modal.Header>
-                <Modal.Body>...</Modal.Body>
               </Modal>
             </Container>
           </div>
@@ -81,7 +80,7 @@ const MainProfile = () => {
                   height="25"
                 />
               </Button>
-              <Modal show={show} onHide={handleClose}>
+              <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
                   <Modal.Title>Modifica presentazione</Modal.Title>
                 </Modal.Header>
