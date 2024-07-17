@@ -1,6 +1,8 @@
 export const PROFILE_LIST = "PROFILE_LIST";
 export const ME_USER = "ME_USER";
 export const EDIT_USER = "EDIT_USER";
+export const EXPERIENCES = "EXPERIENCES";
+export const EXPERIENCE = "EXPERIENCE";
 
 export const storeProfiles = (setCase, data) => ({ type: setCase, payload: data });
 export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputValue });
@@ -64,7 +66,7 @@ export const createExp = (userId, data) => {
       });
       if (resp.ok) {
         const result = await resp.json();
-        dispatch(storeProfiles(EDIT_USER, result));
+        dispatch(storeProfiles(EXPERIENCES, result));
       } else {
         throw new Error();
       }
