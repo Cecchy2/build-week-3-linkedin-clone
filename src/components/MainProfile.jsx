@@ -6,12 +6,15 @@ import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions
 const MainProfile = () => {
   const [show, setShow] = useState(false);
   const [showPicture, setShowPicture] = useState(false);
-
+  const [selectedImage, setSelectedImage] = useState(null);
   const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleShowPicture = () => setShowPicture(true);
+  const handleClosePicture = () => setShowPicture(false);
+
   const [inputValue, setInputValue] = useState({
     name: "",
     surname: "",
@@ -40,6 +43,24 @@ const MainProfile = () => {
     });
   }, [profileMe]);
 
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
+    }
+  };
+
+  //Funzione per creare nuovo FormData e aggiornare l' immagine-------------------
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    if (!selectedImage) return;
+
+    const formData = new FormData();
+    formData.append("image", selectedImage);
+
+    // qui possiamo mandare il valore nello stato globale o fare una fetch api
+    console.log("Caricamento immagine:", selectedImage);
+  };
+
   return (
     profileMe && (
       <>
@@ -54,34 +75,35 @@ const MainProfile = () => {
             <Container>
               <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
                 <Image
-                  className="rounded-circle position-absolute mb-3"
-                  src={profileMe.image}
-                  width="150"
-                  style={{ bottom: "-70px", left: "50px" }}
+                  className="border rounded-circle position-absolute mb-3 "
+                  src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
+                  style={{ bottom: "-70px", left: "50px", width: "150px", height: "150px" }}
                 />
               </Button>
-              <Modal size="lg" show={showPicture} onHide={() => setShowPicture(false)}>
-                <Modal.Header closeButton className="dark text-white dark text-white close-white border-0">
-                  <Modal.Title id="example-modal-sizes-title-sm">Foto Profilo</Modal.Title>
+              <Modal size="lg" show={showPicture} onHide={handleClosePicture}>
+                <Modal.Header closeButton className="dark text-white close-white border-0">
+                  <Modal.Title>Foto Profilo</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="dark text-white d-flex justify-content-center align-items-center">
-                  {" "}
                   <Image
-                    src="https://images.unsplash.com/photo-1720543227828-ec5ae842633a?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
                     alt="immagine profilo"
-                    className="border rounded-circle m-5"
+                    className="border rounded-circle m-5 img-fluid"
                     style={{ width: "278px", height: "278px" }}
                   />
                 </Modal.Body>
                 <div className="dark text-white">
-                  <Button variant="link" className="ms-5 mb-3">
-                    <Image
-                      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0id2hpdGUiPgogIDxwYXRoIGQ9Ik0yMS4xMyAyLjg2YTMgMyAwIDAwLTQuMTcgMGwtMTMgMTNMMiAyMmw2LjE5LTJM
-          MjEuMTMgN2EzIDMgMCAwMDAtNC4xNnogTTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
-                      width="25"
-                      height="25"
-                    />
-                  </Button>
+                  {" "}
+                  {/* Form per il modale della immagine */}
+                  <Form onSubmit={handleImageUpload}>
+                    <Form.Group controlId="formFile" className="mb-3">
+                      <Form.Label>Carica una nuova immagine</Form.Label>
+                      <Form.Control type="file" onChange={handleImageChange} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                      Carica
+                    </Button>
+                  </Form>
                 </div>
               </Modal>
             </Container>
