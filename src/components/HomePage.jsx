@@ -5,7 +5,7 @@ import HomeMain from "./HomeMain";
 
 const HomePage = () => {
   return (
-    <Container>
+    <Container className="mt-4">
       <Row>
         <HomeAsideLeft></HomeAsideLeft>
         <HomeMain></HomeMain>
