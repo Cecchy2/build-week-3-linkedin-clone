@@ -322,3 +322,6 @@ p > span {
     display: none;
   }
 } 
+.dark{
+  background-color: rgb(27, 31, 35)
+}
