@@ -324,11 +324,32 @@ p > span {
 } 
 .custom-dropdown-menu {
   width: 750px; 
-  padding: 15px;    
+  padding: 15px; 
+
 }
 @media (max-width: 991px) {.custom-dropdown-menu {
   width:400px
 }}
+.custom-dropdown-menu-profile{
+  width:350px;
+  padding-right: 20px;
+}
+.custom-dropdown-menu-profile span{
+  margin-top: 0px;
+  font-size: 0.8rem;
+  text-align: left;
+}
+.dropdown-list-profile{
+  list-style-type: none; 
+}
+.dropdown-list-profile li{
+  margin-top: 5px;
+}
+
+.dropdown-list-profile span {
+  font-size: 0.8rem;
+  color: #5c5c5c;
+}
 .dropdown-list {
   list-style-type: none; 
   padding: 0;         

@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import { Container, Dropdown, Row, Col } from "react-bootstrap";
+import { Container, Dropdown, Row, Col, Button } from "react-bootstrap";
 
 function MyNavbar() {
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -95,25 +95,57 @@ function MyNavbar() {
               <span>Notifiche</span>
             </Nav.Link>
             <Nav.Link href="#me" className="nav-item-custom">
-              <img
+              <span><img
                 width="30"
                 src="https://media.licdn.com/dms/image/C5603AQEsE-ujh9vJ1w/profile-displayphoto-shrink_100_100/0/1619603516362?e=1726704000&v=beta&t=BJ5CPVL_8Mr5SGuxa-PZ_mRF5EjekPnP5F2TqyfM45E"
                 height="30"
                 alt="Umberto Amoroso"
-                className="profile-photo"
-              />
-              <span>
-                Tu{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="chevron-down"
-                  width="16"
-                  height="16"
-                >
-                  <path d="M12 14.5l-4-4h8z"></path>
-                </svg>
-              </span>
+                className="profile-photo" 
+              /> </span>
+              
+      <Dropdown align="end" title="Dropdown end" id="dropdown-menu-align-end">
+        <Dropdown.Toggle as="span" id="dropdown-custom-components">
+         Tu
+        </Dropdown.Toggle>
+        <Dropdown.Menu className="custom-dropdown-menu-profile">
+          <Dropdown.Item href="#">
+        <div className="container">
+            <div className="row align-items-left">
+              <div className="col-md-2">
+                <img
+                  src='https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg'
+                  alt="Descrizione"
+                  className="img-fluid rounded-circle"
+                  style={{ maxWidth: '50px' }}
+                />
+              </div>
+                      <div className="col-md-10">
+                      <p className="text-black ms-4 fw-bold ">
+                          Rossi Luca<br />{" "}
+                          <span className="text-secondary">EpiCode Developer</span>
+                        </p>
+                        <Button variant="outline-info">Visualizza profilo</Button>{' '}
+                      </div>
+
+                      </div>
+                      </div>
+                    
+          </Dropdown.Item>
+          <ul className="dropdown-list-profile"> <hr></hr>
+         <li><Dropdown.Item >  Account </Dropdown.Item></li> 
+                <li><Dropdown.Item > <span> Impostazione e privacy</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Guida</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Lingua</span></Dropdown.Item></li> <hr></hr>
+                <li><Dropdown.Item >Gestisci</Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Post e attività</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Account</span></Dropdown.Item></li><hr></hr>
+                <li><Dropdown.Item ><span>Esci</span></Dropdown.Item></li>
+                
+                </ul>
+        </Dropdown.Menu>
+      </Dropdown>
+   
+              
             </Nav.Link>
           </div>
           {!isMobile && (
