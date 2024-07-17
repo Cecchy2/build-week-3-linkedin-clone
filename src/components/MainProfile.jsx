@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createExp, getProfileMe } from "../redux/actions";
+import { createExp, editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
 ``;
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showExp, setShowExp] = useState(false);
 
-  const profileMe = useSelector(state => state.userProfile.meUser);
   // const experiences = useSelector(state => state.skills.experiences);
-  const dispatch = useDispatch();
+
   const handleCloseEdit = () => {
     setShowEdit(false);
   };
@@ -22,12 +21,13 @@ const MainProfile = () => {
   const handleShowExp = () => {
     setShowExp(true);
   };
-  const [show, setShow] = useState(false);
+
   const [showPicture, setShowPicture] = useState(false);
+  const experiences = useSelector(state => state.skills.expriences);
+  const experience = useSelector(state => state.skills.exprience);
   const profileMe = useSelector(state => state.userProfile.meUser);
   const dispatch = useDispatch();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   const handleShowPicture = () => setShowPicture(true);
   const [inputValue, setInputValue] = useState({
     name: "",
