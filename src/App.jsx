@@ -11,10 +11,12 @@ function App() {
   return (
     <>
       <MyNavbar />
-      <HomeProfile />
-      <MessageComp />
+
     </>
   );
 }
 
 export default App;
+
+/*       <HomeProfile />
+      <MessageComp /> */
