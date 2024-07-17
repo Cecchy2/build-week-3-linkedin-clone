@@ -472,3 +472,23 @@ p > span {
 .close-white .btn-close {
   filter: invert(1);
 }
+.hidden {
+  display: none;
+}
+
+.lista-notizie {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lista-notizie .notizia {
+  margin-bottom: 10px;
+}
+
+.lista-notizie li {
+  padding: 8px 0;
+}
+
+.text-muted.small {
+  font-size: 0.875em;
+}
