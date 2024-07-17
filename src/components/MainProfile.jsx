@@ -40,7 +40,7 @@ const MainProfile = () => {
   return (
     profileMe && (
       <>
-        <Container className="badgeContainer border rounded-3 my-3 px-0 " style={{ overflow: "hidden" }}>
+        <Container className="badgeContainer border rounded-3 my-3 px-0  " style={{ overflow: "hidden", backgroundColor: "white"}}>
           <div className="position-relative">
             <Image
               className=" w-100"
@@ -208,7 +208,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
+        <Container className="border rounded-3 my-3" style={{backgroundColor: "white"}}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Esperienza</h4>
             <button className="bg-transparent border-0">
@@ -248,7 +248,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
+        <Container className="border rounded-3 my-3" style={{backgroundColor: "white"}}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Formazione</h4>
             <button className="bg-transparent border-0">
@@ -288,7 +288,7 @@ const MainProfile = () => {
             </div>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
+        <Container className="border rounded-3 my-3" style={{backgroundColor: "white"}}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Competenze</h4>
             <button className="bg-transparent border-0">
