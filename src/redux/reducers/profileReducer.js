@@ -1,27 +1,18 @@
-import { EDIT_USER } from "../actions";
+import { EDIT_USER, ME_USER, PROFILE_LIST, UPDATE_PROFILE_PICTURE } from "../actions";
 
 const initialState = {
   listProfiles: [],
-  user: {
-    name: "",
-    surname: "",
-    email: "",
-    username: "",
-    bio: "",
-    title: "",
-    area: "",
-  },
   meUser: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "PROFILE_LIST":
+    case PROFILE_LIST:
       return {
         ...state,
         listProfiles: state.listProfiles.concat(action.payload),
       };
-    case "ME_USER":
+    case ME_USER:
       return {
         ...state,
         meUser: action.payload,
@@ -31,6 +22,8 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    case UPDATE_PROFILE_PICTURE:
+      return { ...state, meUser: { ...state.meUser, image: action.payload.image } };
     default:
       return state;
   }

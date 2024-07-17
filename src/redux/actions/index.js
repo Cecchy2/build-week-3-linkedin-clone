@@ -1,6 +1,7 @@
 export const PROFILE_LIST = "PROFILE_LIST";
 export const ME_USER = "ME_USER";
 export const EDIT_USER = "EDIT_USER";
+export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 
 export const storeProfiles = (setCase, data) => ({ type: setCase, payload: data });
 export const editUserAction = (inputValue) => ({ type: EDIT_USER, payload: inputValue });
@@ -12,7 +13,7 @@ export const getProfileData = () => {
       const resp = await fetch(baseEndpoint, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGU3OTE5NmQ3YjAwMTVkNmI1MmQiLCJpYXQiOjE3MjEwMzIzMTMsImV4cCI6MTcyMjI0MTkxM30.LrieXR8WEpy4VvtclIVdzZOpB7dyEwD1st577EypH0Y",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
         },
       });
       if (resp.ok) {
@@ -34,7 +35,7 @@ export const getProfileMe = () => {
       const resp = await fetch(baseEndpoint, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGVmNTE5NmQ3YjAwMTVkNmI1MmUiLCJpYXQiOjE3MjExMzMzODgsImV4cCI6MTcyMjM0Mjk4OH0.EdRhnc4taOa_DnaL8pDiRe6T-aRTptWNZR8UY9sTwXA",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
         },
       });
       if (resp.ok) {
@@ -57,7 +58,7 @@ export const editFetchProfile = (profiloModificato) => {
         method: "PUT",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGVmNTE5NmQ3YjAwMTVkNmI1MmUiLCJpYXQiOjE3MjExMzMzODgsImV4cCI6MTcyMjM0Mjk4OH0.EdRhnc4taOa_DnaL8pDiRe6T-aRTptWNZR8UY9sTwXA",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(profiloModificato),
@@ -67,6 +68,34 @@ export const editFetchProfile = (profiloModificato) => {
         dispatch(storeProfiles(ME_USER, result));
       } else {
         throw new Error("Errore nella modifica");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const uploadProfilePicture = (file) => {
+  return async (dispatch) => {
+    const formData = new FormData();
+    formData.append("profile", file);
+
+    const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/6694def5196d7b0015d6b52e/picture";
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "POST",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+        },
+        body: formData,
+      });
+
+      if (resp.ok) {
+        const result = await resp.json();
+        dispatch(storeProfiles(ME_USER, result));
+      } else {
+        throw new Error("Errore durante il caricamento dell'immagine");
       }
     } catch (error) {
       console.log(error.message);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
+import { editFetchProfile, editUserAction, getProfileMe, uploadProfilePicture } from "../redux/actions";
 
 const MainProfile = () => {
   const [show, setShow] = useState(false);
@@ -27,8 +27,6 @@ const MainProfile = () => {
 
   useEffect(() => {
     dispatch(getProfileMe());
-    console.log(profileMe);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
@@ -49,16 +47,12 @@ const MainProfile = () => {
     }
   };
 
-  //Funzione per creare nuovo FormData e aggiornare l' immagine-------------------
   const handleImageUpload = (e) => {
     e.preventDefault();
-    if (!selectedImage) return;
-
-    const formData = new FormData();
-    formData.append("image", selectedImage);
-
-    // qui possiamo mandare il valore nello stato globale o fare una fetch api
-    console.log("Caricamento immagine:", selectedImage);
+    if (selectedImage) {
+      dispatch(uploadProfilePicture(selectedImage));
+      setShowPicture(false);
+    }
   };
 
   return (
@@ -66,18 +60,24 @@ const MainProfile = () => {
       <>
         <Container className="badgeContainer border rounded-3 my-3 px-0 " style={{ overflow: "hidden" }}>
           <div className="position-relative">
-            <Image
-              className=" w-100"
-              src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
-              alt="profile banner"
-              style={{ maxHeight: "25vh" }}
-            />
+            <div>
+              <Button variant="link" className="position-absolute">
+                bottone
+              </Button>
+              <Image
+                className=" w-100"
+                src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
+                alt="profile banner"
+                style={{ maxHeight: "25vh" }}
+              />
+            </div>
             <Container>
               <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
                 <Image
-                  className="border rounded-circle position-absolute mb-3 "
+                  className="rounded-circle position-absolute mb-3"
                   src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
-                  style={{ bottom: "-70px", left: "50px", width: "150px", height: "150px" }}
+                  width="150"
+                  style={{ bottom: "-70px", left: "50px", width: "150", height: "150px" }}
                 />
               </Button>
               <Modal size="lg" show={showPicture} onHide={handleClosePicture}>
@@ -88,13 +88,11 @@ const MainProfile = () => {
                   <Image
                     src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
                     alt="immagine profilo"
-                    className="border rounded-circle m-5 img-fluid"
+                    className="border rounded-circle m-5"
                     style={{ width: "278px", height: "278px" }}
                   />
                 </Modal.Body>
                 <div className="dark text-white">
-                  {" "}
-                  {/* Form per il modale della immagine */}
                   <Form onSubmit={handleImageUpload}>
                     <Form.Group controlId="formFile" className="mb-3">
                       <Form.Label>Carica una nuova immagine</Form.Label>
