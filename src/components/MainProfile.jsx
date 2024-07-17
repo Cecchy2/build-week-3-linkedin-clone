@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { dataConverter, getProfileMe, uploadProfilePicture } from "../redux/actions";
+import { getProfileMe, uploadProfilePicture } from "../redux/actions";
 import { createExp, getExp } from "../redux/actions";
 import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
