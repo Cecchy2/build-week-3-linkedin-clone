@@ -9,7 +9,7 @@ const HomeMain = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPosts);
+    dispatch(getPosts());
     console.log(postsList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -29,17 +29,18 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {postsList.length > 0 &&
-          postsList.map(post => {
-            <Card>
+        {[...postsList].map(post => {
+          return (
+            <Card key={post._id}>
               <Card.Img variant="top" src="holder.js/100px180" />
               <Card.Body>
                 <Card.Title>{post.username}</Card.Title>
                 <Card.Text>{post.text}</Card.Text>
                 <Button variant="primary">Modifica</Button>
               </Card.Body>
-            </Card>;
-          })}
+            </Card>
+          );
+        })}
       </Container>
     </Col>
   );
