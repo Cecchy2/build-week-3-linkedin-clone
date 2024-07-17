@@ -1,6 +1,28 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileData } from "../redux/actions";
 
 const Aside = () => {
+  const listProfiles = useSelector((state) => state.userProfile.listProfiles);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfileData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+  const fallbackImages = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNK4d0igyhvVVsYW2LIAn45LUbcWZpewEerQ&s",
+    "https://img.freepik.com/vettori-premium/profilo-di-avatar-uomo-su-icona-rotonda_24640-14049.jpg",
+    "https://img.freepik.com/vettori-premium/profilo-di-avatar-donna-sull-icona-rotonda_24640-14042.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl6JPaMyl7e0oZfSdBa84_MTOUWwR50niJlLF79QPOlAIEYlSwWcWLG35W3EFI0iGzWFc&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA1lqDgPl7H0dLC70TEOK3luClj7HafIJBHP7WJZyKhv_TatYKCl-vc5Sgwco0dYAeuh8&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS1EUJhfkJFRPWrm0_xMgLz7rxsnr81oS5iZ3ly6AEujgWMbOoIFi8OBgkARmQhjl5X_Y&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgS9gt7bRQjO4-HPlDtfczUF7pOHNwDfqHnZgrbXm4qgyul1MgHkneswnmeMRUQNolJeM&usqp=CAU",
+    "https://img.freepik.com/vettori-premium/profilo-di-avatar-uomo-su-icona-rotonda_24640-14049.jpg",
+  ];
+
   return (
     <Container>
       <Row>
@@ -36,192 +58,69 @@ const Aside = () => {
                 <span className="text-black fw-bold">Altri profili simili</span>
               </div>
 
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl6JPaMyl7e0oZfSdBa84_MTOUWwR50niJlLF79QPOlAIEYlSwWcWLG35W3EFI0iGzWFc&usqp=CAU"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
+              {listProfiles.length > 0 &&
+                listProfiles.slice(2, 6).map((profile, index) => (
+                  <div className="container" key={profile._id}>
+                    <div className="row align-items-left">
+                      <div className="col-md-2">
+                        <img
+                          src={fallbackImages[index % fallbackImages.length]}
+                          alt="Descrizione"
+                          className="img-fluid rounded-circle"
+                          style={{ maxWidth: "50px" }}
+                        />
+                      </div>
+                      <div className="col-md-10">
+                        <p className="text-black ms-4 fw-bold ">
+                          {profile.name} {profile.surname} <br />{" "}
+                          <span className="text-secondary">{profile.title}</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="btn-msg">
+                      {" "}
+                      <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
+                    </div>
+                    <hr></hr>
                   </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Luca Bianchi <br /> <span className="text-secondary">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  {" "}
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://img.freepik.com/vettori-premium/profilo-di-avatar-donna-sull-icona-rotonda_24640-14042.jpg"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Giulia Rossi <br /> <span className="text-secondary">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://img.freepik.com/vettori-premium/profilo-di-avatar-uomo-su-icona-rotonda_24640-14049.jpg"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Marco Esposito
-                      <br /> <span className="text-secondary">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeBSUovrY2USgVlgBsgxYB2Z2WXg6VLKpYvMnjaU-t9YzVi_zZwxzY_bCLODqadKmL_Xw&usqp=CAU"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Elena Conti <br /> <span className="text-secondary o-3">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
-            </div>
-            <div className="profile-info mt-3">
-              <div>
-                <span className="text-black fw-bold">Persone che potresti conoscere</span> <br></br>
-                <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
-              </div>
+                ))}
 
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Francesco Ricci
-                      <br /> <span className="text-secondary">Studente presso Epicode</span>
-                    </p>
-                  </div>
+              <div className="profile-info mt-3">
+                <div>
+                  <span className="text-black fw-bold">Persone che potresti conoscere</span> <br></br>
+                  <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
                 </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
+                {listProfiles.length > 0 &&
+                  listProfiles.slice(6, 10).map((profile, index) => (
+                    <div className="container" key={profile._id}>
+                      <div className="row align-items-left">
+                        <div className="col-md-2 ">
+                          <img
+                            src={fallbackImages[index % fallbackImages.length]}
+                            alt="Descrizione"
+                            className="img-fluid rounded-circle"
+                            style={{ maxWidth: "50px" }}
+                          />
+                        </div>
+                        <div className="col-md-10">
+                          <p className="text-black ms-4 fw-bold ">
+                            {profile.name} {profile.surname}
+                            <br /> <span className="text-secondary">{profile.title}</span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="btn-msg">
+                        <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
+                      </div>
+                      <hr></hr>
+                    </div>
+                  ))}
               </div>
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://img.freepik.com/vector-premium/perfil-avatar-mujer-icono-redondo_24640-14048.jpg"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Anna de Luca
-                      <br /> <span className="text-secondary">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs1pd-BYqknYhHyLcTz2BQ8qrCRpKT0GBoBqqr7hZSygsob-qeYk8WhtL6CXoMGEhgrsI&usqp=CAU"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Matteo Romano
-                      <br /> <span className="text-secondary">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
-              <div className="container">
-                <div className="row align-items-left">
-                  <div className="col-md-2 ">
-                    <img
-                      src="https://cdn.icon-icons.com/icons2/2643/PNG/512/female_woman_person_people_avatar_user_white_tone_icon_159359.png"
-                      alt="Descrizione"
-                      className="img-fluid"
-                      style={{ maxWidth: "50px" }}
-                    />
-                  </div>
-                  <div className="col-md-10">
-                    <p className="text-black ms-4 fw-bold ">
-                      Sara Costa
-                      <br /> <span className="text-secondary o-3">Studente presso Epicode</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="btn-msg">
-                  <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-                </div>
-                <hr></hr>
-              </div>
+              <img
+                className="img-sponsor"
+                src="https://francescoursino.it/wp-content/uploads/2021/04/hero-barilla-1024x633.jpg"
+              ></img>
             </div>
-            <img
-              className="img-sponsor"
-              src="https://francescoursino.it/wp-content/uploads/2021/04/hero-barilla-1024x633.jpg"
-            ></img>
           </div>
         </Col>
       </Row>

@@ -62,7 +62,7 @@ function MyNavbar() {
             </Form>
           )}
           <div className={`nav-items-grid ${isMobile ? "mobile" : ""}`}>
-            <Nav.Link href="#home" className="nav-item-custom">
+            <Nav.Link href="/" className="nav-item-custom">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
                 <path d="M23 9v2h-2v7a3 3 0 01-3 3h-4v-6h-4v6H6a3 3 0 01-3-3v-7H1V9l11-7z"></path>
               </svg>
@@ -92,7 +92,7 @@ function MyNavbar() {
               </svg>
               <span>Notifiche</span>
             </Nav.Link>
-            <Nav.Link href="#me" className="nav-item-custom">
+            <Nav.Link href="/profilo/:idprofilo" className="nav-item-custom">
               <img
                 width="30"
                 src="https://media.licdn.com/dms/image/C5603AQEsE-ujh9vJ1w/profile-displayphoto-shrink_100_100/0/1619603516362?e=1726704000&v=beta&t=BJ5CPVL_8Mr5SGuxa-PZ_mRF5EjekPnP5F2TqyfM45E"

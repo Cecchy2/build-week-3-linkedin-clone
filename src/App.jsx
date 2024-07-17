@@ -11,8 +11,14 @@ import ProfileSearch from "./components/PostCreator";
 function App() {
   return (
     <>
-      <MyNavbar />
-      <ProfileSearch width="600px" />
+      <BrowserRouter>
+        <MyNavbar />
+        <Routes>
+          <Route path="/profilo/:idprofilo" element={<HomeProfile />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+        <MessageComp />
+      </BrowserRouter>
     </>
   );
 }

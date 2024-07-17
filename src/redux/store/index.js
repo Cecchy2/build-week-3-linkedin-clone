@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import profileReducer from "../reducers/profileReducer";
+import skillsReducer from "../reducers/skillsReducers";
 
 const rootReducer = combineReducers({
-  user: profileReducer,
+  userProfile: profileReducer,
+  skills: skillsReducer,
 });
 
 const store = configureStore({
