@@ -7,7 +7,7 @@ import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
 
 const MainProfile = () => {
-  const [showEdit, setShowEdit] = useState(false);
+  /* const [showEdit, setShowEdit] = useState(false); */
   const [showExp, setShowExp] = useState(false);
 
   const profileMe = useSelector((state) => state.userProfile.meUser);
@@ -15,8 +15,8 @@ const MainProfile = () => {
 
   const dispatch = useDispatch();
 
-  const handleCloseEdit = () => setShowEdit(false);
-  const handleShowEdit = () => setShowEdit(true);
+  /* const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true); */
 
   const handleCloseExp = () => setShowExp(false);
   const handleShowExp = () => setShowExp(true);
@@ -61,14 +61,14 @@ const MainProfile = () => {
           </div>
           <Container fluid className="mt-5">
             <div className="mt-5 w-50 ms-auto d-flex justify-content-end">
-              <Button variant="link" onClick={handleShowEdit} style={{ padding: 0 }}>
+              {/* <Button variant="link" onClick={handleShowEdit} style={{ padding: 0 }}>
                 <Image
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
                   width="25"
                   height="25"
                 />
-              </Button>
-              <ModalUserEdit showEdit={showEdit} handleCloseEdit={handleCloseEdit} profileMe={profileMe} />
+              </Button> */}
+              <ModalUserEdit profileMe={profileMe} />
             </div>
             <h2>
               {profileMe.name} {profileMe.surname}
