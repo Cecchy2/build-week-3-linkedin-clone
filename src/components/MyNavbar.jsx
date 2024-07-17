@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import "../App.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import "../App.css";
-import { Container } from "react-bootstrap";
+import { Container, Dropdown, Row, Col } from "react-bootstrap";
 
 function MyNavbar() {
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -122,18 +123,66 @@ function MyNavbar() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
                   <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
                 </svg>
-                <span>
-                  Per le aziende{" "}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="chevron-down"
-                    width="16"
-                    height="16"
-                  >
-                    <path d="M12 14.5l-4-4h8z"></path>
-                  </svg>
-                </span>
+                <Dropdown align="end"  title="Dropdown end"
+      id="dropdown-menu-align-end">
+  <Dropdown.Toggle as="span" id="dropdown-custom-components">
+    Per le aziende
+  </Dropdown.Toggle>
+  <Dropdown.Menu className="custom-dropdown-menu">
+        <Container>
+          <Row>
+            <Col xs={6}>
+            <h5>Scopri altri prodotti LinkedIn</h5>
+              <ul className="dropdown-list prime">
+         <li><Dropdown.Item >  <i className="bi bi-compass" style={{ marginRight: '8px' }}></i>Trova lead </Dropdown.Item></li> 
+                <li><Dropdown.Item > <i class="bi bi-person-fill"style={{ marginRight: '8px' }}></i> Gruppi</Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Talent</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><i class="bi bi-diagram-3-fill" style={{ marginRight: '8px' }}></i>Talent Insights</Dropdown.Item></li>
+                <li><Dropdown.Item ><i class="bi bi-suitcase-lg-fill"style={{ marginRight: '8px' }}></i>Pubblica un’offerta di lavoro</Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Vendite</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><i class="bi bi-shop"style={{ marginRight: '8px' }}></i>Marketplace dei servizi</Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Marketing</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><i class="bi bi-badge-ad-fill"style={{ marginRight: '8px' }}></i>Pubblicizza</Dropdown.Item></li>
+                <li><Dropdown.Item ><span>Learning</span></Dropdown.Item></li>
+                <li><Dropdown.Item ><i class="bi bi-file-play"style={{ marginRight: '8px' }}></i>Learning</Dropdown.Item></li>
+</ul>
+            </Col>
+           
+            <Col xs={6}>
+            
+           
+            <h5>Scopri altro per il business</h5>
+            
+              <ul className="dropdown-list second">
+                
+                <li><Dropdown.Item> Assumi su LinkedIn <br/> 
+<span>Trova, attrai e assumi</span></Dropdown.Item></li>
+
+<li><Dropdown.Item> Vendi con LinkedIn <br/>
+<span>Sblocca nuove opportunità di vendita</span></Dropdown.Item></li>
+
+<li><Dropdown.Item> Offerta di lavoro gratuita<br/>
+<span>Ottieni rapidamente candidati qualificati</span></Dropdown.Item></li>
+
+<li><Dropdown.Item>Fai pubblicità su LinkedIn<br/>
+<span>Acquisisci clienti e fai crescere la tua azienda</span></Dropdown.Item></li>
+
+<li><Dropdown.Item>Impara con LinkedIn<br/>
+<span>Assumi su LinkedIn</span></Dropdown.Item></li>
+
+<li><Dropdown.Item>Admin Center<br/>
+<span>Gestisci i dettagli di fatturazione e account</span></Dropdown.Item></li>
+
+<li><Dropdown.Item> Crea una pagina aziendale </Dropdown.Item></li>
+
+              </ul>
+              
+            </Col>
+          </Row>
+        </Container>
+      </Dropdown.Menu>
+    </Dropdown>
+                
               </Nav.Link>
             </>
           )}
