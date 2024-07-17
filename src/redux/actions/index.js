@@ -4,7 +4,8 @@ export const EDIT_USER = "EDIT_USER";
 export const EXPERIENCES = "EXPERIENCES";
 export const EXPERIENCE = "EXPERIENCE";
 
-export const storeProfiles = (setCase, data) => ({ type: setCase, payload: data });
+export const storeProfiles = (type, data) => ({ type: type, payload: data });
+export const storeExperience = (type, payload) => ({ type: type, payload: payload });
 export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputValue });
 
 export const getProfileData = () => {

@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createExp, getProfileMe } from "../redux/actions";
-import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
-
+import { createExp, editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
+``;
 const MainProfile = () => {
-<<<<<<< Updated upstream
-  const [show, setShow] = useState(false);
-  const [showPicture, setShowPicture] = useState(false);
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-=======
   const [showEdit, setShowEdit] = useState(false);
   const [showExp, setShowExp] = useState(false);
 
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const experiences = useSelector(state => state.skills.experiences);
->>>>>>> Stashed changes
-  const dispatch = useDispatch();
+  // const experiences = useSelector(state => state.skills.experiences);
+
   const handleCloseEdit = () => {
     setShowEdit(false);
   };
@@ -29,8 +21,13 @@ const MainProfile = () => {
   const handleShowExp = () => {
     setShowExp(true);
   };
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  const [showPicture, setShowPicture] = useState(false);
+  const experiences = useSelector(state => state.skills.expriences);
+  const experience = useSelector(state => state.skills.exprience);
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const dispatch = useDispatch();
+
   const handleShowPicture = () => setShowPicture(true);
   const [inputValue, setInputValue] = useState({
     name: "",
@@ -41,12 +38,6 @@ const MainProfile = () => {
     title: "",
     area: "",
   });
-
-  useEffect(() => {
-    dispatch(getProfileMe());
-    console.log(profileMe);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
 
   useEffect(() => {
     setInputValue({
@@ -60,13 +51,16 @@ const MainProfile = () => {
     });
   }, [profileMe]);
 
+  useEffect(() => {
+    dispatch(getProfileMe());
+    console.log(profileMe);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   return (
     profileMe && (
       <>
-        <Container
-          className="badgeContainer border rounded-3 my-3 px-0  "
-          style={{ overflow: "hidden", backgroundColor: "white" }}
-        >
+        <Container className="badgeContainer border rounded-3 my-3 px-0 " style={{ overflow: "hidden" }}>
           <div className="position-relative">
             <Image
               className=" w-100"
@@ -104,11 +98,7 @@ const MainProfile = () => {
                   height="25"
                 />
               </Button>
-<<<<<<< Updated upstream
-              <Modal show={show} onHide={handleClose} size="lg">
-=======
               <Modal show={showEdit} onHide={handleCloseEdit}>
->>>>>>> Stashed changes
                 <Modal.Header closeButton>
                   <Modal.Title>Modifica presentazione</Modal.Title>
                 </Modal.Header>
@@ -126,77 +116,31 @@ const MainProfile = () => {
                   >
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                       <Form.Label>Nome*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="nome"
-                        autoFocus
-                        value={inputValue.name}
-                        onChange={e => setInputValue({ ...inputValue, name: e.target.value })}
-                        required
-                      />
+                      <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                       <Form.Label>Cognome*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="cognome"
-                        autoFocus
-                        value={inputValue.surname}
-                        onChange={e => setInputValue({ ...inputValue, surname: e.target.value })}
-                        required
-                      />
+                      <Form.Control type="text" placeholder="cognome" autoFocus />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                       <Form.Label>Email address</Form.Label>
-                      <Form.Control
-                        type="email"
-                        placeholder="name@example.com"
-                        autoFocus
-                        value={inputValue.email}
-                        onChange={e => setInputValue({ ...inputValue, email: e.target.value })}
-                      />
+                      <Form.Control type="email" placeholder="name@example.com" autoFocus />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                       <Form.Label>Username</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="username"
-                        autoFocus
-                        value={inputValue.username}
-                        onChange={e => setInputValue({ ...inputValue, username: e.target.value })}
-                      />
+                      <Form.Control type="text" placeholder="username" autoFocus />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                      <Form.Label>Sommario*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="bio"
-                        autoFocus
-                        value={inputValue.bio}
-                        onChange={e => setInputValue({ ...inputValue, bio: e.target.value })}
-                        required
-                      />
+                      <Form.Label>Bio*</Form.Label>
+                      <Form.Control type="text" placeholder="bio" autoFocus />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                      <Form.Label>Posizione attuale*</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="title"
-                        autoFocus
-                        value={inputValue.title}
-                        onChange={e => setInputValue({ ...inputValue, title: e.target.value })}
-                        required
-                      />
+                      <Form.Label>Title*</Form.Label>
+                      <Form.Control type="text" placeholder="title" autoFocus />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                       <Form.Label>Area</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="area"
-                        autoFocus
-                        value={inputValue.area}
-                        onChange={e => setInputValue({ ...inputValue, area: e.target.value })}
-                      />
+                      <Form.Control type="text" placeholder="area" autoFocus />
                     </Form.Group>
                     <Modal.Footer>
                       <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseEdit} type="submit">
@@ -250,7 +194,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
+        <Container className="border rounded-3 my-3">
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Esperienza</h4>
             <button className="bg-transparent border-0">
@@ -277,10 +221,10 @@ const MainProfile = () => {
                   <span>*</span> indica che è obbligatorio
                 </p>
                 <Form
-                /* onSubmit={(e) => {
+                  onSubmit={e => {
                     e.preventDefault();
-                    dispatch(editUserAction(inputValue));
-                  }} */
+                    dispatch(createExp(profileMe._id, profileMe));
+                  }}
                 >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Qualifica*</Form.Label>
@@ -337,7 +281,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
+        <Container className="border rounded-3 my-3">
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Formazione</h4>
             <button className="bg-transparent border-0">
@@ -377,7 +321,7 @@ const MainProfile = () => {
             </div>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
+        <Container className="border rounded-3 my-3">
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Competenze</h4>
             <button className="bg-transparent border-0">
