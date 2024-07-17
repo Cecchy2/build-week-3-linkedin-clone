@@ -14,7 +14,7 @@ const HomeAsideLeft = () => {
 
   return (
     profileMe && (
-      <Col Col xs={12} md={2} className="profile-info p-0 overflow-hidden">
+      <Col Col xs={12} md={2} className="profile-info p-0 overflow-hidden h-100">
         <div className="p-0 position-relative">
           <Image
             className="img-fluid w-100"

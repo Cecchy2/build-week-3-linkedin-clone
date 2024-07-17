@@ -4,6 +4,7 @@ export const EDIT_USER = "EDIT_USER";
 export const EXPERIENCES = "EXPERIENCES";
 export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
+export const GET_POSTS = "GET_POSTS";
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
@@ -157,6 +158,26 @@ export const uploadProfilePicture = (file, userId) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const getPosts = () => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        dispatch({ type: GET_POSTS, payload: result });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };
