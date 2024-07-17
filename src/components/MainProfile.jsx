@@ -141,7 +141,7 @@ const MainProfile = () => {
                 <Form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    dispatch(createExp(profileMe._id, profileMe));
+                    dispatch(createExp(profileMe._id, experience));
                   }}
                 >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
