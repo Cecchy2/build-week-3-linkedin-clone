@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../App.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Container, Dropdown, Row, Col, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 function MyNavbar() {
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const navigate = useNavigate();
+
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -95,57 +100,89 @@ function MyNavbar() {
               <span>Notifiche</span>
             </Nav.Link>
             <Nav.Link href="#me" className="nav-item-custom">
-              <span><img
-                width="30"
-                src="https://media.licdn.com/dms/image/C5603AQEsE-ujh9vJ1w/profile-displayphoto-shrink_100_100/0/1619603516362?e=1726704000&v=beta&t=BJ5CPVL_8Mr5SGuxa-PZ_mRF5EjekPnP5F2TqyfM45E"
-                height="30"
-                alt="Umberto Amoroso"
-                className="profile-photo" 
-              /> </span>
-              
-      <Dropdown align="end" title="Dropdown end" id="dropdown-menu-align-end">
-        <Dropdown.Toggle as="span" id="dropdown-custom-components">
-         Tu
-        </Dropdown.Toggle>
-        <Dropdown.Menu className="custom-dropdown-menu-profile">
-          <Dropdown.Item href="#">
-        <div className="container">
-            <div className="row align-items-left">
-              <div className="col-md-2">
+              <span>
                 <img
-                  src='https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg'
-                  alt="Descrizione"
-                  className="img-fluid rounded-circle"
-                  style={{ maxWidth: '50px' }}
-                />
-              </div>
-                      <div className="col-md-10">
-                      <p className="text-black ms-4 fw-bold ">
-                          Rossi Luca<br />{" "}
-                          <span className="text-secondary">EpiCode Developer</span>
-                        </p>
-                        <Button variant="outline-info">Visualizza profilo</Button>{' '}
-                      </div>
+                  width="30"
+                  src="https://media.licdn.com/dms/image/C5603AQEsE-ujh9vJ1w/profile-displayphoto-shrink_100_100/0/1619603516362?e=1726704000&v=beta&t=BJ5CPVL_8Mr5SGuxa-PZ_mRF5EjekPnP5F2TqyfM45E"
+                  height="30"
+                  alt="Umberto Amoroso"
+                  className="profile-photo"
+                />{" "}
+              </span>
 
+              <Dropdown align="end" title="Dropdown end" id="dropdown-menu-align-end">
+                <Dropdown.Toggle as="span" id="dropdown-custom-components">
+                  Tu
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="custom-dropdown-menu-profile">
+                  <Dropdown.Item href="#">
+                    <div className="container">
+                      <div className="row align-items-left">
+                        <div className="col-md-2">
+                          <img
+                            src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
+                            alt="Descrizione"
+                            className="img-fluid rounded-circle"
+                            style={{ maxWidth: "50px" }}
+                          />
+                        </div>
+                        <div className="col-md-10">
+                          <p className="text-black ms-4 fw-bold ">
+                            Rossi Luca
+                            <br /> <span className="text-secondary">EpiCode Developer</span>
+                          </p>
+                          <Link to="/profilo/:idprofilo">
+                            <Button variant="outline-info">Visualizza profilo</Button>
+                          </Link>{" "}
+                        </div>
                       </div>
-                      </div>
-                    
-          </Dropdown.Item>
-          <ul className="dropdown-list-profile"> <hr></hr>
-         <li><Dropdown.Item >  Account </Dropdown.Item></li> 
-                <li><Dropdown.Item > <span> Impostazione e privacy</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Guida</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Lingua</span></Dropdown.Item></li> <hr></hr>
-                <li><Dropdown.Item >Gestisci</Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Post e attività</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Account</span></Dropdown.Item></li><hr></hr>
-                <li><Dropdown.Item ><span>Esci</span></Dropdown.Item></li>
-                
-                </ul>
-        </Dropdown.Menu>
-      </Dropdown>
-   
-              
+                    </div>
+                  </Dropdown.Item>
+                  <ul className="dropdown-list-profile">
+                    {" "}
+                    <hr></hr>
+                    <li>
+                      <Dropdown.Item> Account </Dropdown.Item>
+                    </li>
+                    <li>
+                      <Dropdown.Item>
+                        {" "}
+                        <span> Impostazione e privacy</span>
+                      </Dropdown.Item>
+                    </li>
+                    <li>
+                      <Dropdown.Item>
+                        <span>Guida</span>
+                      </Dropdown.Item>
+                    </li>
+                    <li>
+                      <Dropdown.Item>
+                        <span>Lingua</span>
+                      </Dropdown.Item>
+                    </li>{" "}
+                    <hr></hr>
+                    <li>
+                      <Dropdown.Item>Gestisci</Dropdown.Item>
+                    </li>
+                    <li>
+                      <Dropdown.Item>
+                        <span>Post e attività</span>
+                      </Dropdown.Item>
+                    </li>
+                    <li>
+                      <Dropdown.Item>
+                        <span>Account</span>
+                      </Dropdown.Item>
+                    </li>
+                    <hr></hr>
+                    <li>
+                      <Dropdown.Item>
+                        <span>Esci</span>
+                      </Dropdown.Item>
+                    </li>
+                  </ul>
+                </Dropdown.Menu>
+              </Dropdown>
             </Nav.Link>
           </div>
           {!isMobile && (
@@ -155,66 +192,139 @@ function MyNavbar() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon" width="30" height="30">
                   <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
                 </svg>
-                <Dropdown align="end"  title="Dropdown end"
-      id="dropdown-menu-align-end">
-  <Dropdown.Toggle as="span" id="dropdown-custom-components">
-    Per le aziende
-  </Dropdown.Toggle>
-  <Dropdown.Menu className="custom-dropdown-menu">
-        <Container>
-          <Row>
-            <Col xs={12} lg={6}>
-            <h5>Scopri altri prodotti LinkedIn</h5>
-              <ul className="dropdown-list prime">
-         <li><Dropdown.Item >  <i className="bi bi-compass" style={{ marginRight: '8px' }}></i>Trova lead </Dropdown.Item></li> 
-                <li><Dropdown.Item > <i class="bi bi-person-fill"style={{ marginRight: '8px' }}></i> Gruppi</Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Talent</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><i class="bi bi-diagram-3-fill" style={{ marginRight: '8px' }}></i>Talent Insights</Dropdown.Item></li>
-                <li><Dropdown.Item ><i class="bi bi-suitcase-lg-fill"style={{ marginRight: '8px' }}></i>Pubblica un’offerta di lavoro</Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Vendite</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><i class="bi bi-shop"style={{ marginRight: '8px' }}></i>Marketplace dei servizi</Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Marketing</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><i class="bi bi-badge-ad-fill"style={{ marginRight: '8px' }}></i>Pubblicizza</Dropdown.Item></li>
-                <li><Dropdown.Item ><span>Learning</span></Dropdown.Item></li>
-                <li><Dropdown.Item ><i class="bi bi-file-play"style={{ marginRight: '8px' }}></i>Learning</Dropdown.Item></li>
-</ul>
-            </Col>
-           
-            <Col xs={12} lg={6}>
-            
-           
-            <h5>Scopri altro per il business</h5>
-            
-              <ul className="dropdown-list second">
-                
-                <li><Dropdown.Item> Assumi su LinkedIn <br/> 
-<span>Trova, attrai e assumi</span></Dropdown.Item></li>
+                <Dropdown align="end" title="Dropdown end" id="dropdown-menu-align-end">
+                  <Dropdown.Toggle as="span" id="dropdown-custom-components">
+                    Per le aziende
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="custom-dropdown-menu">
+                    <Container>
+                      <Row>
+                        <Col xs={12} lg={6}>
+                          <h5>Scopri altri prodotti LinkedIn</h5>
+                          <ul className="dropdown-list prime">
+                            <li>
+                              <Dropdown.Item>
+                                {" "}
+                                <i className="bi bi-compass" style={{ marginRight: "8px" }}></i>Trova lead{" "}
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                {" "}
+                                <i className="bi bi-person-fill" style={{ marginRight: "8px" }}></i> Gruppi
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <span>Talent</span>
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <i className="bi bi-diagram-3-fill" style={{ marginRight: "8px" }}></i>Talent Insights
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <i className="bi bi-suitcase-lg-fill" style={{ marginRight: "8px" }}></i>Pubblica
+                                un’offerta di lavoro
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <span>Vendite</span>
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <i className="bi bi-shop" style={{ marginRight: "8px" }}></i>Marketplace dei servizi
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <span>Marketing</span>
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <i className="bi bi-badge-ad-fill" style={{ marginRight: "8px" }}></i>Pubblicizza
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <span>Learning</span>
+                              </Dropdown.Item>
+                            </li>
+                            <li>
+                              <Dropdown.Item>
+                                <i className="bi bi-file-play" style={{ marginRight: "8px" }}></i>Learning
+                              </Dropdown.Item>
+                            </li>
+                          </ul>
+                        </Col>
 
-<li><Dropdown.Item> Vendi con LinkedIn <br/>
-<span>Sblocca nuove opportunità di vendita</span></Dropdown.Item></li>
+                        <Col xs={12} lg={6}>
+                          <h5>Scopri altro per il business</h5>
 
-<li><Dropdown.Item> Offerta di lavoro gratuita<br/>
-<span>Ottieni rapidamente candidati qualificati</span></Dropdown.Item></li>
+                          <ul className="dropdown-list second">
+                            <li>
+                              <Dropdown.Item>
+                                {" "}
+                                Assumi su LinkedIn <br />
+                                <span>Trova, attrai e assumi</span>
+                              </Dropdown.Item>
+                            </li>
 
-<li><Dropdown.Item>Fai pubblicità su LinkedIn<br/>
-<span>Acquisisci clienti e fai crescere la tua azienda</span></Dropdown.Item></li>
+                            <li>
+                              <Dropdown.Item>
+                                {" "}
+                                Vendi con LinkedIn <br />
+                                <span>Sblocca nuove opportunità di vendita</span>
+                              </Dropdown.Item>
+                            </li>
 
-<li><Dropdown.Item>Impara con LinkedIn<br/>
-<span>Assumi su LinkedIn</span></Dropdown.Item></li>
+                            <li>
+                              <Dropdown.Item>
+                                {" "}
+                                Offerta di lavoro gratuita
+                                <br />
+                                <span>Ottieni rapidamente candidati qualificati</span>
+                              </Dropdown.Item>
+                            </li>
 
-<li><Dropdown.Item>Admin Center<br/>
-<span>Gestisci i dettagli di fatturazione e account</span></Dropdown.Item></li>
+                            <li>
+                              <Dropdown.Item>
+                                Fai pubblicità su LinkedIn
+                                <br />
+                                <span>Acquisisci clienti e fai crescere la tua azienda</span>
+                              </Dropdown.Item>
+                            </li>
 
-<li><Dropdown.Item> Crea una pagina aziendale </Dropdown.Item></li>
+                            <li>
+                              <Dropdown.Item>
+                                Impara con LinkedIn
+                                <br />
+                                <span>Assumi su LinkedIn</span>
+                              </Dropdown.Item>
+                            </li>
 
-              </ul>
-              
-            </Col>
-          </Row>
-        </Container>
-      </Dropdown.Menu>
-    </Dropdown>
-                
+                            <li>
+                              <Dropdown.Item>
+                                Admin Center
+                                <br />
+                                <span>Gestisci i dettagli di fatturazione e account</span>
+                              </Dropdown.Item>
+                            </li>
+
+                            <li>
+                              <Dropdown.Item> Crea una pagina aziendale </Dropdown.Item>
+                            </li>
+                          </ul>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Dropdown.Menu>
+                </Dropdown>
               </Nav.Link>
             </>
           )}

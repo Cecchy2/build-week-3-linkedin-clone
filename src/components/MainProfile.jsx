@@ -3,36 +3,27 @@ import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, R
 import { useDispatch, useSelector } from "react-redux";
 import { editFetchProfile, editUserAction, getProfileMe, uploadProfilePicture } from "../redux/actions";
 import { createExp, getExp } from "../redux/actions";
+import ModalProfilePicture from "./ModalProfilePicture";
 
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showExp, setShowExp] = useState(false);
-
-  // const experiences = useSelector(state => state.skills.experiences);
-
-  const handleCloseEdit = () => {
-    setShowEdit(false);
-  };
-  const handleCloseExp = () => {
-    setShowExp(false);
-  };
-  const handleShowEdit = () => {
-    setShowEdit(true);
-  };
-  const handleShowExp = () => {
-    setShowExp(true);
-  };
-
   const [showPicture, setShowPicture] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const experiences = useSelector(state => state.skills.experiences);
+
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const experiences = useSelector((state) => state.skills.experiences);
 
   const dispatch = useDispatch();
 
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true);
+  const handleCloseExp = () => setShowExp(false);
+  const handleShowExp = () => setShowExp(true);
   const handleShowPicture = () => setShowPicture(true);
   const handleClosePicture = () => setShowPicture(false);
-  const [experience, setExperirence] = useState({
+
+  const [experience, setExperience] = useState({
     role: "",
     company: "",
     startDate: "",
@@ -56,30 +47,32 @@ const MainProfile = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setInputValue({
-      name: profileMe?.name,
-      surname: profileMe?.surname,
-      email: profileMe?.email,
-      username: profileMe?.username,
-      bio: profileMe?.bio,
-      title: profileMe?.title,
-      area: profileMe?.area,
-    });
+    if (profileMe) {
+      setInputValue({
+        name: profileMe.name || "",
+        surname: profileMe.surname || "",
+        email: profileMe.email || "",
+        username: profileMe.username || "",
+        bio: profileMe.bio || "",
+        title: profileMe.title || "",
+        area: profileMe.area || "",
+      });
+    }
   }, [profileMe]);
 
   useEffect(() => {
-    dispatch(getProfileMe());
-    dispatch(getExp(profileMe?._id));
-    console.log(profileMe);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-  const handleImageChange = e => {
+    if (profileMe?._id) {
+      dispatch(getExp(profileMe._id));
+    }
+  }, [dispatch, profileMe]);
+
+  const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(e.target.files[0]);
     }
   };
 
-  const handleImageUpload = e => {
+  const handleImageUpload = (e) => {
     e.preventDefault();
     if (selectedImage) {
       dispatch(uploadProfilePicture(selectedImage, profileMe._id));
@@ -87,17 +80,32 @@ const MainProfile = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editUserAction(inputValue));
+    dispatch(editFetchProfile(inputValue));
+    setShowEdit(false);
+  };
+
   return (
     profileMe && (
       <>
-        <Container className="badgeContainer border rounded-3 my-3 px-0 " style={{ overflow: "hidden" }}>
+        <Container className="badgeContainer border rounded-3 my-3 px-0" style={{ overflow: "hidden" }}>
           <div className="position-relative">
             <div>
               <Button variant="link" className="position-absolute">
                 bottone
               </Button>
               <Image
-                className=" w-100"
+                className="w-100"
                 src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
                 alt="profile banner"
                 style={{ maxHeight: "25vh" }}
@@ -109,33 +117,18 @@ const MainProfile = () => {
                   className="rounded-circle position-absolute mb-3 object-fit-cover"
                   src={profileMe.image}
                   width="150"
-                  style={{ bottom: "-70px", left: "50px", width: "150", height: "150px" }}
+                  height="150"
+                  style={{ bottom: "-70px", left: "50px", objectFit: "cover" }}
                 />
               </Button>
-              <Modal size="lg" show={showPicture} onHide={handleClosePicture}>
-                <Modal.Header closeButton className="dark text-white close-white border-0">
-                  <Modal.Title>Foto Profilo</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="dark text-white d-flex justify-content-center align-items-center">
-                  <Image
-                    src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
-                    alt="immagine profilo"
-                    className="border rounded-circle m-5 object-fit-cover"
-                    style={{ width: "278px", height: "278px" }}
-                  />
-                </Modal.Body>
-                <div className="dark text-white">
-                  <Form onSubmit={handleImageUpload}>
-                    <Form.Group controlId="formFile" className="mb-3">
-                      <Form.Label>Carica una nuova immagine</Form.Label>
-                      <Form.Control type="file" onChange={handleImageChange} />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                      Carica
-                    </Button>
-                  </Form>
-                </div>
-              </Modal>
+              <ModalProfilePicture
+                showPicture={showPicture}
+                handleClosePicture={handleClosePicture}
+                selectedImage={selectedImage}
+                profileMe={profileMe}
+                handleImageUpload={handleImageUpload}
+                handleImageChange={handleImageChange}
+              />
             </Container>
           </div>
           <Container fluid className="mt-5">
@@ -155,41 +148,83 @@ const MainProfile = () => {
                   <p className="text-muted fs-6">
                     <span>*</span>indica che è obbligatorio
                   </p>
-                  <Form
-                    onSubmit={e => {
-                      e.preventDefault();
-                      console.log("Dati inviati:", inputValue);
-                      dispatch(editUserAction(inputValue));
-                      dispatch(editFetchProfile(inputValue));
-                    }}
-                  >
+                  <Form onSubmit={handleFormSubmit}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                       <Form.Label>Nome*</Form.Label>
-                      <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
+                      <Form.Control
+                        type="text"
+                        placeholder="nome"
+                        autoFocus
+                        name="name"
+                        value={inputValue.name}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                       <Form.Label>Cognome*</Form.Label>
-                      <Form.Control type="text" placeholder="cognome" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="cognome"
+                        autoFocus
+                        name="surname"
+                        value={inputValue.surname}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                       <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" placeholder="name@example.com" autoFocus />
+                      <Form.Control
+                        type="email"
+                        placeholder="name@example.com"
+                        autoFocus
+                        name="email"
+                        value={inputValue.email}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                       <Form.Label>Username</Form.Label>
-                      <Form.Control type="text" placeholder="username" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="username"
+                        autoFocus
+                        name="username"
+                        value={inputValue.username}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
                       <Form.Label>Bio*</Form.Label>
-                      <Form.Control type="text" placeholder="bio" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="bio"
+                        autoFocus
+                        name="bio"
+                        value={inputValue.bio}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput6">
                       <Form.Label>Title*</Form.Label>
-                      <Form.Control type="text" placeholder="title" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="title"
+                        autoFocus
+                        name="title"
+                        value={inputValue.title}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput7">
                       <Form.Label>Area</Form.Label>
-                      <Form.Control type="text" placeholder="area" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="area"
+                        autoFocus
+                        name="area"
+                        value={inputValue.area}
+                        onChange={handleInputChange}
+                      />
                     </Form.Group>
                     <Modal.Footer>
                       <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseEdit} type="submit">
@@ -217,7 +252,6 @@ const MainProfile = () => {
               </Col>
               <Col xs={12} md={4}>
                 <h5>Job</h5>
-
                 <h5>Istruzione</h5>
               </Col>
             </Row>
@@ -270,7 +304,7 @@ const MainProfile = () => {
                   <span>*</span> indica che è obbligatorio
                 </p>
                 <Form
-                  onSubmit={e => {
+                  onSubmit={(e) => {
                     e.preventDefault();
                     dispatch(createExp(profileMe._id, profileMe));
                   }}
@@ -282,7 +316,7 @@ const MainProfile = () => {
                       placeholder="qualifica"
                       autoFocus
                       value={experience.role}
-                      onChange={e => setExperirence({ ...experience, role: e.target.value })}
+                      onChange={(e) => setExperience({ ...experience, role: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -292,7 +326,7 @@ const MainProfile = () => {
                       placeholder="name@example.com"
                       autoFocus
                       value={experience.company}
-                      onChange={e => setExperirence({ ...experience, company: e.target.value })}
+                      onChange={(e) => setExperience({ ...experience, company: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -302,7 +336,7 @@ const MainProfile = () => {
                       placeholder="username"
                       autoFocus
                       value={experience.startDate}
-                      onChange={e => setExperirence({ ...experience, startDate: e.target.value })}
+                      onChange={(e) => setExperience({ ...experience, startDate: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -312,7 +346,7 @@ const MainProfile = () => {
                       placeholder="bio"
                       autoFocus
                       value={experience.endDate}
-                      onChange={e => setExperirence({ ...experience, endDate: e.target.value })}
+                      onChange={(e) => setExperience({ ...experience, endDate: e.target.value })}
                     />
                   </Form.Group>{" "}
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -322,7 +356,7 @@ const MainProfile = () => {
                       placeholder="area"
                       autoFocus
                       value={experience.description}
-                      onChange={e => setExperirence({ ...experience, description: e.target.value })}
+                      onChange={(e) => setExperience({ ...experience, description: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -332,7 +366,7 @@ const MainProfile = () => {
                       placeholder="area"
                       autoFocus
                       value={experience.area}
-                      onChange={e => setExperirence({ ...experience, area: e.target.value })}
+                      onChange={(e) => setExperience({ ...experience, area: e.target.value })}
                     />
                   </Form.Group>
                   <Modal.Footer>
@@ -346,7 +380,7 @@ const MainProfile = () => {
           </div>
           <Container className="border-bottom">
             {experiences.length > 0 &&
-              experiences.slice(0, 4).map(exp => {
+              experiences.slice(0, 4).map((exp) => {
                 return (
                   <Row key={exp._id}>
                     <Col xs={1}>
@@ -476,4 +510,5 @@ const MainProfile = () => {
     )
   );
 };
+
 export default MainProfile;
