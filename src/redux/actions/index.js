@@ -75,6 +75,7 @@ export const getExp = userId => {
         dispatch({ type: EXPERIENCES, payload: result });
       }
     } catch (err) {
+      ``;
       console.log(err);
     }
   };
