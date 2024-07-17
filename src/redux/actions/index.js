@@ -12,7 +12,7 @@ export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputVa
 // export const getDate = dateString => {
 //   const dateObj = new Date(dateString);
 //   const options = { month: "long", year: "numeric" };
-//   const date = dateObj.toLocaleDateString("ita", options);
+//   const date = dateObj.toLocaleDateString("it-IT", options);
 //   return date;
 // };
 
