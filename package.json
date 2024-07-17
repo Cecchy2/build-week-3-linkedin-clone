@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.2.6",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "date-fns": "^3.6.0",
     "font-awesome": "^4.7.0",
     "install": "^0.13.0",
     "npm": "^10.8.2",
