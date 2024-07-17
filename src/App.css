@@ -1,5 +1,5 @@
 body {
-  background-color: f4f2ee;
+  background-color: #f4f2ee;
 }
 
 .profile-info {
@@ -298,6 +298,14 @@ p > span {
   white-space: nowrap;
   overflow: hidden;
 }
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
 
 .top-bar {
   background-color: white;
@@ -308,3 +316,9 @@ p > span {
   background-color: rgb(237, 243, 247);
   background-size: contain;
 }
+ 
+@media (max-width: 768px) {
+  .messageTool {
+    display: none;
+  }
+} 

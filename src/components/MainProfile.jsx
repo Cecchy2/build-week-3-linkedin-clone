@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createExp, getProfileMe } from "../redux/actions";
+import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
 
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
@@ -22,6 +23,17 @@ const MainProfile = () => {
   const handleShowExp = () => {
     setShowExp(true);
   };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [inputValue, setInputValue] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    username: "",
+    bio: "",
+    title: "",
+    area: "",
+  });
 
   useEffect(() => {
     dispatch(getProfileMe());
@@ -29,10 +41,25 @@ const MainProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  useEffect(() => {
+    setInputValue({
+      name: profileMe?.name,
+      surname: profileMe?.surname,
+      email: profileMe?.email,
+      username: profileMe?.username,
+      bio: profileMe?.bio,
+      title: profileMe?.title,
+      area: profileMe?.area,
+    });
+  }, [profileMe]);
+
   return (
     profileMe && (
       <>
-        <Container className="badgeContainer border rounded-3 my-3 px-0 " style={{ overflow: "hidden" }}>
+        <Container
+          className="badgeContainer border rounded-3 my-3 px-0  "
+          style={{ overflow: "hidden", backgroundColor: "white" }}
+        >
           <div className="position-relative">
             <Image
               className=" w-100"
@@ -69,36 +96,84 @@ const MainProfile = () => {
                   <Form
                     onSubmit={e => {
                       e.preventDefault();
-                      dispatch(createExp(profileMe._id, profileMe));
+                      console.log("Dati inviati:", inputValue);
+                      dispatch(editUserAction(inputValue));
+                      dispatch(editFetchProfile(inputValue));
                     }}
                   >
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                       <Form.Label>Nome*</Form.Label>
-                      <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
+                      <Form.Control
+                        type="text"
+                        placeholder="nome"
+                        autoFocus
+                        value={inputValue.name}
+                        onChange={e => setInputValue({ ...inputValue, name: e.target.value })}
+                        required
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                       <Form.Label>Cognome*</Form.Label>
-                      <Form.Control type="text" placeholder="cognome" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="cognome"
+                        autoFocus
+                        value={inputValue.surname}
+                        onChange={e => setInputValue({ ...inputValue, surname: e.target.value })}
+                        required
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                       <Form.Label>Email address</Form.Label>
-                      <Form.Control type="email" placeholder="name@example.com" autoFocus />
+                      <Form.Control
+                        type="email"
+                        placeholder="name@example.com"
+                        autoFocus
+                        value={inputValue.email}
+                        onChange={e => setInputValue({ ...inputValue, email: e.target.value })}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                       <Form.Label>Username</Form.Label>
-                      <Form.Control type="text" placeholder="username" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="username"
+                        autoFocus
+                        value={inputValue.username}
+                        onChange={e => setInputValue({ ...inputValue, username: e.target.value })}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                      <Form.Label>Bio*</Form.Label>
-                      <Form.Control type="text" placeholder="bio" autoFocus />
+                      <Form.Label>Sommario*</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="bio"
+                        autoFocus
+                        value={inputValue.bio}
+                        onChange={e => setInputValue({ ...inputValue, bio: e.target.value })}
+                        required
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                      <Form.Label>Title*</Form.Label>
-                      <Form.Control type="text" placeholder="title" autoFocus />
+                      <Form.Label>Posizione attuale*</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="title"
+                        autoFocus
+                        value={inputValue.title}
+                        onChange={e => setInputValue({ ...inputValue, title: e.target.value })}
+                        required
+                      />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                       <Form.Label>Area</Form.Label>
-                      <Form.Control type="text" placeholder="area" autoFocus />
+                      <Form.Control
+                        type="text"
+                        placeholder="area"
+                        autoFocus
+                        value={inputValue.area}
+                        onChange={e => setInputValue({ ...inputValue, area: e.target.value })}
+                      />
                     </Form.Group>
                     <Modal.Footer>
                       <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseEdit} type="submit">
@@ -152,7 +227,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
+        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Esperienza</h4>
             <button className="bg-transparent border-0">
@@ -239,7 +314,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
+        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Formazione</h4>
             <button className="bg-transparent border-0">
@@ -279,7 +354,7 @@ const MainProfile = () => {
             </div>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
+        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Competenze</h4>
             <button className="bg-transparent border-0">
