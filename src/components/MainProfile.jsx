@@ -6,6 +6,7 @@ import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions
 const MainProfile = () => {
   const [show, setShow] = useState(false);
   const [showPicture, setShowPicture] = useState(false);
+
   const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
@@ -60,14 +61,28 @@ const MainProfile = () => {
                 />
               </Button>
               <Modal size="lg" show={showPicture} onHide={() => setShowPicture(false)}>
-                <Modal.Header closeButton className="dark text-white">
-                  <img
+                <Modal.Header closeButton className="dark text-white dark text-white close-white border-0">
+                  <Modal.Title id="example-modal-sizes-title-sm">Foto Profilo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="dark text-white d-flex justify-content-center align-items-center">
+                  {" "}
+                  <Image
                     src="https://images.unsplash.com/photo-1720543227828-ec5ae842633a?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="immagine profilo"
-                    className="border rounded-circle"
+                    className="border rounded-circle m-5"
                     style={{ width: "278px", height: "278px" }}
                   />
-                </Modal.Header>
+                </Modal.Body>
+                <div className="dark text-white">
+                  <Button variant="link" className="ms-5 mb-3">
+                    <Image
+                      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0id2hpdGUiPgogIDxwYXRoIGQ9Ik0yMS4xMyAyLjg2YTMgMyAwIDAwLTQuMTcgMGwtMTMgMTNMMiAyMmw2LjE5LTJM
+          MjEuMTMgN2EzIDMgMCAwMDAtNC4xNnogTTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
+                      width="25"
+                      height="25"
+                    />
+                  </Button>
+                </div>
               </Modal>
             </Container>
           </div>

@@ -319,3 +319,6 @@ p > span {
 .dark{
   background-color: rgb(27, 31, 35)
 }
+.close-white .btn-close {
+  filter: invert(1);
+}
