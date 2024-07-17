@@ -74,7 +74,7 @@ const MainProfile = () => {
             <Container>
               <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
                 <Image
-                  className="rounded-circle position-absolute mb-3"
+                  className="rounded-circle position-absolute mb-3 object-fit-cover"
                   src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
                   width="150"
                   style={{ bottom: "-70px", left: "50px", width: "150", height: "150px" }}
@@ -88,7 +88,7 @@ const MainProfile = () => {
                   <Image
                     src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
                     alt="immagine profilo"
-                    className="border rounded-circle m-5"
+                    className="border rounded-circle m-5 object-fit-cover"
                     style={{ width: "278px", height: "278px" }}
                   />
                 </Modal.Body>
