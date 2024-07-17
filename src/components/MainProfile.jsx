@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileMe, uploadProfilePicture } from "../redux/actions";
+import { getProfileMe } from "../redux/actions";
 import { createExp, getExp } from "../redux/actions";
 import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
@@ -9,8 +9,6 @@ import ModalUserEdit from "./ModalUserEdit";
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showExp, setShowExp] = useState(false);
-  const [showPicture, setShowPicture] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
 
   const profileMe = useSelector((state) => state.userProfile.meUser);
   const experiences = useSelector((state) => state.skills.experiences);
@@ -19,11 +17,9 @@ const MainProfile = () => {
 
   const handleCloseEdit = () => setShowEdit(false);
   const handleShowEdit = () => setShowEdit(true);
+
   const handleCloseExp = () => setShowExp(false);
   const handleShowExp = () => setShowExp(true);
-  const handleShowPicture = () => setShowPicture(true);
-  const handleClosePicture = () => setShowPicture(false);
-
   const [experience, setExperience] = useState({
     role: "",
     company: "",
@@ -43,20 +39,6 @@ const MainProfile = () => {
     }
   }, [dispatch, profileMe]);
 
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedImage(e.target.files[0]);
-    }
-  };
-
-  const handleImageUpload = (e) => {
-    e.preventDefault();
-    if (selectedImage) {
-      dispatch(uploadProfilePicture(selectedImage, profileMe._id));
-      setShowPicture(false);
-    }
-  };
-
   return (
     profileMe && (
       <>
@@ -74,23 +56,7 @@ const MainProfile = () => {
               />
             </div>
             <Container>
-              <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
-                <Image
-                  className="rounded-circle position-absolute mb-3 object-fit-cover"
-                  src={profileMe.image}
-                  width="150"
-                  height="150"
-                  style={{ bottom: "-70px", left: "50px", objectFit: "cover" }}
-                />
-              </Button>
-              <ModalProfilePicture
-                showPicture={showPicture}
-                handleClosePicture={handleClosePicture}
-                selectedImage={selectedImage}
-                profileMe={profileMe}
-                handleImageUpload={handleImageUpload}
-                handleImageChange={handleImageChange}
-              />
+              <ModalProfilePicture profileMe={profileMe} />
             </Container>
           </div>
           <Container fluid className="mt-5">
