@@ -50,7 +50,7 @@ const MainProfile = () => {
   const handleImageUpload = (e) => {
     e.preventDefault();
     if (selectedImage) {
-      dispatch(uploadProfilePicture(selectedImage));
+      dispatch(uploadProfilePicture(selectedImage, profileMe._id));
       setShowPicture(false);
     }
   };
@@ -75,7 +75,7 @@ const MainProfile = () => {
               <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
                 <Image
                   className="rounded-circle position-absolute mb-3 object-fit-cover"
-                  src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
+                  src={profileMe.image}
                   width="150"
                   style={{ bottom: "-70px", left: "50px", width: "150", height: "150px" }}
                 />

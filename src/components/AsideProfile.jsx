@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileData } from "../redux/actions";
 

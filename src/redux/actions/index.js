@@ -75,12 +75,12 @@ export const editFetchProfile = (profiloModificato) => {
   };
 };
 
-export const uploadProfilePicture = (file) => {
+export const uploadProfilePicture = (file, userId) => {
   return async (dispatch) => {
     const formData = new FormData();
     formData.append("profile", file);
 
-    const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/6694def5196d7b0015d6b52e/picture";
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`;
     try {
       const resp = await fetch(baseEndpoint, {
         method: "POST",
@@ -93,6 +93,7 @@ export const uploadProfilePicture = (file) => {
 
       if (resp.ok) {
         const result = await resp.json();
+        console.log(result);
         dispatch(storeProfiles(ME_USER, result));
       } else {
         throw new Error("Errore durante il caricamento dell'immagine");
