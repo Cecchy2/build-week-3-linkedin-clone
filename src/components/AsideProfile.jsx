@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileData } from "../redux/actions";
 
 const Aside = () => {
-  const listProfiles = useSelector((state) => state.userProfile.listProfiles);
+  const listProfiles = useSelector(state => state.userProfile.listProfiles);
 
   const dispatch = useDispatch();
 
@@ -26,37 +26,39 @@ const Aside = () => {
   
 
   return (
-    <Col xs={{ span: 3 }}>
-      <div className="aside">
-        <div className="profile-info">
-          <div>
-            <span className="text-black fw-bold">
-              Lingua del profilo{" "}
-              <img
-                className="icon-pensil"
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
-              ></img>
-            </span>{" "}
-            <br></br>
-            <p className="text-normal text-secondary pt1">Italiano</p>
-            <hr></hr>
-          </div>
+    <Container>
+      <Row>
+        <Col xs={{ span: 3 }}>
+          <div className="aside">
+            <div className="profile-info">
+              <div>
+                <span className="text-black fw-bold">
+                  Lingua del profilo{" "}
+                  <img
+                    className="icon-pensil"
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
+                  ></img>
+                </span>{" "}
+                <br></br>
+                <p className="text-normal text-secondary pt1">Italiano</p>
+                <hr></hr>
+              </div>
 
-          <div>
-            <span className="text-black fw-bold">
-              Profilo pubblico e URL{" "}
-              <img
-                className="icon-pensil"
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
-              ></img>
-            </span>
-            <p className="text-secondary ">www.linkedin.com/in/luca-rossi </p>
-          </div>
-        </div>
-        <div className="profile-info mt-3">
-          <div className="mb-2">
-            <span className="text-black fw-bold">Altri profili simili</span>
-          </div>
+              <div>
+                <span className="text-black fw-bold">
+                  Profilo pubblico e URL{" "}
+                  <img
+                    className="icon-pensil"
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
+                  ></img>
+                </span>
+                <p className="text-secondary ">www.linkedin.com/in/luca-rossi </p>
+              </div>
+            </div>
+            <div className="profile-info mt-3">
+              <div className="mb-2">
+                <span className="text-black fw-bold">Altri profili simili</span>
+              </div>
 
               {listProfiles.length > 0 &&
          listProfiles.slice(2, 6).map((profile, index) => (
