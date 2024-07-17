@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const HomeAsideLeft = () => {
   const profileMe = useSelector((state) => state.userProfile.meUser);
   return (
-    <Col className="profile-info mt-4">
+    <Col Col xs={{ span: 2 }} className="profile-info">
       <div className="position-relative">
         <Image
           className=" w-100"
