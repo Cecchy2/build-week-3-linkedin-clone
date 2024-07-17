@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createExp, editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
-``;
+import { createExp, editFetchProfile, editUserAction, getExp, getProfileMe } from "../redux/actions";
+
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showExp, setShowExp] = useState(false);
@@ -23,12 +23,21 @@ const MainProfile = () => {
   };
 
   const [showPicture, setShowPicture] = useState(false);
-  const experiences = useSelector(state => state.skills.expriences);
-  const experience = useSelector(state => state.skills.exprience);
+  const experiences = useSelector(state => state.skills.experiences);
+
   const profileMe = useSelector(state => state.userProfile.meUser);
   const dispatch = useDispatch();
 
   const handleShowPicture = () => setShowPicture(true);
+  const [experience, setExperirence] = useState({
+    role: "",
+    company: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    area: "",
+  });
+
   const [inputValue, setInputValue] = useState({
     name: "",
     surname: "",
@@ -53,6 +62,7 @@ const MainProfile = () => {
 
   useEffect(() => {
     dispatch(getProfileMe());
+    dispatch(getExp(profileMe?._id));
     console.log(profileMe);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -196,7 +206,7 @@ const MainProfile = () => {
         </Container>
         <Container className="border rounded-3 my-3">
           <div className="d-flex justify-content-between align-items-center pt-3">
-            <h4>Esperienza</h4>
+            <h4>Esperienze</h4>
             <button className="bg-transparent border-0">
               <svg
                 onClick={handleShowExp}
@@ -223,32 +233,68 @@ const MainProfile = () => {
                 <Form
                   onSubmit={e => {
                     e.preventDefault();
-                    dispatch(createExp(profileMe._id, profileMe));
+                    dispatch(createExp(profileMe._id, experience));
                   }}
                 >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Qualifica*</Form.Label>
-                    <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                    <Form.Label>Ruolo*</Form.Label>
-                    <Form.Control type="text" placeholder="cognome" autoFocus />
+                    <Form.Control
+                      type="text"
+                      placeholder="qualifica"
+                      autoFocus
+                      value={experience.role}
+                      onChange={e => setExperirence({ ...experience, role: e.target.value })}
+                    />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Company</Form.Label>
-                    <Form.Control type="email" placeholder="name@example.com" autoFocus />
+                    <Form.Control
+                      type="text"
+                      placeholder="name@example.com"
+                      autoFocus
+                      value={experience.company}
+                      onChange={e => setExperirence({ ...experience, company: e.target.value })}
+                    />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                     <Form.Label>Start Date</Form.Label>
-                    <Form.Control type="text" placeholder="username" autoFocus />
+                    <Form.Control
+                      type="date"
+                      placeholder="username"
+                      autoFocus
+                      value={experience.startDate}
+                      onChange={e => setExperirence({ ...experience, startDate: e.target.value })}
+                    />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                     <Form.Label>End Date</Form.Label>
-                    <Form.Control type="text" placeholder="bio" autoFocus />
+                    <Form.Control
+                      type="date"
+                      placeholder="bio"
+                      autoFocus
+                      value={experience.endDate}
+                      onChange={e => setExperirence({ ...experience, endDate: e.target.value })}
+                    />
+                  </Form.Group>{" "}
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="area"
+                      autoFocus
+                      value={experience.description}
+                      onChange={e => setExperirence({ ...experience, description: e.target.value })}
+                    />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                     <Form.Label>Area</Form.Label>
-                    <Form.Control type="text" placeholder="area" autoFocus />
+                    <Form.Control
+                      type="text"
+                      placeholder="area"
+                      autoFocus
+                      value={experience.area}
+                      onChange={e => setExperirence({ ...experience, area: e.target.value })}
+                    />
                   </Form.Group>
                   <Modal.Footer>
                     <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseExp} type="submit">
@@ -260,25 +306,30 @@ const MainProfile = () => {
             </Modal>
           </div>
           <Container className="border-bottom">
-            <Row>
-              <Col xs={1}>
-                <img
-                  width="48"
-                  src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
-                  loading="lazy"
-                  height="48"
-                  alt="Logo di EPICODE"
-                  id="ember2008"
-                  className="ms-auto"
-                ></img>
-              </Col>
-              <Col xs={11}>
-                <h5 className="mb-0">Current Role</h5>
-                <p className="mb-0">Where</p>
-                <p className="mb-0">present from... </p>
-                <p>Area</p>
-              </Col>
-            </Row>
+            {experiences.length > 0 &&
+              experiences.slice(0, 4).map(exp => {
+                return (
+                  <Row key={exp._id}>
+                    <Col xs={1}>
+                      <img
+                        width="48"
+                        src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
+                        loading="lazy"
+                        height="48"
+                        alt="Logo di EPICODE"
+                        id="ember2008"
+                        className="ms-auto"
+                      ></img>
+                    </Col>
+                    <Col xs={11}>
+                      <h5 className="mb-0">{exp.role}</h5>
+                      <p className="mb-0">{exp.company}</p>
+                      <p className="mb-0">{exp.startDate}</p>
+                      <p>{exp.area}</p>
+                    </Col>
+                  </Row>
+                );
+              })}
           </Container>
         </Container>
         <Container className="border rounded-3 my-3">
