@@ -8,8 +8,9 @@ const Notizie = () => {
     <Container>
       <Row>
         <Col xs={{ span: 3 }}>
-          <div className="bg-white p-5 rounded">
-            <h4>LinkedIn Notizie</h4>
+          <div className="bg-white p-3 rounded" style={{ minWidth:"300px", boxShadow:" 0 2px 8px rgba(0, 0, 0, 0.1)"}}>
+            <h4>LinkedIn Notizie <span className="ms-5"> <img className="logo-link" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgaWQ9InNpZ25hbC1ub3RpY2Utc21hbGwiIGFyaWEtaGlkZGVuPSJ0cnVlIiByb2xlPSJub25lIiBkYXRhLXN1cHBvcnRlZC1kcHM9IjE2eDE2IiBmaWxsPSJjdXJyZW50Q29sb3IiPgogIDxwYXRoIGQ9Ik0xMiAySDRhMiAyIDAgMDAtMiAydjhhMiAyIDAgMDAyIDJoOGEyIDIgMCAwMDItMlY0YTIgMiAwIDAwLTItMnptLTMgOHYySDcuNUExLjUgMS41IDAgMDE2IDEwLjVhMS41NiAxLjU2IDAgMDEuMS0uNWwxLjA4LTNoMi4xM2wtMS4wOSAzem0wLTMuNzVBMS4yNSAxLjI1IDAgMTExMC4yNSA1IDEuMjUgMS4yNSAwIDAxOSA2LjI1eiIvPgo8L3N2Zz4="/>
+            </span></h4> 
             <p className="text-muted">Storie principali</p>
             <ul className="lista-notizie">
               <div className="notizia">
@@ -53,7 +54,7 @@ const Notizie = () => {
                 <p className="text-muted small">22 ore fa • 102 lettori</p>
               </div>
             </ul>
-            <button onClick={() => setMostraAltro(!mostraAltro)}>
+             <button class="btn custom-button"  onClick={() => setMostraAltro(!mostraAltro)}>
               {mostraAltro ? 'Nascondi altro' : 'Mostra altro'}
             </button>
           </div>
