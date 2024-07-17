@@ -324,6 +324,19 @@ p > span {
 
 
 /* fine navbar */
+/* PostCreator */
+.custom-button {
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover { background-color: rgba(255, 255, 255, 0.5); }
+.custom-button:active,
+.custom-button:focus {
+  background-color: rgba(255, 255, 255, 2); }
+
+
+/* /PostCreator */
 .messageTool {
   bottom: 0;
   right: 75px;
