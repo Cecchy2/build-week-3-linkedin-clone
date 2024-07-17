@@ -323,9 +323,12 @@ p > span {
   }
 } 
 .custom-dropdown-menu {
-  min-width: 750px; 
+  width: 750px; 
   padding: 15px;    
 }
+@media (max-width: 991px) {.custom-dropdown-menu {
+  width:400px
+}}
 .dropdown-list {
   list-style-type: none; 
   padding: 0;         

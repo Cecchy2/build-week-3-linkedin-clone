@@ -131,7 +131,7 @@ function MyNavbar() {
   <Dropdown.Menu className="custom-dropdown-menu">
         <Container>
           <Row>
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
             <h5>Scopri altri prodotti LinkedIn</h5>
               <ul className="dropdown-list prime">
          <li><Dropdown.Item >  <i className="bi bi-compass" style={{ marginRight: '8px' }}></i>Trova lead </Dropdown.Item></li> 
@@ -148,7 +148,7 @@ function MyNavbar() {
 </ul>
             </Col>
            
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
             
            
             <h5>Scopri altro per il business</h5>
