@@ -401,9 +401,25 @@ p > span {
 }
 
 .lista-notizie li {
-  padding: 8px 0;
+ 
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .text-muted.small {
   font-size: 0.875em;
+
+}
+
+.logo-link{
+  width:20px;
+}
+.custom-button {
+  border: none; 
+  background-color: white; 
+  
+}
+
+.custom-button:hover {
+  background-color: grey
 }
