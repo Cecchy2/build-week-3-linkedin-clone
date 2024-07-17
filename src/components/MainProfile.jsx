@@ -12,8 +12,8 @@ const MainProfile = () => {
   const [showPicture, setShowPicture] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-  const experiences = useSelector((state) => state.skills.experiences);
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const experiences = useSelector(state => state.skills.experiences);
 
   const dispatch = useDispatch();
 
@@ -43,13 +43,13 @@ const MainProfile = () => {
     }
   }, [dispatch, profileMe]);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = e => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(e.target.files[0]);
     }
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = e => {
     e.preventDefault();
     if (selectedImage) {
       dispatch(uploadProfilePicture(selectedImage, profileMe._id));
@@ -173,9 +173,9 @@ const MainProfile = () => {
                   <span>*</span> indica che è obbligatorio
                 </p>
                 <Form
-                  onSubmit={(e) => {
+                  onSubmit={e => {
                     e.preventDefault();
-                    dispatch(createExp(profileMe._id, profileMe));
+                    dispatch(createExp(profileMe._id, experience));
                   }}
                 >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -185,7 +185,7 @@ const MainProfile = () => {
                       placeholder="qualifica"
                       autoFocus
                       value={experience.role}
-                      onChange={(e) => setExperience({ ...experience, role: e.target.value })}
+                      onChange={e => setExperience({ ...experience, role: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -195,7 +195,7 @@ const MainProfile = () => {
                       placeholder="name@example.com"
                       autoFocus
                       value={experience.company}
-                      onChange={(e) => setExperience({ ...experience, company: e.target.value })}
+                      onChange={e => setExperience({ ...experience, company: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -205,7 +205,7 @@ const MainProfile = () => {
                       placeholder="username"
                       autoFocus
                       value={experience.startDate}
-                      onChange={(e) => setExperience({ ...experience, startDate: e.target.value })}
+                      onChange={e => setExperience({ ...experience, startDate: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -215,7 +215,7 @@ const MainProfile = () => {
                       placeholder="bio"
                       autoFocus
                       value={experience.endDate}
-                      onChange={(e) => setExperience({ ...experience, endDate: e.target.value })}
+                      onChange={e => setExperience({ ...experience, endDate: e.target.value })}
                     />
                   </Form.Group>{" "}
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -225,7 +225,7 @@ const MainProfile = () => {
                       placeholder="area"
                       autoFocus
                       value={experience.description}
-                      onChange={(e) => setExperience({ ...experience, description: e.target.value })}
+                      onChange={e => setExperience({ ...experience, description: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -235,7 +235,7 @@ const MainProfile = () => {
                       placeholder="area"
                       autoFocus
                       value={experience.area}
-                      onChange={(e) => setExperience({ ...experience, area: e.target.value })}
+                      onChange={e => setExperience({ ...experience, area: e.target.value })}
                     />
                   </Form.Group>
                   <Modal.Footer>
@@ -249,7 +249,7 @@ const MainProfile = () => {
           </div>
           <Container className="border-bottom">
             {experiences.length > 0 &&
-              experiences.slice(0, 4).map((exp) => {
+              experiences.slice(0, 4).map(exp => {
                 return (
                   <Row key={exp._id}>
                     <Col xs={1}>
