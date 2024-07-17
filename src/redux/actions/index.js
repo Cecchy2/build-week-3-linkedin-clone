@@ -67,7 +67,7 @@ export const getExp = userId => {
       const resp = await fetch(baseEndpoint, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGU3OTE5NmQ3YjAwMTVkNmI1MmQiLCJpYXQiOjE3MjEwMzIzMTMsImV4cCI6MTcyMjI0MTkxM30.LrieXR8WEpy4VvtclIVdzZOpB7dyEwD1st577EypH0Y",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
         },
       });
       if (resp.ok) {
@@ -90,7 +90,7 @@ export const createExp = (userId, data) => {
         headers: {
           "Content-Type": "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGU3OTE5NmQ3YjAwMTVkNmI1MmQiLCJpYXQiOjE3MjEwMzIzMTMsImV4cCI6MTcyMjI0MTkxM30.LrieXR8WEpy4VvtclIVdzZOpB7dyEwD1st577EypH0Y",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
         },
       });
       if (resp.ok) {
