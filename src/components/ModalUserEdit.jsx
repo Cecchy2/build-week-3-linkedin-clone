@@ -41,20 +41,6 @@ const ModalUserEdit = ({
     }
   }, [profileMe]);
 
-  useEffect(() => {
-    if (profileMe) {
-      setInputValue({
-        name: profileMe.name || "",
-        surname: profileMe.surname || "",
-        email: profileMe.email || "",
-        username: profileMe.username || "",
-        bio: profileMe.bio || "",
-        title: profileMe.title || "",
-        area: profileMe.area || "",
-      });
-    }
-  }, [profileMe]);
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(editUserAction(inputValue));
