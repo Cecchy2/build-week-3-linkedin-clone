@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, R
 import { useDispatch, useSelector } from "react-redux";
 import { editFetchProfile, editUserAction, getProfileMe, uploadProfilePicture } from "../redux/actions";
 import { createExp, getExp } from "../redux/actions";
+import ModalProfilePicture from "./ModalProfilePicture";
 
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
@@ -25,8 +26,8 @@ const MainProfile = () => {
 
   const [showPicture, setShowPicture] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const experiences = useSelector(state => state.skills.experiences);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const experiences = useSelector((state) => state.skills.experiences);
 
   const dispatch = useDispatch();
 
@@ -73,13 +74,13 @@ const MainProfile = () => {
     console.log(profileMe);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-  const handleImageChange = e => {
+  const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(e.target.files[0]);
     }
   };
 
-  const handleImageUpload = e => {
+  const handleImageUpload = (e) => {
     e.preventDefault();
     if (selectedImage) {
       dispatch(uploadProfilePicture(selectedImage, profileMe._id));
@@ -112,30 +113,14 @@ const MainProfile = () => {
                   style={{ bottom: "-70px", left: "50px", width: "150", height: "150px" }}
                 />
               </Button>
-              <Modal size="lg" show={showPicture} onHide={handleClosePicture}>
-                <Modal.Header closeButton className="dark text-white close-white border-0">
-                  <Modal.Title>Foto Profilo</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="dark text-white d-flex justify-content-center align-items-center">
-                  <Image
-                    src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
-                    alt="immagine profilo"
-                    className="border rounded-circle m-5 object-fit-cover"
-                    style={{ width: "278px", height: "278px" }}
-                  />
-                </Modal.Body>
-                <div className="dark text-white">
-                  <Form onSubmit={handleImageUpload}>
-                    <Form.Group controlId="formFile" className="mb-3">
-                      <Form.Label>Carica una nuova immagine</Form.Label>
-                      <Form.Control type="file" onChange={handleImageChange} />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                      Carica
-                    </Button>
-                  </Form>
-                </div>
-              </Modal>
+              <ModalProfilePicture
+                showPicture={showPicture}
+                handleClosePicture={handleClosePicture}
+                selectedImage={selectedImage}
+                profileMe={profileMe}
+                handleImageUpload={handleImageUpload}
+                handleImageChange={handleImageChange}
+              />
             </Container>
           </div>
           <Container fluid className="mt-5">
@@ -156,7 +141,7 @@ const MainProfile = () => {
                     <span>*</span>indica che è obbligatorio
                   </p>
                   <Form
-                    onSubmit={e => {
+                    onSubmit={(e) => {
                       e.preventDefault();
                       console.log("Dati inviati:", inputValue);
                       dispatch(editUserAction(inputValue));
@@ -270,7 +255,7 @@ const MainProfile = () => {
                   <span>*</span> indica che è obbligatorio
                 </p>
                 <Form
-                  onSubmit={e => {
+                  onSubmit={(e) => {
                     e.preventDefault();
                     dispatch(createExp(profileMe._id, profileMe));
                   }}
@@ -282,7 +267,7 @@ const MainProfile = () => {
                       placeholder="qualifica"
                       autoFocus
                       value={experience.role}
-                      onChange={e => setExperirence({ ...experience, role: e.target.value })}
+                      onChange={(e) => setExperirence({ ...experience, role: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -292,7 +277,7 @@ const MainProfile = () => {
                       placeholder="name@example.com"
                       autoFocus
                       value={experience.company}
-                      onChange={e => setExperirence({ ...experience, company: e.target.value })}
+                      onChange={(e) => setExperirence({ ...experience, company: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -302,7 +287,7 @@ const MainProfile = () => {
                       placeholder="username"
                       autoFocus
                       value={experience.startDate}
-                      onChange={e => setExperirence({ ...experience, startDate: e.target.value })}
+                      onChange={(e) => setExperirence({ ...experience, startDate: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -312,7 +297,7 @@ const MainProfile = () => {
                       placeholder="bio"
                       autoFocus
                       value={experience.endDate}
-                      onChange={e => setExperirence({ ...experience, endDate: e.target.value })}
+                      onChange={(e) => setExperirence({ ...experience, endDate: e.target.value })}
                     />
                   </Form.Group>{" "}
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -322,7 +307,7 @@ const MainProfile = () => {
                       placeholder="area"
                       autoFocus
                       value={experience.description}
-                      onChange={e => setExperirence({ ...experience, description: e.target.value })}
+                      onChange={(e) => setExperirence({ ...experience, description: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -332,7 +317,7 @@ const MainProfile = () => {
                       placeholder="area"
                       autoFocus
                       value={experience.area}
-                      onChange={e => setExperirence({ ...experience, area: e.target.value })}
+                      onChange={(e) => setExperirence({ ...experience, area: e.target.value })}
                     />
                   </Form.Group>
                   <Modal.Footer>
@@ -346,7 +331,7 @@ const MainProfile = () => {
           </div>
           <Container className="border-bottom">
             {experiences.length > 0 &&
-              experiences.slice(0, 4).map(exp => {
+              experiences.slice(0, 4).map((exp) => {
                 return (
                   <Row key={exp._id}>
                     <Col xs={1}>
