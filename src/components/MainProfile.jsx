@@ -5,10 +5,12 @@ import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions
 
 const MainProfile = () => {
   const [show, setShow] = useState(false);
+  const [showPicture, setShowPicture] = useState(false);
   const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleShowPicture = () => setShowPicture(true);
   const [inputValue, setInputValue] = useState({
     name: "",
     surname: "",
@@ -49,12 +51,25 @@ const MainProfile = () => {
               style={{ maxHeight: "25vh" }}
             />
             <Container>
-              <Image
-                className="rounded-circle position-absolute mb-3"
-                src={profileMe.image}
-                width="150"
-                style={{ bottom: "-70px", left: "50px" }}
-              />
+              <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
+                <Image
+                  className="rounded-circle position-absolute mb-3"
+                  src={profileMe.image}
+                  width="150"
+                  style={{ bottom: "-70px", left: "50px" }}
+                />
+              </Button>
+              <Modal
+                size="lg"
+                show={lgShow}
+                onHide={() => setLgShow(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title id="example-modal-sizes-title-lg">Large Modal</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>...</Modal.Body>
+              </Modal>
             </Container>
           </div>
           <Container fluid className="mt-5">
