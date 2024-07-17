@@ -1,12 +1,66 @@
+import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { editFetchProfile, editUserAction } from "../redux/actions";
 
 const ModalUserEdit = ({
   showEdit = { showEdit },
   handleCloseEdit = { handleCloseEdit },
-  handleFormSubmit = { handleFormSubmit },
-  inputValue = { inputValue },
-  handleInputChange = { handleInputChange },
+  profileMe = { profileMe },
 }) => {
+  const dispatch = useDispatch();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const [inputValue, setInputValue] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    username: "",
+    bio: "",
+    title: "",
+    area: "",
+  });
+
+  useEffect(() => {
+    if (profileMe) {
+      setInputValue({
+        name: profileMe.name || "",
+        surname: profileMe.surname || "",
+        email: profileMe.email || "",
+        username: profileMe.username || "",
+        bio: profileMe.bio || "",
+        title: profileMe.title || "",
+        area: profileMe.area || "",
+      });
+    }
+  }, [profileMe]);
+
+  useEffect(() => {
+    if (profileMe) {
+      setInputValue({
+        name: profileMe.name || "",
+        surname: profileMe.surname || "",
+        email: profileMe.email || "",
+        username: profileMe.username || "",
+        bio: profileMe.bio || "",
+        title: profileMe.title || "",
+        area: profileMe.area || "",
+      });
+    }
+  }, [profileMe]);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editUserAction(inputValue));
+    dispatch(editFetchProfile(inputValue));
+  };
+
   return (
     <Modal show={showEdit} onHide={handleCloseEdit}>
       <Modal.Header closeButton>

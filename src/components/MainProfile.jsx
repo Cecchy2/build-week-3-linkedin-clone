@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { editFetchProfile, editUserAction, getProfileMe, uploadProfilePicture } from "../redux/actions";
+import { getProfileMe, uploadProfilePicture } from "../redux/actions";
 import { createExp, getExp } from "../redux/actions";
 import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
@@ -33,33 +33,9 @@ const MainProfile = () => {
     area: "",
   });
 
-  const [inputValue, setInputValue] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    username: "",
-    bio: "",
-    title: "",
-    area: "",
-  });
-
   useEffect(() => {
     dispatch(getProfileMe());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (profileMe) {
-      setInputValue({
-        name: profileMe.name || "",
-        surname: profileMe.surname || "",
-        email: profileMe.email || "",
-        username: profileMe.username || "",
-        bio: profileMe.bio || "",
-        title: profileMe.title || "",
-        area: profileMe.area || "",
-      });
-    }
-  }, [profileMe]);
 
   useEffect(() => {
     if (profileMe?._id) {
@@ -79,21 +55,6 @@ const MainProfile = () => {
       dispatch(uploadProfilePicture(selectedImage, profileMe._id));
       setShowPicture(false);
     }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    dispatch(editUserAction(inputValue));
-    dispatch(editFetchProfile(inputValue));
-    setShowEdit(false);
   };
 
   return (
@@ -141,13 +102,7 @@ const MainProfile = () => {
                   height="25"
                 />
               </Button>
-              <ModalUserEdit
-                showEdit={showEdit}
-                handleCloseEdit={handleCloseEdit}
-                handleFormSubmit={handleFormSubmit}
-                inputValue={inputValue}
-                handleInputChange={handleInputChange}
-              />
+              <ModalUserEdit showEdit={showEdit} handleCloseEdit={handleCloseEdit} profileMe={profileMe} />
             </div>
             <h2>
               {profileMe.name} {profileMe.surname}
