@@ -1,8 +1,7 @@
-import { EDIT_USER, ME_USER, PROFILE_LIST } from "../actions";
+import { EDIT_USER, ME_USER, PROFILE_LIST, UPDATE_PROFILE_PICTURE } from "../actions";
 
 const initialState = {
   listProfiles: [],
-
   meUser: null,
 };
 
@@ -21,11 +20,10 @@ const profileReducer = (state = initialState, action) => {
     case EDIT_USER:
       return {
         ...state,
-        meUser: {
-          ...state.meUser,
-          ...action.payload,
-        },
+        user: action.payload,
       };
+    case UPDATE_PROFILE_PICTURE:
+      return { ...state, meUser: { ...state.meUser, image: action.payload.image } };
     default:
       return state;
   }

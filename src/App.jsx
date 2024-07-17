@@ -6,13 +6,20 @@ import MyNavbar from "./components/MyNavbar";
 
 import MessageComp from "./components/MessageComp";
 import HomeProfile from "./components/HomeProfile";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
     <>
-      <MyNavbar />
-      <HomeProfile />
-      <MessageComp />
+      <BrowserRouter>
+        <MyNavbar />
+        <Routes>
+          <Route path="/profilo/:idprofilo" element={<HomeProfile />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+        <MessageComp />
+      </BrowserRouter>
     </>
   );
 }

@@ -3,19 +3,20 @@ export const ME_USER = "ME_USER";
 export const EDIT_USER = "EDIT_USER";
 export const EXPERIENCES = "EXPERIENCES";
 export const EXPERIENCE = "EXPERIENCE";
+export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
-export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputValue });
+export const editUserAction = (inputValue) => ({ type: EDIT_USER, payload: inputValue });
 
 export const getProfileData = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/";
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGU3OTE5NmQ3YjAwMTVkNmI1MmQiLCJpYXQiOjE3MjEwMzIzMTMsImV4cCI6MTcyMjI0MTkxM30.LrieXR8WEpy4VvtclIVdzZOpB7dyEwD1st577EypH0Y",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
         },
       });
       if (resp.ok) {
@@ -31,13 +32,13 @@ export const getProfileData = () => {
 };
 
 export const getProfileMe = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/me";
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGVmNTE5NmQ3YjAwMTVkNmI1MmUiLCJpYXQiOjE3MjExMzMzODgsImV4cCI6MTcyMjM0Mjk4OH0.EdRhnc4taOa_DnaL8pDiRe6T-aRTptWNZR8UY9sTwXA",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
         },
       });
       if (resp.ok) {
@@ -53,7 +54,7 @@ export const getProfileMe = () => {
 };
 
 export const createExp = (userId, data) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
     try {
       const resp = await fetch(baseEndpoint, {
@@ -77,15 +78,15 @@ export const createExp = (userId, data) => {
   };
 };
 
-export const editFetchProfile = profiloModificato => {
-  return async dispatch => {
+export const editFetchProfile = (profiloModificato) => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/`;
     try {
       const resp = await fetch(baseEndpoint, {
         method: "PUT",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk0ZGVmNTE5NmQ3YjAwMTVkNmI1MmUiLCJpYXQiOjE3MjExMzMzODgsImV4cCI6MTcyMjM0Mjk4OH0.EdRhnc4taOa_DnaL8pDiRe6T-aRTptWNZR8UY9sTwXA",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(profiloModificato),
@@ -95,6 +96,35 @@ export const editFetchProfile = profiloModificato => {
         dispatch(storeProfiles(ME_USER, result));
       } else {
         throw new Error("Errore nella modifica");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const uploadProfilePicture = (file, userId) => {
+  return async (dispatch) => {
+    const formData = new FormData();
+    formData.append("profile", file);
+
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "POST",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+        },
+        body: formData,
+      });
+
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+        dispatch(storeProfiles(ME_USER, result));
+      } else {
+        throw new Error("Errore durante il caricamento dell'immagine");
       }
     } catch (error) {
       console.log(error.message);

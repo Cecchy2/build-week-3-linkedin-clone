@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createExp, editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
-``;
+import { editFetchProfile, editUserAction, getProfileMe, uploadProfilePicture } from "../redux/actions";
+
 const MainProfile = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showExp, setShowExp] = useState(false);
@@ -23,12 +23,15 @@ const MainProfile = () => {
   };
 
   const [showPicture, setShowPicture] = useState(false);
-  const experiences = useSelector(state => state.skills.expriences);
-  const experience = useSelector(state => state.skills.exprience);
-  const profileMe = useSelector(state => state.userProfile.meUser);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const handleShowPicture = () => setShowPicture(true);
+  const handleClosePicture = () => setShowPicture(false);
+
   const [inputValue, setInputValue] = useState({
     name: "",
     surname: "",
@@ -38,6 +41,10 @@ const MainProfile = () => {
     title: "",
     area: "",
   });
+
+  useEffect(() => {
+    dispatch(getProfileMe());
+  }, [dispatch]);
 
   useEffect(() => {
     setInputValue({
@@ -56,36 +63,68 @@ const MainProfile = () => {
     console.log(profileMe);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
+    }
+  };
+
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    if (selectedImage) {
+      dispatch(uploadProfilePicture(selectedImage, profileMe._id));
+      setShowPicture(false);
+    }
+  };
 
   return (
     profileMe && (
       <>
         <Container className="badgeContainer border rounded-3 my-3 px-0 " style={{ overflow: "hidden" }}>
           <div className="position-relative">
-            <Image
-              className=" w-100"
-              src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
-              alt="profile banner"
-              style={{ maxHeight: "25vh" }}
-            />
+            <div>
+              <Button variant="link" className="position-absolute">
+                bottone
+              </Button>
+              <Image
+                className=" w-100"
+                src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
+                alt="profile banner"
+                style={{ maxHeight: "25vh" }}
+              />
+            </div>
             <Container>
               <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
                 <Image
-                  className="rounded-circle position-absolute mb-3"
+                  className="rounded-circle position-absolute mb-3 object-fit-cover"
                   src={profileMe.image}
                   width="150"
-                  style={{ bottom: "-70px", left: "50px" }}
+                  style={{ bottom: "-70px", left: "50px", width: "150", height: "150px" }}
                 />
               </Button>
-              <Modal size="lg" show={showPicture} onHide={() => setShowPicture(false)}>
-                <Modal.Header closeButton className="dark text-white">
-                  <img
-                    src="https://images.unsplash.com/photo-1720543227828-ec5ae842633a?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              <Modal size="lg" show={showPicture} onHide={handleClosePicture}>
+                <Modal.Header closeButton className="dark text-white close-white border-0">
+                  <Modal.Title>Foto Profilo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="dark text-white d-flex justify-content-center align-items-center">
+                  <Image
+                    src={selectedImage ? URL.createObjectURL(selectedImage) : profileMe.image}
                     alt="immagine profilo"
-                    className="border rounded-circle"
+                    className="border rounded-circle m-5 object-fit-cover"
                     style={{ width: "278px", height: "278px" }}
                   />
-                </Modal.Header>
+                </Modal.Body>
+                <div className="dark text-white">
+                  <Form onSubmit={handleImageUpload}>
+                    <Form.Group controlId="formFile" className="mb-3">
+                      <Form.Label>Carica una nuova immagine</Form.Label>
+                      <Form.Control type="file" onChange={handleImageChange} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                      Carica
+                    </Button>
+                  </Form>
+                </div>
               </Modal>
             </Container>
           </div>
@@ -107,7 +146,7 @@ const MainProfile = () => {
                     <span>*</span>indica che è obbligatorio
                   </p>
                   <Form
-                    onSubmit={e => {
+                    onSubmit={(e) => {
                       e.preventDefault();
                       console.log("Dati inviati:", inputValue);
                       dispatch(editUserAction(inputValue));
@@ -221,10 +260,10 @@ const MainProfile = () => {
                   <span>*</span> indica che è obbligatorio
                 </p>
                 <Form
-                  onSubmit={e => {
+                /*  onSubmit={e => {
                     e.preventDefault();
                     dispatch(createExp(profileMe._id, profileMe));
-                  }}
+                  }} */
                 >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Qualifica*</Form.Label>
