@@ -100,11 +100,11 @@ function MessageComp() {
             </Col>
             <Col className="messageData">
               <p className="mb-0 truncate msgTxt little d-flex align-items-center">
-                Nino D'angelo
+                Nino D&apos angelo
                 <span className="ms-auto p-o">15 Luglio 2024</span>
               </p>
               <p className="mb-0 truncate msgTxt little text-truncate-2 p-0">
-                Nino: Ciao Umberto, sono Nino D'angelo, ti voglio
+                Nino: Ciao Umberto, sono Nino D&apos angelo, ti voglio
               </p>
             </Col>
           </Row>

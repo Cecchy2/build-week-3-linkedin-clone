@@ -1,13 +1,34 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { createExp, getProfileMe } from "../redux/actions";
 import { editFetchProfile, editUserAction, getProfileMe } from "../redux/actions";
 
 const MainProfile = () => {
+<<<<<<< Updated upstream
   const [show, setShow] = useState(false);
   const [showPicture, setShowPicture] = useState(false);
   const profileMe = useSelector((state) => state.userProfile.meUser);
+=======
+  const [showEdit, setShowEdit] = useState(false);
+  const [showExp, setShowExp] = useState(false);
+
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const experiences = useSelector(state => state.skills.experiences);
+>>>>>>> Stashed changes
   const dispatch = useDispatch();
+  const handleCloseEdit = () => {
+    setShowEdit(false);
+  };
+  const handleCloseExp = () => {
+    setShowExp(false);
+  };
+  const handleShowEdit = () => {
+    setShowEdit(true);
+  };
+  const handleShowExp = () => {
+    setShowExp(true);
+  };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleShowPicture = () => setShowPicture(true);
@@ -42,7 +63,10 @@ const MainProfile = () => {
   return (
     profileMe && (
       <>
-        <Container className="badgeContainer border rounded-3 my-3 px-0  " style={{ overflow: "hidden", backgroundColor: "white"}}>
+        <Container
+          className="badgeContainer border rounded-3 my-3 px-0  "
+          style={{ overflow: "hidden", backgroundColor: "white" }}
+        >
           <div className="position-relative">
             <Image
               className=" w-100"
@@ -73,14 +97,18 @@ const MainProfile = () => {
           </div>
           <Container fluid className="mt-5">
             <div className="mt-5 w-50 ms-auto d-flex justify-content-end">
-              <Button variant="link" onClick={handleShow} style={{ padding: 0 }}>
+              <Button variant="link" onClick={handleShowEdit} style={{ padding: 0 }}>
                 <Image
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
                   width="25"
                   height="25"
                 />
               </Button>
+<<<<<<< Updated upstream
               <Modal show={show} onHide={handleClose} size="lg">
+=======
+              <Modal show={showEdit} onHide={handleCloseEdit}>
+>>>>>>> Stashed changes
                 <Modal.Header closeButton>
                   <Modal.Title>Modifica presentazione</Modal.Title>
                 </Modal.Header>
@@ -89,7 +117,7 @@ const MainProfile = () => {
                     <span>*</span>indica che è obbligatorio
                   </p>
                   <Form
-                    onSubmit={(e) => {
+                    onSubmit={e => {
                       e.preventDefault();
                       console.log("Dati inviati:", inputValue);
                       dispatch(editUserAction(inputValue));
@@ -103,7 +131,7 @@ const MainProfile = () => {
                         placeholder="nome"
                         autoFocus
                         value={inputValue.name}
-                        onChange={(e) => setInputValue({ ...inputValue, name: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, name: e.target.value })}
                         required
                       />
                     </Form.Group>
@@ -114,7 +142,7 @@ const MainProfile = () => {
                         placeholder="cognome"
                         autoFocus
                         value={inputValue.surname}
-                        onChange={(e) => setInputValue({ ...inputValue, surname: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, surname: e.target.value })}
                         required
                       />
                     </Form.Group>
@@ -125,7 +153,7 @@ const MainProfile = () => {
                         placeholder="name@example.com"
                         autoFocus
                         value={inputValue.email}
-                        onChange={(e) => setInputValue({ ...inputValue, email: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, email: e.target.value })}
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -135,7 +163,7 @@ const MainProfile = () => {
                         placeholder="username"
                         autoFocus
                         value={inputValue.username}
-                        onChange={(e) => setInputValue({ ...inputValue, username: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, username: e.target.value })}
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -145,7 +173,7 @@ const MainProfile = () => {
                         placeholder="bio"
                         autoFocus
                         value={inputValue.bio}
-                        onChange={(e) => setInputValue({ ...inputValue, bio: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, bio: e.target.value })}
                         required
                       />
                     </Form.Group>
@@ -156,7 +184,7 @@ const MainProfile = () => {
                         placeholder="title"
                         autoFocus
                         value={inputValue.title}
-                        onChange={(e) => setInputValue({ ...inputValue, title: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, title: e.target.value })}
                         required
                       />
                     </Form.Group>
@@ -167,12 +195,12 @@ const MainProfile = () => {
                         placeholder="area"
                         autoFocus
                         value={inputValue.area}
-                        onChange={(e) => setInputValue({ ...inputValue, area: e.target.value })}
+                        onChange={e => setInputValue({ ...inputValue, area: e.target.value })}
                       />
                     </Form.Group>
                     <Modal.Footer>
-                      <Button variant="primary" onClick={handleClose} type="submit" className="rounded-pill">
-                        Salva
+                      <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseEdit} type="submit">
+                        Save
                       </Button>
                     </Modal.Footer>
                   </Form>
@@ -222,11 +250,12 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3" style={{backgroundColor: "white"}}>
+        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Esperienza</h4>
             <button className="bg-transparent border-0">
               <svg
+                onClick={handleShowExp}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
@@ -239,6 +268,52 @@ const MainProfile = () => {
                 <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
               </svg>
             </button>
+            <Modal show={showExp} onHide={handleCloseExp}>
+              <Modal.Header closeButton>
+                <Modal.Title>Modifica presentazione</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p className="text-muted fs-6">
+                  <span>*</span> indica che è obbligatorio
+                </p>
+                <Form
+                /* onSubmit={(e) => {
+                    e.preventDefault();
+                    dispatch(editUserAction(inputValue));
+                  }} */
+                >
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Qualifica*</Form.Label>
+                    <Form.Control type="text" placeholder="nome" autoFocus /* value={inputValue} */ />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                    <Form.Label>Ruolo*</Form.Label>
+                    <Form.Control type="text" placeholder="cognome" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                    <Form.Label>Company</Form.Label>
+                    <Form.Control type="email" placeholder="name@example.com" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>Start Date</Form.Label>
+                    <Form.Control type="text" placeholder="username" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>End Date</Form.Label>
+                    <Form.Control type="text" placeholder="bio" autoFocus />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
+                    <Form.Label>Area</Form.Label>
+                    <Form.Control type="text" placeholder="area" autoFocus />
+                  </Form.Group>
+                  <Modal.Footer>
+                    <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseExp} type="submit">
+                      Save
+                    </Button>
+                  </Modal.Footer>
+                </Form>
+              </Modal.Body>
+            </Modal>
           </div>
           <Container className="border-bottom">
             <Row>
@@ -262,7 +337,7 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3" style={{backgroundColor: "white"}}>
+        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Formazione</h4>
             <button className="bg-transparent border-0">
@@ -302,7 +377,7 @@ const MainProfile = () => {
             </div>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3" style={{backgroundColor: "white"}}>
+        <Container className="border rounded-3 my-3" style={{ backgroundColor: "white" }}>
           <div className="d-flex justify-content-between align-items-center pt-3">
             <h4>Competenze</h4>
             <button className="bg-transparent border-0">
