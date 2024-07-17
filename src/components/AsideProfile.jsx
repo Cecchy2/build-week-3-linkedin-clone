@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileData } from "../redux/actions";
 
 const Aside = () => {
-  const listProfiles = useSelector(state => state.userProfile.listProfiles);
+  const listProfiles = useSelector((state) => state.userProfile.listProfiles);
 
   const dispatch = useDispatch();
 
