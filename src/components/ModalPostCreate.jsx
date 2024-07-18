@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { createPosts } from "../redux/actions";
 
 const ModalPostCreate = () => {
   const [lgShow, setLgShow] = useState(false);
   const dispatch = useDispatch();
 
-  const [text, setText] = useState("");
+  const [post, setPost] = useState({ text: "" });
 
-  const handleFetchSubmit = (e) => {
+  const handleFetchSubmit = e => {
     e.preventDefault();
-    dispatch;
+    dispatch(createPosts(post));
+    setPost({ text: "" });
   };
 
   return (
@@ -53,12 +55,12 @@ const ModalPostCreate = () => {
               className="border border-0 "
               placeholder="Di cosa vorresti Parlare?"
               rows={15}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              value={post.text}
+              onChange={e => setPost({ ...post, text: e.target.value })}
             />
           </InputGroup>
           <Modal.Body className="border border-top-1 d-flex justify-content-end">
-            <Button className="rounded-pill" disabled={!text} type="submit">
+            <Button className="rounded-pill" disabled={!post.text} type="submit" onClick={() => setLgShow(false)}>
               Pubblica
             </Button>
           </Modal.Body>
