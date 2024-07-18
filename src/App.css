@@ -10,13 +10,6 @@ body {
   padding: 1rem;
   margin-bottom: 0.5rem;
 }
-.aside {
-  padding: 20px;
-  width: 400px;
-  height: 180vh;
-  position: sticky;
-  top: 0;
-}
 .btn-msg {
   border: 1px solid black;
   border-radius: 10px;
