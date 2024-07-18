@@ -6,10 +6,11 @@ export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 export const GET_POSTS = "GET_POSTS";
 export const CREATE_POSTS = "CREATE_POSTS";
+export const QUERY = "QUERY";
 
 export const GET_JOBS = "GET_JOBS";
 
-const token = import.meta.env.VITE_TOKEN;
+export const token = import.meta.env.VITE_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
@@ -251,6 +252,26 @@ export const deletePost = userId => {
 export const getJobs = () => {
   return async dispatch => {
     const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+        dispatch({ type: GET_JOBS, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const searchJobs = query => {
+  return async dispatch => {
+    const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`;
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {

@@ -7,12 +7,14 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import { Container, Dropdown, Row, Col, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { QUERY, searchJobs } from "../redux/actions";
 
 function MyNavbar() {
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-  const navigate = useNavigate();
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const query = useSelector(state => state.jobList.query);
+  const dispatch = useDispatch();
 
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -32,6 +34,14 @@ function MyNavbar() {
     };
   }, []);
 
+  const handleChange = e => {
+    dispatch({ type: QUERY, payload: e.target.value });
+  };
+
+  const handleSubmitSearch = e => {
+    e.preventDefault();
+    dispatch(searchJobs(query));
+  };
   const handleFocus = () => setSearchExpanded(true);
   const handleBlur = () => setSearchExpanded(false);
 
@@ -58,11 +68,17 @@ function MyNavbar() {
               </svg>
             </Nav.Link>
           ) : (
-            <Form inline className={`flex-grow-1 search-bar ${searchExpanded ? "active" : ""}`}>
+            <Form
+              inline
+              className={`flex-grow-1 search-bar ${searchExpanded ? "active" : ""}`}
+              onSubmit={handleSubmitSearch}
+            >
               <FormControl
                 type="text"
                 placeholder="Cerca"
                 className="mr-sm-2 search-input"
+                value={query}
+                onChange={handleChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
