@@ -58,11 +58,11 @@ const MainProfile = () => {
             <h2>
               {profileMe.name} {profileMe.surname}
             </h2>
+
             <Row>
               <Col xs={12} md={8}>
-                <p className="mb-1">
-                  {profileMe.title} | {profileMe.bio}
-                </p>
+                <p className="mb-1">{profileMe.bio}</p>
+                <p>{profileMe.title}</p>
                 <p className="mt-0 text-secondary">
                   {profileMe.area} -{" "}
                   <a className="link-offset-2 link-underline link-underline-opacity-0" href="#">
