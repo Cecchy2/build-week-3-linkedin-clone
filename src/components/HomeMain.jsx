@@ -6,8 +6,8 @@ import ModalPostCreate from "./ModalPostCreate";
 import ModalPostEdit from "./ModalPostEdit";
 
 const HomeMain = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const postsList = useSelector(state => state.postsList.posts);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const postsList = useSelector((state) => state.postsList.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {[...postsList].reverse().map(post => {
+        {[...postsList].reverse().map((post) => {
           return (
             <Card className="mt-3" key={post._id}>
               <Card.Body>

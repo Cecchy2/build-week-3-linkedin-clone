@@ -15,7 +15,7 @@ function MessageComp() {
         <img
           src="https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="immagine user"
-          className="border rounded-circle me-2"
+          className="border rounded-circle me-2 object-fit-cover"
           style={{ width: "35px" }}
         />
         <span className="fs-6 fw-medium textCursor" onClick={() => setOpen(!open)}>
@@ -54,7 +54,7 @@ function MessageComp() {
               <img
                 src="https://plus.unsplash.com/premium_photo-1664199486611-3e1277e150cd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="immagine utente"
-                className="border rounded-circle img-fluid ms-1"
+                className="border rounded-circle img-fluid ms-1 object-fit-cover"
                 style={{ width: "50px", height: "50px" }}
               />
             </Col>
@@ -74,7 +74,7 @@ function MessageComp() {
               <img
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="immagine utente"
-                className="border rounded-circle img-fluid ms-1"
+                className="border rounded-circle img-fluid ms-1 object-fit-cover"
                 style={{ width: "50px", height: "50px" }}
               />
             </Col>
@@ -94,7 +94,7 @@ function MessageComp() {
               <img
                 src="https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="immagine utente"
-                className="border rounded-circle img-fluid ms-1"
+                className="border rounded-circle img-fluid ms-1 object-fit-cover"
                 style={{ width: "50px", height: "50px" }}
               />
             </Col>
