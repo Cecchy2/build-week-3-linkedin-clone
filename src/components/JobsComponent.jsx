@@ -21,9 +21,13 @@ const JobsComponent = () => {
   return (
     <Container className="mt-4">
       <Row>
-        {!selectedJob && <Col xs={12} md={4} className="profile-info"></Col>}
+        {!selectedJob && (
+          <Col xs={12} md={4}>
+            <JobsLeftAside />
+          </Col>
+        )}
         {/* INSERIRE QUA I COMPONENTI */}
-        <JobsLeftAside></JobsLeftAside>
+
         <Col xs={12} md={5} className="px-0">
           <Container>
             {[...jobs].reverse().map((job) => {
