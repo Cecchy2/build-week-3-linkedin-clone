@@ -29,11 +29,9 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        <h1>Ciao</h1>
-        {[...postsList].reverse().map(post => {
+        {postsList.reverse().map(post => {
           return (
-            <Card key={post._id}>
-              <Card.Img variant="top" src="holder.js/100px180" />
+            <Card className="mt-3" key={post._id}>
               <Card.Body>
                 <Card.Title>{post.username}</Card.Title>
                 <Card.Text>{post.text}</Card.Text>
