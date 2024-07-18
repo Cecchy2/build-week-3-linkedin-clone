@@ -34,11 +34,9 @@ const HomeAsideLeft = () => {
           <h6>
             {profileMe.name} {profileMe.surname}
           </h6>
-          <p className="mb-1 line-truncate-2">
-            {profileMe.title} | {profileMe.bio}
-          </p>
+          <p className="mb-1 line-truncate-2">{profileMe.bio}</p>
+          <p className="mb-1 line-truncate-2">{profileMe.title}</p>
           <p className="mb-1 text-secondary line-truncate-2">{profileMe.area}</p>
-          <p className="line-truncate-2">{profileMe.title}</p>
         </Container>
       </Container>
     )
