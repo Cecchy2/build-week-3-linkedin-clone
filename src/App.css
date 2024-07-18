@@ -435,8 +435,9 @@ text-align: center
 }
 .container-info{
   margin-top: 15px;
-  max-width: 300px;
-  background-color: grey;
+  min-width: 280px;
+  margin-right: 60px;
+
 }
 
 .line-truncate-2 {
