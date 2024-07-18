@@ -31,11 +31,16 @@ const AsideProfile = () => {
         </div>
 
         {listProfiles.length > 0 &&
-          listProfiles.slice(2, 6).map((profile, index) => (
+          listProfiles.slice(24, 28).map((profile, index) => (
             <Container key={profile._id} className="p-0">
               <Row className="align-items-center">
                 <Col xs={3} className="p-0">
-                  <Image src={fallbackImages[index % fallbackImages.length]} roundedCircle fluid />
+                  <Image
+                    src={profile.image}
+                    roundedCircle
+                    fluid
+                    style={{ width: "55px", height: "55px", objectFit: "cover" }}
+                  />
                 </Col>
                 <Col xs={9}>
                   <p className="text-black fw-bold mb-0">
@@ -58,11 +63,16 @@ const AsideProfile = () => {
           <p className="text-normal text-secondary pt-1">Dalla tua scuola o università</p>
         </div>
         {listProfiles.length > 0 &&
-          listProfiles.slice(6, 10).map((profile) => (
+          listProfiles.slice(40, 45).map((profile) => (
             <Container key={profile._id} className="p-0">
               <Row className="align-items-center">
                 <Col xs={3} className="p-0">
-                  <Image src={profile.image} roundedCircle fluid />
+                  <Image
+                    src={profile.image}
+                    roundedCircle
+                    fluid
+                    style={{ width: "55px", height: "55px", objectFit: "cover" }}
+                  />
                 </Col>
                 <Col xs={9}>
                   <p className="text-black fw-bold mb-0">

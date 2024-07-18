@@ -10,7 +10,7 @@ const profileReducer = (state = initialState, action) => {
     case PROFILE_LIST:
       return {
         ...state,
-        listProfiles: state.listProfiles.concat(action.payload),
+        listProfiles: action.payload,
       };
     case ME_USER:
       return {
