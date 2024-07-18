@@ -12,7 +12,7 @@ const HomeMain = () => {
 
   useEffect(() => {
     dispatch(getPosts());
-    console.log(postsList);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
