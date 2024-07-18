@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Button, Form, Image, InputGroup, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editPosts } from "../redux/actions";
 
 const ModalPostEdit = ({ userId }) => {
   const [lgShow, setLgShow] = useState(false);
+  const profileMe = useSelector(state => state.userProfile.meUser);
   const dispatch = useDispatch();
 
   const [post, setPost] = useState({ text: "" });
@@ -37,13 +38,15 @@ const ModalPostEdit = ({ userId }) => {
             <Button variant="Link">
               <div className="d-flex justify-content-center align-items-center">
                 <img
-                  src="https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src={profileMe.image}
                   alt="immagine user"
                   className="border rounded-circle me-2"
                   style={{ width: "35px" }}
                 />
                 <div>
-                  <h5>NOME COGNOME</h5>
+                  <h5>
+                    {profileMe.name} {profileMe.surname}
+                  </h5>
                   <p className="p-0">Pubblica : chiunque</p>
                 </div>
               </div>
