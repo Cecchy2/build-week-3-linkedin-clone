@@ -6,10 +6,10 @@ const HomeProfile = () => {
   return (
     <Container>
       <Row>
-        <Col xs={12} md={7}>
+        <Col xs={12} md={7} className="p-0">
           <MainProfile />
         </Col>
-        <Col xs={12} md={5}>
+        <Col xs={12} md={5} className="p-0">
           <Aside />
         </Col>
       </Row>

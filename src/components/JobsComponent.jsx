@@ -26,7 +26,7 @@ const JobsComponent = () => {
           <Container>
             {[...jobs].reverse().map((job) => {
               return (
-                <Card className="mt-3" key={job._id} onClick={() => handleCardClick(job)}>
+                <Card key={job._id} onClick={() => handleCardClick(job)}>
                   <Card.Body>
                     <Card.Title>{job.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{job.company_name}</Card.Subtitle>
@@ -42,7 +42,7 @@ const JobsComponent = () => {
         </Col>
         {selectedJob && (
           <Col xs={12} md={7} className="px-0">
-            <Card className="mt-3">
+            <Card>
               <Card.Body>
                 <Card.Title>{selectedJob.title}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{selectedJob.company_name}</Card.Subtitle>

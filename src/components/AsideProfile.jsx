@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileData } from "../redux/actions";
 
 const Aside = () => {
-  const listProfiles = useSelector(state => state.userProfile.listProfiles);
+  const listProfiles = useSelector((state) => state.userProfile.listProfiles);
 
   const dispatch = useDispatch();
 
@@ -24,9 +24,9 @@ const Aside = () => {
   ];
 
   return (
-    <Container>
+    <Container className="p-0">
       <Row>
-        <Col xs={{ span: 3 }}>
+        <Col xs={{ span: 3 }} className="p-0">
           <div className="aside">
             <div className="profile-info">
               <div>
@@ -91,7 +91,7 @@ const Aside = () => {
                   <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
                 </div>
                 {listProfiles.length > 0 &&
-                  listProfiles.slice(6, 10).map(profile => (
+                  listProfiles.slice(6, 10).map((profile) => (
                     <div className="container" key={profile._id}>
                       <div className="row align-items-left">
                         <div className="col-md-2 ">
