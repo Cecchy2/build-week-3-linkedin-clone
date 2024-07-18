@@ -180,26 +180,6 @@ export const getPosts = () => {
   };
 };
 
-export const getJobs = () => {
-  return async (dispatch) => {
-    const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs`;
-    try {
-      const resp = await fetch(baseEndpoint, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (resp.ok) {
-        const result = await resp.json();
-        console.log(result);
-        dispatch({ type: GET_JOBS, payload: result.data });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 export const createPosts = (post) => {
   return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts`;
@@ -219,6 +199,26 @@ export const createPosts = (post) => {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const getJobs = () => {
+  return async (dispatch) => {
+    const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+        dispatch({ type: GET_JOBS, payload: result.data });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };

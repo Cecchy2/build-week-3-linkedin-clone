@@ -5,8 +5,8 @@ import { getPosts } from "../redux/actions";
 import ModalPostCreate from "./ModalPostCreate";
 
 const HomeMain = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const postsList = useSelector(state => state.postsList.posts);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const postsList = useSelector((state) => state.postsList.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,12 +24,11 @@ const HomeMain = () => {
           </Col>
           <Col xs={10}>
             <ModalPostCreate />
-            {/*  */}
           </Col>
         </Row>
       </Container>
       <Container>
-        {[...postsList].reverse().map(post => {
+        {[...postsList].reverse().map((post) => {
           return (
             <Card className="mt-3" key={post._id}>
               <Card.Body>
