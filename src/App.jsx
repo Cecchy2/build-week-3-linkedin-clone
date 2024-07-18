@@ -8,6 +8,7 @@ import MessageComp from "./components/MessageComp";
 import HomeProfile from "./components/HomeProfile";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
+import JobsComponent from "./components/JobsComponent";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/profilo/:idprofilo" element={<HomeProfile />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/jobs" element={<JobsComponent />} />
         </Routes>
         <MessageComp />
       </BrowserRouter>

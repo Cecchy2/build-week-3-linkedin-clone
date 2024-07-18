@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPosts } from "../redux/actions";
 
 const ModalPostCreate = () => {
   const [lgShow, setLgShow] = useState(false);
   const dispatch = useDispatch();
 
-  const [post, setPost] = useState({ text: "" });
+  const [post, setPost] = useState({
+    text: "",
+  });
 
   const handleFetchSubmit = e => {
     e.preventDefault();
     dispatch(createPosts(post));
     setPost({ text: "" });
   };
+
+  const profileMe = useSelector(state => state.userProfile.meUser);
 
   return (
     <div>
@@ -34,13 +38,15 @@ const ModalPostCreate = () => {
             <Button variant="Link">
               <div className="d-flex justify-content-center align-items-center">
                 <img
-                  src="https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src={profileMe?.image}
                   alt="immagine user"
-                  className="border rounded-circle me-2"
-                  style={{ width: "35px" }}
+                  className="border rounded-circle me-2 object-fit-cover"
+                  style={{ width: "70px", height: "70px" }}
                 />
                 <div>
-                  <h5>NOME COGNOME</h5>
+                  <h5>
+                    {profileMe?.name} {profileMe?.surname}
+                  </h5>
                   <p className="p-0">Pubblica : chiunque</p>
                 </div>
               </div>
