@@ -3,12 +3,12 @@ import { Button, Form, Image, InputGroup, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { editPosts } from "../redux/actions";
 
-const ModalPostEdit = ({ userId }) => {
+const ModalPostEdit = ({ userId, postText }) => {
   const [lgShow, setLgShow] = useState(false);
   const profileMe = useSelector(state => state.userProfile.meUser);
   const dispatch = useDispatch();
 
-  const [post, setPost] = useState({ text: "" });
+  const [post, setPost] = useState({ text: postText });
 
   const handleFetchSubmit = e => {
     e.preventDefault();
