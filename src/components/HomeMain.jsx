@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../redux/actions";
 
 const HomeMain = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const postsList = useSelector(state => state.postsList.posts);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const postsList = useSelector((state) => state.postsList.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,8 +29,7 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        <h1>Ciao</h1>
-        {[...postsList].reverse().map(post => {
+        {[...postsList].reverse().map((post) => {
           return (
             <Card key={post._id}>
               <Card.Img variant="top" src="holder.js/100px180" />
