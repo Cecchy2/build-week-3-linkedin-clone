@@ -29,7 +29,6 @@ const JobsComponent = () => {
                       <Card.Text className="ms-auto">{job.candidate_required_location}</Card.Text>
                     </div>
                     <Card.Link href={job.url}>Link azienda</Card.Link>
-                    <Button variant="link">dettagli</Button>
                   </Card.Body>
                 </Card>
               );
