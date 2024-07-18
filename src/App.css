@@ -423,3 +423,23 @@ p > span {
 .custom-button:hover {
   background-color: grey
 }
+.info-list{
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+}
+.info-list li,span{
+font-size:0.7rem;
+
+color: #7d7d7d;
+margin-left:15px;
+margin-top: 7px;
+text-align: center
+}
+.container-info{
+  margin-top: 15px;
+  max-width: 300px;
+}
