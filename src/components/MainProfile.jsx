@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+
+import { getExp } from "../redux/actions";
 import { getProfileMe } from "../redux/actions";
-import { createExp, getExp } from "../redux/actions";
+
 import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
+import Experiences from "./Experiences";
+import Formazione from "./Fomazione";
+import Competenze from "./Competenze";
 
 const MainProfile = () => {
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-  const experiences = useSelector((state) => state.skills.experiences);
+  const profileMe = useSelector(state => state.userProfile.meUser);
+
   const [showExp, setShowExp] = useState(false);
   const dispatch = useDispatch();
   const handleCloseExp = () => setShowExp(false);
   const handleShowExp = () => setShowExp(true);
-
-  const [experience, setExperience] = useState({
-    role: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    area: "",
-  });
 
   useEffect(() => {
     dispatch(getProfileMe());
@@ -36,7 +32,7 @@ const MainProfile = () => {
   return (
     profileMe && (
       <>
-        <Container className="badgeContainer border rounded-3 my-3 px-0" style={{ overflow: "hidden" }}>
+        <Container className="badgeContainer border rounded-3 my-3 p-0 profile-info" style={{ overflow: "hidden" }}>
           <div className="position-relative">
             <div>
               <Button variant="link" className="position-absolute">
@@ -62,11 +58,11 @@ const MainProfile = () => {
             <h2>
               {profileMe.name} {profileMe.surname}
             </h2>
+
             <Row>
               <Col xs={12} md={8}>
-                <p className="mb-1">
-                  {profileMe.title} | {profileMe.bio}
-                </p>
+                <p className="mb-1">{profileMe.bio}</p>
+                <p>{profileMe.title}</p>
                 <p className="mt-0 text-secondary">
                   {profileMe.area} -{" "}
                   <a className="link-offset-2 link-underline link-underline-opacity-0" href="#">
@@ -101,235 +97,9 @@ const MainProfile = () => {
             </Row>
           </Container>
         </Container>
-        <Container className="border rounded-3 my-3">
-          <div className="d-flex justify-content-between align-items-center pt-3">
-            <h4>Esperienze</h4>
-            <button className="bg-transparent border-0">
-              <svg
-                onClick={handleShowExp}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="mercado-match"
-                width="24"
-                height="24"
-                focusable="false"
-              >
-                <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
-              </svg>
-            </button>
-            <Modal show={showExp} onHide={handleCloseExp}>
-              <Modal.Header closeButton>
-                <Modal.Title>Modifica presentazione</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <p className="text-muted fs-6">
-                  <span>*</span> indica che è obbligatorio
-                </p>
-                <Form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    dispatch(createExp(profileMe._id, experience));
-                  }}
-                >
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Qualifica*</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="qualifica"
-                      autoFocus
-                      value={experience.role}
-                      onChange={(e) => setExperience({ ...experience, role: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-                    <Form.Label>Company</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="name@example.com"
-                      autoFocus
-                      value={experience.company}
-                      onChange={(e) => setExperience({ ...experience, company: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                    <Form.Label>Start Date</Form.Label>
-                    <Form.Control
-                      type="date"
-                      placeholder="username"
-                      autoFocus
-                      value={experience.startDate}
-                      onChange={(e) => setExperience({ ...experience, startDate: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                    <Form.Label>End Date</Form.Label>
-                    <Form.Control
-                      type="date"
-                      placeholder="bio"
-                      autoFocus
-                      value={experience.endDate}
-                      onChange={(e) => setExperience({ ...experience, endDate: e.target.value })}
-                    />
-                  </Form.Group>{" "}
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="area"
-                      autoFocus
-                      value={experience.description}
-                      onChange={(e) => setExperience({ ...experience, description: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-                    <Form.Label>Area</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="area"
-                      autoFocus
-                      value={experience.area}
-                      onChange={(e) => setExperience({ ...experience, area: e.target.value })}
-                    />
-                  </Form.Group>
-                  <Modal.Footer>
-                    <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseExp} type="submit">
-                      Save
-                    </Button>
-                  </Modal.Footer>
-                </Form>
-              </Modal.Body>
-            </Modal>
-          </div>
-          <Container className="border-bottom">
-            {experiences.length > 0 &&
-              experiences.slice(0, 4).map((exp) => {
-                return (
-                  <Row key={exp._id}>
-                    <Col xs={1}>
-                      <img
-                        width="48"
-                        src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
-                        loading="lazy"
-                        height="48"
-                        alt="Logo di EPICODE"
-                        id="ember2008"
-                        className="ms-auto"
-                      ></img>
-                    </Col>
-                    <Col xs={11}>
-                      <h5 className="mb-0">{exp.role}</h5>
-                      <p className="mb-0">{exp.company}</p>
-                      <p className="mb-0">{exp.startDate}</p>
-                      <p>{exp.area}</p>
-                    </Col>
-                  </Row>
-                );
-              })}
-          </Container>
-        </Container>
-        <Container className="border rounded-3 my-3">
-          <div className="d-flex justify-content-between align-items-center pt-3">
-            <h4>Formazione</h4>
-            <button className="bg-transparent border-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="mercado-match"
-                width="24"
-                height="24"
-                focusable="false"
-              >
-                <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
-              </svg>
-            </button>
-          </div>
-          <Container className="border-bottom p-0">
-            <div className="p-3">
-              <Row>
-                <Col xs={1} className="p-0 ">
-                  <img
-                    width="55"
-                    src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
-                    loading="lazy"
-                    height="55"
-                    alt="Logo di EPICODE"
-                    id="ember2008"
-                    className="ms-auto"
-                  ></img>
-                </Col>
-                <Col xs={11} className="p-0">
-                  <h5 className="mb-0 px-0">School</h5>
-                  <p className="mb-0">Where</p>
-                </Col>
-              </Row>
-            </div>
-          </Container>
-        </Container>
-        <Container className="border rounded-3 my-3">
-          <div className="d-flex justify-content-between align-items-center pt-3">
-            <h4>Competenze</h4>
-            <button className="bg-transparent border-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="mercado-match"
-                width="24"
-                height="24"
-                focusable="false"
-              >
-                <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
-              </svg>
-            </button>
-          </div>
-          <ListGroup>
-            <ListGroupItem className="border-start-0 border-top-0 border-end-0 py-3">
-              <Container>
-                <Row>
-                  <Col xs={1} className="p-0 ">
-                    <img
-                      width="45"
-                      src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
-                      loading="lazy"
-                      height="45"
-                      alt="Logo di EPICODE"
-                      id="ember2008"
-                      className="ms-auto"
-                    ></img>
-                  </Col>
-                  <Col xs={11} className="p-0">
-                    <p className="mb-0">Competenza #1</p>
-                  </Col>
-                </Row>
-              </Container>
-            </ListGroupItem>
-            <ListGroupItem className="border-0 py-3">
-              <Container>
-                <Row>
-                  <Col xs={1} className="p-0 ">
-                    <img
-                      width="45"
-                      src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
-                      loading="lazy"
-                      height="45"
-                      alt="Logo di EPICODE"
-                      id="ember2008"
-                      className="ms-auto"
-                    ></img>
-                  </Col>
-                  <Col xs={11} className="p-0">
-                    <p className="mb-0">Competenza #2</p>
-                  </Col>
-                </Row>
-              </Container>
-            </ListGroupItem>
-          </ListGroup>
-        </Container>
+        <Experiences handleCloseExp={handleCloseExp} handleShowExp={handleShowExp} showExp={showExp} />
+        <Formazione />
+        <Competenze />
       </>
     )
   );

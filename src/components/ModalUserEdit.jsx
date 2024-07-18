@@ -5,9 +5,9 @@ import { editFetchProfile, editUserAction } from "../redux/actions";
 
 const ModalUserEdit = ({ profileMe = { profileMe } }) => {
   const dispatch = useDispatch();
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
-    setInputValue((prevState) => ({
+    setInputValue(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -41,7 +41,7 @@ const ModalUserEdit = ({ profileMe = { profileMe } }) => {
     }
   }, [profileMe]);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = e => {
     e.preventDefault();
     dispatch(editUserAction(inputValue));
     dispatch(editFetchProfile(inputValue));

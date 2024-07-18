@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Col, Button } from "react-bootstrap";
+import Footer from "./Footer"
 
 const Notizie = () => {
   const [mostraAltro, setMostraAltro] = useState(false);
 
   return (
-    <Col xs={{ span: 3 }}>
+    <>
       <div className="bg-white p-3 rounded" style={{ minWidth: "300px", boxShadow: " 0 2px 8px rgba(0, 0, 0, 0.1)" }}>
         <h4>
           LinkedIn Notizie{" "}
@@ -44,7 +45,7 @@ const Notizie = () => {
             <p className="text-muted small">22 ore fa • 254 lettori</p>
           </div>
           <div className={`notizia ${mostraAltro ? "" : "hidden"}`}>
-            <li>Ora che l'AI Act è legge</li>
+            <li>Ora che l&aposAI Act è legge</li>
             <p className="text-muted small">1 giorno fa • 248 lettori</p>
           </div>
           <div className={`notizia ${mostraAltro ? "" : "hidden"}`}>
@@ -64,7 +65,8 @@ const Notizie = () => {
           {mostraAltro ? "Nascondi altro" : "Mostra altro"}
         </Button>
       </div>
-    </Col>
+      <Footer/>
+    </>
   );
 };
 export default Notizie;

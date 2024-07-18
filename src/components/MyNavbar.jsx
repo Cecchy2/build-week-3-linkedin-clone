@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 function MyNavbar() {
-  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const profileMe = useSelector(state => state.userProfile.meUser);
   const navigate = useNavigate();
 
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -110,11 +110,11 @@ function MyNavbar() {
                 />{" "}
               </span>
 
-              <Dropdown align="end" title="Dropdown end" id="dropdown-menu-align-end">
+              <Dropdown align="end" title="Dropdown" id="dropdown-menu-align-end">
                 <Dropdown.Toggle as="span" id="dropdown-custom-components">
                   Tu
                 </Dropdown.Toggle>
-                <Dropdown.Menu className="custom-dropdown-menu-profile">
+                <Dropdown.Menu className="custom-dropdown-menu-profile p-3">
                   <Dropdown.Item href="#">
                     <div className="container">
                       <div className="row align-items-left">
@@ -123,7 +123,7 @@ function MyNavbar() {
                             src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
                             alt="Descrizione"
                             className="img-fluid rounded-circle"
-                            style={{ maxWidth: "50px" }}
+                            style={{ maxWidth: "40px" }}
                           />
                         </div>
                         <div className="col-md-10">
@@ -131,9 +131,11 @@ function MyNavbar() {
                             Rossi Luca
                             <br /> <span className="text-secondary">EpiCode Developer</span>
                           </p>
-                          <Link to="/profilo/:idprofilo">
-                            <Button variant="outline-info">Visualizza profilo</Button>
-                          </Link>{" "}
+                          <Link to={`/profilo/${profileMe?._id}`}>
+                            <Button className="rounded-5 px-4 py-0" variant="outline-primary">
+                              Visualizza profilo
+                            </Button>
+                          </Link>
                         </div>
                       </div>
                     </div>

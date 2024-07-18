@@ -4,6 +4,10 @@ export const EDIT_USER = "EDIT_USER";
 export const EXPERIENCES = "EXPERIENCES";
 export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
+export const GET_POSTS = "GET_POSTS";
+export const CREATE_POSTS = "CREATE_POSTS";
+export const POST = "POST";
+const token = import.meta.env.VITE_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
@@ -12,7 +16,7 @@ export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputVa
 // export const getDate = dateString => {
 //   const dateObj = new Date(dateString);
 //   const options = { month: "long", year: "numeric" };
-//   const date = dateObj.toLocaleDateString("ita", options);
+//   const date = dateObj.toLocaleDateString("it-IT", options);
 //   return date;
 // };
 
@@ -22,8 +26,7 @@ export const getProfileData = () => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -44,8 +47,7 @@ export const getProfileMe = () => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -66,8 +68,7 @@ export const getExp = userId => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -75,6 +76,7 @@ export const getExp = userId => {
         dispatch({ type: EXPERIENCES, payload: result });
       }
     } catch (err) {
+      ``;
       console.log(err);
     }
   };
@@ -89,8 +91,7 @@ export const createExp = (userId, data) => {
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -113,8 +114,7 @@ export const editFetchProfile = profiloModificato => {
       const resp = await fetch(baseEndpoint, {
         method: "PUT",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(profiloModificato),
@@ -141,8 +141,7 @@ export const uploadProfilePicture = (file, userId) => {
       const resp = await fetch(baseEndpoint, {
         method: "POST",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -156,6 +155,49 @@ export const uploadProfilePicture = (file, userId) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const getPosts = () => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+        dispatch({ type: GET_POSTS, payload: result });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createPosts = (post) => {
+  return async (dispatch) => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "POST",
+        body: JSON.stringify(post),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json(post);
+        console.log(result);
+        dispatch(getPosts());
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 };
