@@ -7,9 +7,9 @@ import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
 
 const MainProfile = () => {
-  const [showExp, setShowExp] = useState(false);
   const profileMe = useSelector((state) => state.userProfile.meUser);
   const experiences = useSelector((state) => state.skills.experiences);
+  const [showExp, setShowExp] = useState(false);
   const dispatch = useDispatch();
   const handleCloseExp = () => setShowExp(false);
   const handleShowExp = () => setShowExp(true);
