@@ -21,12 +21,13 @@ const JobsComponent = () => {
     <Container className="mt-4">
       <Row>
         {!selectedJob && <Col xs={12} md={4} className="profile-info"></Col>}
+        {/* INSERIRE QUA I COMPONENTI */}
 
         <Col xs={12} md={5} className="px-0">
           <Container>
             {[...jobs].reverse().map((job) => {
               return (
-                <Card className="mt-3" key={job._id} onClick={() => handleCardClick(job)}>
+                <Card className="" key={job._id} onClick={() => handleCardClick(job)}>
                   <Card.Body>
                     <Card.Title>{job.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{job.company_name}</Card.Subtitle>
