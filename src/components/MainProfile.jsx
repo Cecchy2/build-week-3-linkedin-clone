@@ -1,28 +1,18 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, ListGroup, ListGroupItem, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileMe, uploadProfilePicture } from "../redux/actions";
+import { getProfileMe } from "../redux/actions";
 import { createExp, getExp } from "../redux/actions";
 import ModalProfilePicture from "./ModalProfilePicture";
 import ModalUserEdit from "./ModalUserEdit";
 
 const MainProfile = () => {
-  const [showEdit, setShowEdit] = useState(false);
-  const [showExp, setShowExp] = useState(false);
-  const [showPicture, setShowPicture] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-
   const profileMe = useSelector((state) => state.userProfile.meUser);
   const experiences = useSelector((state) => state.skills.experiences);
-
+  const [showExp, setShowExp] = useState(false);
   const dispatch = useDispatch();
-
-  const handleCloseEdit = () => setShowEdit(false);
-  const handleShowEdit = () => setShowEdit(true);
   const handleCloseExp = () => setShowExp(false);
   const handleShowExp = () => setShowExp(true);
-  const handleShowPicture = () => setShowPicture(true);
-  const handleClosePicture = () => setShowPicture(false);
 
   const [experience, setExperience] = useState({
     role: "",
@@ -43,20 +33,6 @@ const MainProfile = () => {
     }
   }, [dispatch, profileMe]);
 
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedImage(e.target.files[0]);
-    }
-  };
-
-  const handleImageUpload = (e) => {
-    e.preventDefault();
-    if (selectedImage) {
-      dispatch(uploadProfilePicture(selectedImage, profileMe._id));
-      setShowPicture(false);
-    }
-  };
-
   return (
     profileMe && (
       <>
@@ -74,35 +50,14 @@ const MainProfile = () => {
               />
             </div>
             <Container>
-              <Button variant="link" onClick={handleShowPicture} style={{ padding: 0 }}>
-                <Image
-                  className="rounded-circle position-absolute mb-3 object-fit-cover"
-                  src={profileMe.image}
-                  width="150"
-                  height="150"
-                  style={{ bottom: "-70px", left: "50px", objectFit: "cover" }}
-                />
-              </Button>
-              <ModalProfilePicture
-                showPicture={showPicture}
-                handleClosePicture={handleClosePicture}
-                selectedImage={selectedImage}
-                profileMe={profileMe}
-                handleImageUpload={handleImageUpload}
-                handleImageChange={handleImageChange}
-              />
+              <ModalProfilePicture profileMe={profileMe} />
+              {/* -------MODALE PROFILE PICTURE------- */}
             </Container>
           </div>
           <Container fluid className="mt-5">
             <div className="mt-5 w-50 ms-auto d-flex justify-content-end">
-              <Button variant="link" onClick={handleShowEdit} style={{ padding: 0 }}>
-                <Image
-                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaWQ9ImVkaXQtbWVkaXVtIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0ibm9uZSIgZGF0YS1zdXBwb3J0ZWQtZHBzPSIyNHgyNCIgZmlsbD0iY3VycmVudENvbG9yIj4KICA8cGF0aCBkPSJNMjEuMTMgMi44NmEzIDMgMCAwMC00LjE3IDBsLTEzIDEzTDIgMjJsNi4xOS0yTDIxLjEzIDdhMyAzIDAgMDAwLTQuMTZ6TTYuNzcgMTguNTdsLTEuMzUtMS4zNEwxNi42NCA2IDE4IDcuMzV6Ii8+Cjwvc3ZnPg=="
-                  width="25"
-                  height="25"
-                />
-              </Button>
-              <ModalUserEdit showEdit={showEdit} handleCloseEdit={handleCloseEdit} profileMe={profileMe} />
+              <ModalUserEdit profileMe={profileMe} />
+              {/* -------MODALE USER EDIT------- */}
             </div>
             <h2>
               {profileMe.name} {profileMe.surname}
@@ -175,7 +130,7 @@ const MainProfile = () => {
                 <Form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    dispatch(createExp(profileMe._id, profileMe));
+                    dispatch(createExp(profileMe._id, experience));
                   }}
                 >
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

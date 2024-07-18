@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileData } from "../redux/actions";
 
 const Aside = () => {
-  const listProfiles = useSelector((state) => state.userProfile.listProfiles);
+  const listProfiles = useSelector(state => state.userProfile.listProfiles);
 
   const dispatch = useDispatch();
 
@@ -91,12 +91,12 @@ const Aside = () => {
                   <p className="text-normal text-secondary pt1">Dalla tua scuola o università</p>
                 </div>
                 {listProfiles.length > 0 &&
-                  listProfiles.slice(6, 10).map((profile, index) => (
+                  listProfiles.slice(6, 10).map(profile => (
                     <div className="container" key={profile._id}>
                       <div className="row align-items-left">
                         <div className="col-md-2 ">
                           <img
-                            src={fallbackImages[index % fallbackImages.length]}
+                            src={profile.image}
                             alt="Descrizione"
                             className="img-fluid rounded-circle"
                             style={{ maxWidth: "50px" }}
