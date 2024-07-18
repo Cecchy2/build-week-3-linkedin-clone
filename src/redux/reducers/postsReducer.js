@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const postsReducer = (state = initialState, action) => {
-  switch (action.paylload) {
+  switch (action.type) {
     case GET_POSTS:
       return {
         ...state,

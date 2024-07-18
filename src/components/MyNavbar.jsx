@@ -131,7 +131,7 @@ function MyNavbar() {
                             Rossi Luca
                             <br /> <span className="text-secondary">EpiCode Developer</span>
                           </p>
-                          <Link to="/profilo/:idprofilo">
+                          <Link to={`/profilo/${profileMe?._id}`}>
                             <Button className="rounded-5 px-4 py-0" variant="outline-primary">
                               Visualizza profilo
                             </Button>

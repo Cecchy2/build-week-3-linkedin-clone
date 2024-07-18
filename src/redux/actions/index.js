@@ -5,6 +5,8 @@ export const EXPERIENCES = "EXPERIENCES";
 export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 export const GET_POSTS = "GET_POSTS";
+export const CREATE_POSTS = "CREATE_POSTS";
+const token = import.meta.env.VITE_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
@@ -23,8 +25,7 @@ export const getProfileData = () => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -45,8 +46,7 @@ export const getProfileMe = () => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -67,8 +67,7 @@ export const getExp = userId => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -91,8 +90,7 @@ export const createExp = (userId, data) => {
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -115,8 +113,7 @@ export const editFetchProfile = profiloModificato => {
       const resp = await fetch(baseEndpoint, {
         method: "PUT",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(profiloModificato),
@@ -143,8 +140,7 @@ export const uploadProfilePicture = (file, userId) => {
       const resp = await fetch(baseEndpoint, {
         method: "POST",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -168,8 +164,7 @@ export const getPosts = () => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Njk3NmZhMTg2MTQyYzAwMTVjMWMzY2QiLCJpYXQiOjE3MjEyMDA1NDUsImV4cCI6MTcyMjQxMDE0NX0.jXahjnm_y-Q72IM9QipBQI03L56e1YH9ib0PU9ZC9rc",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -178,6 +173,29 @@ export const getPosts = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const createPosts = post => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "POST",
+        boyd: JSON.stringify(post),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json(post);
+        console.log(result);
+        dispatch(getPosts());
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 };
