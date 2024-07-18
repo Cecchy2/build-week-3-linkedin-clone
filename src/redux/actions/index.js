@@ -6,7 +6,6 @@ export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 export const GET_POSTS = "GET_POSTS";
 export const CREATE_POSTS = "CREATE_POSTS";
-export const POST = "POST";
 const token = import.meta.env.VITE_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
@@ -179,8 +178,8 @@ export const getPosts = () => {
   };
 };
 
-export const createPosts = (post) => {
-  return async (dispatch) => {
+export const createPosts = post => {
+  return async dispatch => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts`;
     try {
       const resp = await fetch(baseEndpoint, {
@@ -193,6 +192,51 @@ export const createPosts = (post) => {
       });
       if (resp.ok) {
         const result = await resp.json(post);
+        console.log(result);
+        dispatch(getPosts());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const editPosts = (userId, post) => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/${userId}`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "PUT",
+        body: JSON.stringify(post),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json(post);
+        console.log(result);
+        dispatch(getPosts());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const deletePost = userId => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/${userId}`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "DELETE",
+
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
         console.log(result);
         dispatch(getPosts());
       }
