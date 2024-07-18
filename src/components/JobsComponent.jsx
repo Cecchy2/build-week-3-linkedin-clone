@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { getJobs } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import JobsLeftAside from "./JobsLeftAside";
@@ -26,35 +26,33 @@ const JobsComponent = () => {
             <JobsLeftAside />
           </Col>
         )}
-        {/* INSERIRE QUA I COMPONENTI */}
 
-        <Col xs={12} md={5} className="px-0">
-          <Container>
-            {[...jobs].reverse().map((job) => {
-              return (
-                <Card key={job._id} onClick={() => handleCardClick(job)}>
-                  <Card.Body>
-                    <Card.Title>{job.title}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{job.company_name}</Card.Subtitle>
-                    <div className="d-flex ">
-                      <Card.Text>{job.job_type}</Card.Text>
-                      <Card.Text className="ms-auto">{job.candidate_required_location}</Card.Text>
-                    </div>
-                  </Card.Body>
-                </Card>
-              );
-            })}
+        <Col xs={12} md={6} className="px-1">
+          <Container className="bg-white p-3 rounded">
+            {jobs
+              .slice()
+              .reverse()
+              .map((job, index) => (
+                <div key={job._id} onClick={() => handleCardClick(job)} className="mb-3">
+                  <h5>{job.title}</h5>
+                  <h6 className="text-muted">{job.company_name}</h6>
+                  <div className="d-flex">
+                    <p className="mb-1">{job.job_type}</p>
+                    <p className="ms-auto mb-1">{job.candidate_required_location}</p>
+                  </div>
+                  {index < jobs.length - 1 && <hr />}
+                </div>
+              ))}
           </Container>
         </Col>
+
         {selectedJob && (
-          <Col xs={12} md={7} className="px-0">
-            <Card>
-              <Card.Body>
-                <Card.Title>{selectedJob.title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{selectedJob.company_name}</Card.Subtitle>
-                <Card.Text dangerouslySetInnerHTML={{ __html: selectedJob.description }}></Card.Text>
-              </Card.Body>
-            </Card>
+          <Col xs={12} md={6} className="px-0">
+            <div className="p-3 bg-white">
+              <h5>{selectedJob.title}</h5>
+              <h6 className="text-muted">{selectedJob.company_name}</h6>
+              <div dangerouslySetInnerHTML={{ __html: selectedJob.description }}></div>
+            </div>
           </Col>
         )}
       </Row>
