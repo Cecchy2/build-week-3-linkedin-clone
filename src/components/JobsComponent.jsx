@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { getJobs } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import JobsLeftAside from "./JobsLeftAside";
 
 const JobsComponent = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const JobsComponent = () => {
       <Row>
         {!selectedJob && <Col xs={12} md={4} className="profile-info"></Col>}
         {/* INSERIRE QUA I COMPONENTI */}
-
+        <JobsLeftAside></JobsLeftAside>
         <Col xs={12} md={5} className="px-0">
           <Container>
             {[...jobs].reverse().map((job) => {
