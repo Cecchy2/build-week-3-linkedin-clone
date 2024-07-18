@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Col, Button } from "react-bootstrap";
 
 const Notizie = () => {
   const [mostraAltro, setMostraAltro] = useState(false);
@@ -44,7 +44,7 @@ const Notizie = () => {
             <p className="text-muted small">22 ore fa • 254 lettori</p>
           </div>
           <div className={`notizia ${mostraAltro ? "" : "hidden"}`}>
-            <li>Ora che l'AI Act è legge</li>
+            <li>Ora che l&aposAI Act è legge</li>
             <p className="text-muted small">1 giorno fa • 248 lettori</p>
           </div>
           <div className={`notizia ${mostraAltro ? "" : "hidden"}`}>
