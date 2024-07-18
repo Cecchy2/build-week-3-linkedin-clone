@@ -1,4 +1,3 @@
-import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBriefcase, faCog, faStar, faInfoCircle, faPen } from "@fortawesome/free-solid-svg-icons";
