@@ -15,8 +15,8 @@ const HomeMain = () => {
   }, [dispatch]);
 
   return (
-    <Col xs={{ span: 6 }} className="profile-info ms-2 h-100">
-      <Container>
+    <>
+      <Container className="profile-info ms-2 ">
         <Row className="align-items-center">
           <Col xs={2}>
             <Image src={profileMe?.image} className="rounded-circle object-fit-cover" width="50" height="50" />
@@ -29,7 +29,8 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {[...postsList].map(post => {
+        <h1>Ciao</h1>
+        {[...postsList].reverse().map(post => {
           return (
             <Card key={post._id}>
               <Card.Img variant="top" src="holder.js/100px180" />
@@ -42,7 +43,7 @@ const HomeMain = () => {
           );
         })}
       </Container>
-    </Col>
+    </>
   );
 };
 

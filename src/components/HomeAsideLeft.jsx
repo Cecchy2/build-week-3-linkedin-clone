@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Col, Container, Image } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileMe } from "../redux/actions";
 
@@ -14,7 +14,7 @@ const HomeAsideLeft = () => {
 
   return (
     profileMe && (
-      <Col Col xs={12} md={2} className="profile-info p-0 overflow-hidden h-100">
+      <Container className="profile-info p-0 overflow-hidden ">
         <div className="p-0 position-relative">
           <Image
             className="img-fluid w-100"
@@ -40,7 +40,7 @@ const HomeAsideLeft = () => {
           <p className="mb-1 text-secondary line-truncate-2">{profileMe.area}</p>
           <p className="line-truncate-2">{profileMe.title}</p>
         </Container>
-      </Col>
+      </Container>
     )
   );
 };
