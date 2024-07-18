@@ -8,45 +8,45 @@ import "../App.css"; // Assicurati di importare il file CSS
 const JobsLeftAside = () => {
   return (
     <>
-      <div className="bg-white p-3 rounded mb-3" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
+      <div className="bg-white p-3 rounded mb-3 p-0" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
         <Row className="mb-2">
           <Col>
-            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start">
+            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start p-0">
               <FontAwesomeIcon icon={faBriefcase} className="me-2" />
-              <span className="ms-auto">Le mie offerte di lavoro</span>
+              Le mie offerte di lavoro
             </Button>
           </Col>
         </Row>
         <Row className="mb-2">
           <Col>
-            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start">
+            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start p-0">
               <FontAwesomeIcon icon={faCog} className="me-2" />
-              <span className="ms-5">Preferenze</span>
+              Preferenze
             </Button>
           </Col>
         </Row>
         <Row className="mb-2">
           <Col>
-            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start">
+            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start p-0">
               <FontAwesomeIcon icon={faStar} className="me-2" />
-              <span className="ms-auto">Valutazioni delle competenze</span>
+              Valutazioni delle competenze
             </Button>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start">
+            <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start p-0">
               <FontAwesomeIcon icon={faInfoCircle} className="me-2" />
-              <span className="">Indicazioni per chi cerca lavoro</span>
+              Indicazioni per chi cerca lavoro
             </Button>
           </Col>
         </Row>
       </div>
       <Row>
         <Col>
-          <Button variant="primary" className="w-100 d-flex align-items-center custom-publish-button">
+          <Button variant="outline-primary" className="w-100 d-flex align-items-center custom-publish-button">
             <FontAwesomeIcon icon={faPen} className="me-2" />
-            <span className="text-blue font-weight-bold">Pubblica offerta gratuita</span>
+            Pubblica offerta gratuita
           </Button>
         </Col>
       </Row>

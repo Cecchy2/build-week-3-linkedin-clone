@@ -22,7 +22,7 @@ const JobsComponent = () => {
     <Container className="mt-4">
       <Row>
         {!selectedJob && (
-          <Col xs={12} md={4}>
+          <Col xs={12} md={2}>
             <JobsLeftAside />
           </Col>
         )}

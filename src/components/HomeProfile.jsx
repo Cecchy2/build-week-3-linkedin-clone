@@ -4,16 +4,17 @@ import Aside from "./AsideProfile";
 
 const HomeProfile = () => {
   return (
-    <Container>
-      <Row>
-        <Col xs={12} md={8} className="p-0">
+    <Container fluid className="px-3">
+      <Row className="justify-content-center">
+        <Col xs={12} md={8} lg={7} className="p-3">
           <MainProfile />
         </Col>
-        <Col xs={12} md={3} className="p-0">
+        <Col xs={12} md={4} lg={3} className="p-3">
           <Aside />
         </Col>
       </Row>
     </Container>
   );
 };
+
 export default HomeProfile;
