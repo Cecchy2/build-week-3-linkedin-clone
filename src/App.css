@@ -423,7 +423,7 @@ p > span {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-
+padding-left: 0px;
 }
 .info-list li,span{
 font-size:0.7rem;
@@ -435,8 +435,8 @@ text-align: center
 }
 .container-info{
   margin-top: 15px;
-  min-width: 280px;
-  margin-right: 60px;
+  width: 250px;
+margin-left: 20px;
 
 }
 
