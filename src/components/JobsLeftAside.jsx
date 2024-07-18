@@ -1,8 +1,6 @@
 import { Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBriefcase, faCog, faStar, faInfoCircle, faPen } from "@fortawesome/free-solid-svg-icons";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css"; // Assicurati di importare il file CSS
 
 const JobsLeftAside = () => {
   return (

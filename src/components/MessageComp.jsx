@@ -4,7 +4,6 @@ import { PiNotePencilDuotone } from "react-icons/pi";
 import { RiArrowUpWideLine } from "react-icons/ri";
 import { RiArrowDownWideLine } from "react-icons/ri";
 import { Col, Container, Row, Button, InputGroup, Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function MessageComp() {
   const [open, setOpen] = useState(false);
