@@ -6,6 +6,7 @@ export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 export const GET_POSTS = "GET_POSTS";
 export const CREATE_POSTS = "CREATE_POSTS";
+export const POST = "POST";
 const token = import.meta.env.VITE_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
@@ -178,13 +179,13 @@ export const getPosts = () => {
   };
 };
 
-export const createPosts = post => {
-  return async dispatch => {
+export const createPosts = (post) => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts`;
     try {
       const resp = await fetch(baseEndpoint, {
         method: "POST",
-        boyd: JSON.stringify(post),
+        body: JSON.stringify(post),
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

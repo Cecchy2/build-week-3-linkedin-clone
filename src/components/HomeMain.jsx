@@ -29,7 +29,7 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {postsList.reverse().map((post) => {
+        {[...postsList].reverse().map((post) => {
           return (
             <Card className="mt-3" key={post._id}>
               <Card.Body>
