@@ -12,7 +12,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function MyNavbar() {
   const profileMe = useSelector((state) => state.userProfile.meUser);
-  const navigate = useNavigate();
 
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -120,15 +119,15 @@ function MyNavbar() {
                       <div className="row align-items-left">
                         <div className="col-md-2">
                           <img
-                            src="https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg"
+                            src={profileMe?.image}
                             alt="Descrizione"
-                            className="img-fluid rounded-circle"
-                            style={{ maxWidth: "40px" }}
+                            className="rounded-circle object-fit cover"
+                            style={{ width: "40px", height: "40px" }}
                           />
                         </div>
                         <div className="col-md-10">
                           <p className="text-black ms-4 fw-bold ">
-                            Rossi Luca
+                            {profileMe?.name} {profileMe?.surname}
                             <br /> <span className="text-secondary">EpiCode Developer</span>
                           </p>
                           <Link to={`/profilo/${profileMe?._id}`}>
