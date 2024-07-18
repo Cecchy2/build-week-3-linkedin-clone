@@ -20,11 +20,7 @@ const JobsComponent = () => {
   return (
     <Container className="mt-4">
       <Row>
-        {!selectedJob && (
-          <Col xs={12} md={2}>
-            ciao
-          </Col>
-        )}
+        {!selectedJob && <Col xs={12} md={4} className="profile-info"></Col>}
 
         <Col xs={12} md={5} className="px-0">
           <Container>
