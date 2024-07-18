@@ -250,6 +250,50 @@ p > span {
   }
 }
 /* fine navbar */
+/* JobsLeftAside */
+.custom-button {
+  background-color: white !important;
+  border: none !important;
+  color: #000;
+  padding: 10px 15px;
+}
+
+.custom-button:hover {
+  background-color: white !important;
+  color: #000 !important;
+  cursor: pointer;
+}
+
+.custom-button span {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.custom-publish-button {
+  border: 2px solid #007bff !important;
+  color: #007bff !important;
+  background-color: transparent !important;
+  border-radius: 50px !important;
+  padding: 10px 15px;
+  width: 250px; /* Aggiungi questa linea per impostare la larghezza del pulsante */
+}
+
+.custom-publish-button span {
+  flex-grow: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+.text-blue {
+  color: #007bff; /* Blu di Bootstrap */
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+
+
+/* Fine JobsLeftAside */
 .messageTool {
   bottom: 0;
   right: 75px;
