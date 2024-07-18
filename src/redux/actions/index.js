@@ -10,7 +10,7 @@ const token = import.meta.env.VITE_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
-export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputValue });
+export const editUserAction = (inputValue) => ({ type: EDIT_USER, payload: inputValue });
 
 // export const getDate = dateString => {
 //   const dateObj = new Date(dateString);
@@ -20,7 +20,7 @@ export const editUserAction = inputValue => ({ type: EDIT_USER, payload: inputVa
 // };
 
 export const getProfileData = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/";
     try {
       const resp = await fetch(baseEndpoint, {
@@ -41,7 +41,7 @@ export const getProfileData = () => {
 };
 
 export const getProfileMe = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/me";
     try {
       const resp = await fetch(baseEndpoint, {
@@ -61,8 +61,8 @@ export const getProfileMe = () => {
   };
 };
 
-export const getExp = userId => {
-  return async dispatch => {
+export const getExp = (userId) => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
     try {
       const resp = await fetch(baseEndpoint, {
@@ -82,7 +82,7 @@ export const getExp = userId => {
 };
 
 export const createExp = (userId, data) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
     try {
       const resp = await fetch(baseEndpoint, {
@@ -106,8 +106,8 @@ export const createExp = (userId, data) => {
   };
 };
 
-export const editFetchProfile = profiloModificato => {
-  return async dispatch => {
+export const editFetchProfile = (profiloModificato) => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/profile/`;
     try {
       const resp = await fetch(baseEndpoint, {
@@ -131,7 +131,7 @@ export const editFetchProfile = profiloModificato => {
 };
 
 export const uploadProfilePicture = (file, userId) => {
-  return async dispatch => {
+  return async (dispatch) => {
     const formData = new FormData();
     formData.append("profile", file);
 
@@ -159,7 +159,7 @@ export const uploadProfilePicture = (file, userId) => {
 };
 
 export const getPosts = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/`;
     try {
       const resp = await fetch(baseEndpoint, {
@@ -169,6 +169,7 @@ export const getPosts = () => {
       });
       if (resp.ok) {
         const result = await resp.json();
+        console.log(result);
         dispatch({ type: GET_POSTS, payload: result });
       }
     } catch (error) {
