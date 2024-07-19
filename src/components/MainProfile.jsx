@@ -35,9 +35,6 @@ const MainProfile = () => {
         <Container className="badgeContainer border rounded-3 my-3 p-0 profile-info" style={{ overflow: "hidden" }}>
           <div className="position-relative">
             <div>
-              <Button variant="link" className="position-absolute">
-                bottone
-              </Button>
               <Image
                 className="w-100 object-fit-cover"
                 src={profileMe.image}
