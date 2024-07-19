@@ -10,7 +10,7 @@ const HomeMain = () => {
   const profileMe = useSelector(state => state.userProfile.meUser);
   const postsList = useSelector(state => state.postsList.posts);
   const dispatch = useDispatch();
-  const [commentOn, setCommentOn] = useState({});
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const [comment, setComment] = useState({
     comment: "",
@@ -26,6 +26,15 @@ const HomeMain = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  const handlePostClick = (postId) => {
+    if (selectedPost === postId) {
+      setSelectedPost(null);
+    } else {
+      setSelectedPost(postId);
+      dispatch(getComments(postId));
+    }
+  };
 
   return (
     <>
@@ -83,22 +92,23 @@ const HomeMain = () => {
                     <Button
                       variant="custom"
                       onClick={() => {
-                        /* setCommentOn(!commentOn);
-                        dispatch(getComments(post?._id)); */
+                        handlePostClick(setselectedPost());
                       }}
                     >
                       <TbMessage />
                     </Button>
                   </Col>
                 </Row>
-                {/* {commentOn[post._id] && (
-                  <Row>
-                    <Col>
-                      {" "}
-                      <h4>commenti</h4>
-                    </Col>
-                  </Row>
-                )} */}
+                {commentsList
+                  .filter((comment) => comment._id === post._id)
+                  .map((comment) => {
+                    return (
+                      <div key={comment._id}>
+                        <h5>{comment.author}</h5>
+                        <p>{comment.comment}</p>
+                      </div>
+                    );
+                  })}
               </Container>
             </Card>
           );
