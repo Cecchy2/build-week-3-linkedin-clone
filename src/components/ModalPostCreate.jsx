@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, InputGroup, Modal } from "react-bootstrap";
+import { Button, Form, Image, InputGroup, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, token } from "../redux/actions";
 
@@ -7,6 +7,8 @@ const ModalPostCreate = () => {
   const [lgShow, setLgShow] = useState(false);
   const profileMe = useSelector(state => state.userProfile.meUser);
   const dispatch = useDispatch();
+
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const [post, setPost] = useState({
     text: "",
@@ -26,33 +28,40 @@ const ModalPostCreate = () => {
       if (resp.ok) {
         const result = await resp.json();
         console.log(result);
-        dispatch(getPosts());
+        if (selectedImage) {
+          uploadImagePost(selectedImage, result._id);
+          dispatch(getPosts());
+        } else dispatch(getPosts());
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const uploadImagePost = async file => {
+  const uploadImagePost = async (file, postId) => {
     let formData = new FormData();
     formData.append("post", file);
-    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/${profileMe._id}`;
+
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/${postId}`;
+
     try {
       const resp = await fetch(baseEndpoint, {
         method: "POST",
         body: formData,
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
       });
+
       if (resp.ok) {
         const result = await resp.json();
         console.log(result);
         dispatch(getPosts());
+      } else {
+        console.error("Errore nel caricamento dell'immagine", resp.statusText);
       }
     } catch (err) {
-      console.log(err);
+      console.error("Errore nel caricamento dell'immagine", err);
     }
   };
 
@@ -62,18 +71,11 @@ const ModalPostCreate = () => {
     }
   };
 
-  const handleImageUpload = e => {
-    e.preventDefault();
-    if (selectedImage) {
-      dispatch(uploadImagePost(selectedImage));
-    }
-  };
-
   const handleFetchSubmit = e => {
     e.preventDefault();
-    uploadImagePost(e.target.files);
-    console.log(post.user._id);
+
     createPosts(post);
+
     setPost({ text: "" });
   };
 
@@ -123,8 +125,14 @@ const ModalPostCreate = () => {
               onChange={e => setPost({ ...post, text: e.target.value })}
             />
           </InputGroup>
+          <Image
+            className="object-fit-cover m-2"
+            src={selectedImage ? URL.createObjectURL(selectedImage) : <></>}
+            width="450"
+            height="250"
+          />
           <Modal.Body className="border border-top-1 d-flex justify-content-between">
-            <Form onSubmit={handleImageUpload}>
+            <Form>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Carica una nuova immagine</Form.Label>
                 <Form.Control type="file" onChange={handleImageChange} />

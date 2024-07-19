@@ -32,6 +32,7 @@ const HomeMain = () => {
         {[...postsList].reverse().map(post => {
           return (
             <Card className="mt-3" key={post._id}>
+              <Image className="img-fluid w-100 overflow-hidden" src={post.image} />
               <Card.Body>
                 <Container className="d-flex justify-content-between aling-items-center p-0">
                   <Container className="p-0">
