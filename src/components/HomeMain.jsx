@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, getPosts } from "../redux/actions";
+import { deletePost, getComments, getPosts } from "../redux/actions";
 import ModalPostCreate from "./ModalPostCreate";
 import ModalPostEdit from "./ModalPostEdit";
+import { TbMessage } from "react-icons/tb";
 
 const HomeMain = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const postsList = useSelector(state => state.postsList.posts);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const postsList = useSelector((state) => state.postsList.posts);
   const dispatch = useDispatch();
+  const [commentOn, setCommentOn] = useState({});
+
+  const commentsList = useSelector((state) => state.commentsList.comments);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -29,7 +33,7 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {[...postsList].reverse().map(post => {
+        {[...postsList].reverse().map((post) => {
           return (
             <Card className="mt-3" key={post._id}>
               <Image className="img-fluid w-100 overflow-hidden" src={post.image} />
@@ -66,6 +70,29 @@ const HomeMain = () => {
                 </Container>
                 <Card.Text>{post.text}</Card.Text>
               </Card.Body>
+              <Container>
+                <Row>
+                  <Col>
+                    <Button
+                      variant="custom"
+                      onClick={() => {
+                        /* setCommentOn(!commentOn);
+                        dispatch(getComments(post?._id)); */
+                      }}
+                    >
+                      <TbMessage />
+                    </Button>
+                  </Col>
+                </Row>
+                {/* {commentOn[post._id] && (
+                  <Row>
+                    <Col>
+                      {" "}
+                      <h4>commenti</h4>
+                    </Col>
+                  </Row>
+                )} */}
+              </Container>
             </Card>
           );
         })}

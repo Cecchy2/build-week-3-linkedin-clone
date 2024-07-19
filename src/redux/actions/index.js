@@ -6,6 +6,7 @@ export const EXPERIENCE = "EXPERIENCE";
 export const UPDATE_PROFILE_PICTURE = "UPDATE_PROFILE_PICTURE";
 export const GET_POSTS = "GET_POSTS";
 export const CREATE_POSTS = "CREATE_POSTS";
+export const GET_COMMENTS = "GET_COMMENTS";
 export const QUERY = "QUERY";
 
 export const GET_JOBS = "GET_JOBS";
@@ -182,29 +183,6 @@ export const getPosts = () => {
   };
 };
 
-export const createComments = comment => {
-  return async dispatch => {
-    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/`;
-    try {
-      const resp = await fetch(baseEndpoint, {
-        method: "POST",
-        body: JSON.stringify(comment),
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      if (resp.ok) {
-        const result = await resp.json(comment);
-        console.log(result);
-        dispatch(getPosts());
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
 export const editPosts = (userId, post) => {
   return async dispatch => {
     const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts/${userId}`;
@@ -269,6 +247,50 @@ export const getJobs = () => {
   };
 };
 
+export const getComments = () => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjlhOTdjMjM5YzAwMTUyZjRiM2QiLCJpYXQiOjE3MjEzNzU1NDcsImV4cCI6MTcyMjU4NTE0N30.u-EHUoaD8PMwGjvz2zbHDUhnxyVge-IRtxpBpIMZa4E`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+        dispatch({ type: GET_COMMENTS, payload: result });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const createComment = comment => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "POST",
+        body: JSON.stringify(comment),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json(comment);
+        console.log(result);
+        dispatch(getComments());
+        return result;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const searchJobs = query => {
   return async dispatch => {
     const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`;
@@ -281,6 +303,7 @@ export const searchJobs = query => {
       if (resp.ok) {
         const result = await resp.json();
         console.log(result);
+
         dispatch({ type: GET_JOBS, payload: result.data });
       }
     } catch (error) {
