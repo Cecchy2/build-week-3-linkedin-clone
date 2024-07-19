@@ -12,7 +12,6 @@ export const QUERY = "QUERY";
 export const GET_JOBS = "GET_JOBS";
 
 export const token = import.meta.env.VITE_TOKEN;
-export const commentsToken = import.meta.env.VITE_COMMENTS_TOKEN;
 
 export const storeProfiles = (type, data) => ({ type: type, payload: data });
 export const storeExperience = (type, payload) => ({ type: type, payload: payload });
@@ -254,7 +253,7 @@ export const getComments = () => {
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
-          Authorization: `Bearer ${commentsToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (resp.ok) {
@@ -276,7 +275,7 @@ export const createComment = comment => {
         method: "POST",
         body: JSON.stringify(comment),
         headers: {
-          Authorization: `Bearer ${commentsToken}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });

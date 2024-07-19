@@ -110,7 +110,7 @@ const HomeMain = () => {
                     >
                       <Form.Control
                         className=" rounded-5"
-                        aria-label="Default"
+                        // aria-label="Default"
                         type="text"
                         placeholder="crea un post"
                         value={comment.comment}
@@ -125,43 +125,45 @@ const HomeMain = () => {
                   </Col>
                 </Row>
                 <h5>Commenti</h5>
-                {commentsList
-                  .filter(comment => comment.elementId === post._id)
-                  .map(comment => {
-                    return (
-                      <Container key={comment._id}>
-                        <ListGroup className="bg-secondary rounded-4 my-2">
-                          <ListGroupItem>
-                            <h5>{comment.author}</h5>
-                            <p>{comment.comment}</p>
-                          </ListGroupItem>
-                        </ListGroup>
-                        {profileMe._id === comment.elementId ? (
-                          <>
-                            {/* <ModalPostEdit userId={post._id} postText={post.text} /> */}
-                            <Button className="bg-transparent border border-0">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="15"
-                                fill="black"
-                                className="bi bi-trash-fill"
-                                viewBox="0 0 16 16"
-                                onClick={() => {
-                                  dispatch(deleteComment(comment._id));
-                                  dispatch(getComments());
-                                }}
-                              >
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                              </svg>
-                            </Button>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </Container>
-                    );
-                  })}
+                <Container>
+                  <ListGroup>
+                    {commentsList
+                      .filter(comment => comment.elementId === post._id)
+                      .map(comment => {
+                        return (
+                          <Container className="d-flex justyfy-content-between rounded-4 border" key={comment._id}>
+                            <ListGroupItem className=" border-0 my-2">
+                              <h6>{comment.author}</h6>
+                              <h5>{comment.comment}</h5>
+                            </ListGroupItem>
+                            {profileMe.username === comment.author ? (
+                              <>
+                                {/* <ModalPostEdit userId={post._id} postText={post.text} /> */}
+                                <Button className="bg-transparent border border-0 ms-auto">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="15"
+                                    height="15"
+                                    fill="black"
+                                    className="bi bi-trash-fill"
+                                    viewBox="0 0 16 16"
+                                    onClick={() => {
+                                      dispatch(deleteComment(comment._id));
+                                      dispatch(getComments());
+                                    }}
+                                  >
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                  </svg>
+                                </Button>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </Container>
+                        );
+                      })}
+                  </ListGroup>
+                </Container>
               </Container>
             </Card>
           );
