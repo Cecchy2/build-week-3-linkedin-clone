@@ -7,15 +7,22 @@ import ModalPostEdit from "./ModalPostEdit";
 import { TbMessage } from "react-icons/tb";
 
 const HomeMain = () => {
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-  const postsList = useSelector((state) => state.postsList.posts);
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const postsList = useSelector(state => state.postsList.posts);
   const dispatch = useDispatch();
   const [commentOn, setCommentOn] = useState({});
 
-  const commentsList = useSelector((state) => state.commentsList.comments);
+  const [comment, setComment] = useState({
+    comment: "",
+    rate: "",
+    postId: "",
+  });
+
+  const commentsList = useSelector(state => state.commentsList.comments);
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getComments());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -33,7 +40,7 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {[...postsList].reverse().map((post) => {
+        {[...postsList].reverse().map(post => {
           return (
             <Card className="mt-3" key={post._id}>
               <Image className="img-fluid w-100 overflow-hidden" src={post.image} />
