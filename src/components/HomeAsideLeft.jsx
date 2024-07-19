@@ -17,10 +17,10 @@ const HomeAsideLeft = () => {
       <Container className="profile-info p-0 overflow-hidden ">
         <div className="p-0 position-relative">
           <Image
-            className="img-fluid w-100"
-            src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
+            className="img-fluid w-100 object-fit-cover"
+            src={profileMe.image}
             alt="profile banner"
-            style={{ maxHeight: "25vh" }}
+            style={{ maxHeight: "8vh" }}
           />
           <Image
             className="rounded-circle position-absolute  object-fit-cover"
@@ -36,7 +36,7 @@ const HomeAsideLeft = () => {
           </h6>
           <p className="mb-1 line-truncate-2">{profileMe.bio}</p>
           <p className="mb-1 line-truncate-2">{profileMe.title}</p>
-          <p className="mb-1 text-secondary line-truncate-2">{profileMe.area}</p>
+          <p className="mb-3 text-secondary line-truncate-2">{profileMe.area}</p>
         </Container>
       </Container>
     )

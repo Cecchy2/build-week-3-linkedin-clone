@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Image, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Container, Form, Image, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment, deleteComment, deletePost, getComments, getPosts } from "../redux/actions";
 import ModalPostCreate from "./ModalPostCreate";
@@ -47,7 +47,7 @@ const HomeMain = () => {
       </Container>
       <Container>
         {[...postsList].reverse().map(post => (
-          <Card className="mt-3" key={post._id}>
+          <Card className="mt-3 p-0" key={post._id}>
             {post.image && <Image className="img-fluid w-100 overflow-hidden" src={post.image} />}
             <Card.Body>
               <Container className="d-flex justify-content-between align-items-center p-0">
@@ -92,9 +92,9 @@ const HomeMain = () => {
             <Container>
               {selectedPost === post._id && (
                 <>
-                  <Row>
+                  <Row className="mb-2">
                     <Col xs={12} md={2}>
-                      <Image className="rounded-circle" src={profileMe.image} width="50" height="50" />
+                      <Image className="rounded-circle " src={profileMe.image} width="50" height="50" />
                     </Col>
                     <Col xs={12} md={10}>
                       <Form
@@ -118,16 +118,16 @@ const HomeMain = () => {
                       </Form>
                     </Col>
                   </Row>
-                  <h5>Commenti</h5>
+                  {/* {comment ? <h5>Commenti</h5> : <Alert>Non sono presenti commenti </Alert>} */}
                   <Container>
                     <ListGroup>
                       {commentsList
                         .filter(comment => comment.elementId === post._id)
                         .map(comment => (
-                          <Container className="d-flex justify-content-between rounded-4 border" key={comment._id}>
-                            <ListGroupItem className="border-0 my-2">
-                              <h6>{comment.author}</h6>
-                              <h5>{comment.comment}</h5>
+                          <Container className="d-flex justify-content-between rounded-4 border my-3" key={comment._id}>
+                            <ListGroupItem className="border-0 ">
+                              <h6 style={{ fontSize: "1rem" }}>{comment.author}</h6>
+                              <h5 style={{ fontSize: "0.8rem" }}>{comment.comment}</h5>
                             </ListGroupItem>
                             {profileMe.username === comment.author && (
                               <Button className="bg-transparent border border-0 ms-auto">

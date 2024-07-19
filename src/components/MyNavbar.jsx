@@ -43,7 +43,7 @@ function MyNavbar() {
   const handleBlur = () => setSearchExpanded(false);
 
   return (
-    <Container fluid className="navbar-custom bg-light">
+    <Container fluid className="navbar-custom bg-light ">
       <Navbar expand="lg" className="navbar-custom container">
         <div className="navbar-content">
           <Navbar.Brand href="#home" className="navbar-brand-custom">

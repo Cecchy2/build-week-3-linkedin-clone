@@ -5,8 +5,8 @@ import { createExp, getExp, uploadExpImage } from "../redux/actions";
 
 const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
   const dispatch = useDispatch();
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-  const experiences = useSelector((state) => state.skills.experiences);
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const experiences = useSelector(state => state.skills.experiences);
   const [experience, setExperience] = useState({
     role: "",
     company: "",
@@ -23,12 +23,12 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
     }
   }, [dispatch, profileMe]);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = e => {
     e.preventDefault();
     setSelectedImage(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const newExperience = await dispatch(createExp(profileMe._id, experience));
@@ -76,7 +76,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="qualifica"
                     autoFocus
                     value={experience.role}
-                    onChange={(e) => setExperience({ ...experience, role: e.target.value })}
+                    onChange={e => setExperience({ ...experience, role: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -86,7 +86,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="name@example.com"
                     autoFocus
                     value={experience.company}
-                    onChange={(e) => setExperience({ ...experience, company: e.target.value })}
+                    onChange={e => setExperience({ ...experience, company: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -96,7 +96,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="username"
                     autoFocus
                     value={experience.startDate}
-                    onChange={(e) => setExperience({ ...experience, startDate: e.target.value })}
+                    onChange={e => setExperience({ ...experience, startDate: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -106,7 +106,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="bio"
                     autoFocus
                     value={experience.endDate}
-                    onChange={(e) => setExperience({ ...experience, endDate: e.target.value })}
+                    onChange={e => setExperience({ ...experience, endDate: e.target.value })}
                   />
                 </Form.Group>{" "}
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -116,7 +116,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="area"
                     autoFocus
                     value={experience.description}
-                    onChange={(e) => setExperience({ ...experience, description: e.target.value })}
+                    onChange={e => setExperience({ ...experience, description: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -126,7 +126,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="area"
                     autoFocus
                     value={experience.area}
-                    onChange={(e) => setExperience({ ...experience, area: e.target.value })}
+                    onChange={e => setExperience({ ...experience, area: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formImage">
@@ -144,32 +144,35 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
         </div>
         <Container>
           {experiences.length > 0 &&
-            experiences.slice(0, 4).map((exp) => {
-              return (
-                <Row key={exp._id}>
-                  <Col xs={2}>
-                    <img
-                      width="48"
-                      src={
-                        exp.image ||
-                        "https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
-                      }
-                      loading="lazy"
-                      height="48"
-                      alt="Logo di EPICODE"
-                      id="ember2008"
-                      className="ms-auto"
-                    ></img>
-                  </Col>
-                  <Col xs={10}>
-                    <h5 className="mb-0">{exp.role}</h5>
-                    <p className="mb-0">{exp.company}</p>
-                    <p className="mb-0">{exp.startDate}</p>
-                    <p>{exp.area}</p>
-                  </Col>
-                </Row>
-              );
-            })}
+            [...experiences]
+              .reverse()
+              .slice(0, 4)
+              .map(exp => {
+                return (
+                  <Row key={exp._id}>
+                    <Col xs={2}>
+                      <img
+                        width="48"
+                        src={
+                          exp.image ||
+                          "https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
+                        }
+                        loading="lazy"
+                        height="48"
+                        alt="Logo di EPICODE"
+                        id="ember2008"
+                        className="ms-auto"
+                      ></img>
+                    </Col>
+                    <Col xs={10}>
+                      <h5 className="mb-0">{exp.role}</h5>
+                      <p className="mb-0">{exp.company}</p>
+                      <p className="mb-0">{exp.startDate}</p>
+                      <p>{exp.area}</p>
+                    </Col>
+                  </Row>
+                );
+              })}
         </Container>
       </Container>
     )
