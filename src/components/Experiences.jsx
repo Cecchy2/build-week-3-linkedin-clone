@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createExp, getExp } from "../redux/actions";
+import { createExp, getExp, uploadExpImage } from "../redux/actions";
 
 const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
   const dispatch = useDispatch();
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const experiences = useSelector(state => state.skills.experiences);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const experiences = useSelector((state) => state.skills.experiences);
   const [experience, setExperience] = useState({
     role: "",
     company: "",
@@ -15,6 +15,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
     description: "",
     area: "",
   });
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     if (profileMe?._id) {
@@ -22,6 +23,23 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
     }
   }, [dispatch, profileMe]);
 
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    setSelectedImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newExperience = await dispatch(createExp(profileMe._id, experience));
+
+      if (newExperience && selectedImage) {
+        await dispatch(uploadExpImage(profileMe._id, newExperience._id, selectedImage));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     profileMe && (
       <Container className="border rounded-3 my-3 profile-info ">
@@ -50,12 +68,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
               <p className="text-muted fs-6">
                 <span>*</span> indica che è obbligatorio
               </p>
-              <Form
-                onSubmit={e => {
-                  e.preventDefault();
-                  dispatch(createExp(profileMe._id, experience));
-                }}
-              >
+              <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label>Qualifica*</Form.Label>
                   <Form.Control
@@ -63,7 +76,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="qualifica"
                     autoFocus
                     value={experience.role}
-                    onChange={e => setExperience({ ...experience, role: e.target.value })}
+                    onChange={(e) => setExperience({ ...experience, role: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -73,7 +86,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="name@example.com"
                     autoFocus
                     value={experience.company}
-                    onChange={e => setExperience({ ...experience, company: e.target.value })}
+                    onChange={(e) => setExperience({ ...experience, company: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -83,7 +96,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="username"
                     autoFocus
                     value={experience.startDate}
-                    onChange={e => setExperience({ ...experience, startDate: e.target.value })}
+                    onChange={(e) => setExperience({ ...experience, startDate: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -93,7 +106,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="bio"
                     autoFocus
                     value={experience.endDate}
-                    onChange={e => setExperience({ ...experience, endDate: e.target.value })}
+                    onChange={(e) => setExperience({ ...experience, endDate: e.target.value })}
                   />
                 </Form.Group>{" "}
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -103,7 +116,7 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="area"
                     autoFocus
                     value={experience.description}
-                    onChange={e => setExperience({ ...experience, description: e.target.value })}
+                    onChange={(e) => setExperience({ ...experience, description: e.target.value })}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -113,8 +126,12 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
                     placeholder="area"
                     autoFocus
                     value={experience.area}
-                    onChange={e => setExperience({ ...experience, area: e.target.value })}
+                    onChange={(e) => setExperience({ ...experience, area: e.target.value })}
                   />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formImage">
+                  <Form.Label>Upload Image</Form.Label>
+                  <Form.Control type="file" placeholder="Upload Image" autoFocus onChange={handleFileChange} />
                 </Form.Group>
                 <Modal.Footer>
                   <Button className="rounded-5 px-3" variant="primary" onClick={handleCloseExp} type="submit">
@@ -127,13 +144,16 @@ const Experiences = ({ handleShowExp, showExp, handleCloseExp }) => {
         </div>
         <Container>
           {experiences.length > 0 &&
-            experiences.slice(0, 4).map(exp => {
+            experiences.slice(0, 4).map((exp) => {
               return (
                 <Row key={exp._id}>
                   <Col xs={2}>
                     <img
                       width="48"
-                      src="https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
+                      src={
+                        exp.image ||
+                        "https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1729123200&amp;v=beta&amp;t=h5xweoh6ztkgY0_oRfROE4Q649H11tcWlMMnHpR8qok"
+                      }
                       loading="lazy"
                       height="48"
                       alt="Logo di EPICODE"
