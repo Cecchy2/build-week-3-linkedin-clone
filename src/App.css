@@ -10,13 +10,6 @@ body {
   padding: 1rem;
   margin-bottom: 0.5rem;
 }
-.aside {
-  padding: 20px;
-  width: 400px;
-  height: 180vh;
-  position: sticky;
-  top: 0;
-}
 .btn-msg {
   border: 1px solid black;
   border-radius: 10px;
@@ -39,7 +32,7 @@ p > span {
 }
 /* NAVBAR */
 .navbar-custom {
-  height: 60px;
+  
   width: 100%;
   
 }
@@ -249,6 +242,9 @@ p > span {
     font-size: 0.8em;
   }
 }
+.info-list li, span  {
+  margin-left: 0;
+}
 /* fine navbar */
 .messageTool {
   bottom: 0;
@@ -448,4 +444,17 @@ margin-left: 20px;
 
 .line-truncate-2 {
   font-size: 0.8rem;
+}
+.bigger-icon{
+  font-size: 2rem;
+}
+
+.bigger-icon:hover{
+  background-color: #d1d0d0;
+}
+.sticky {
+  
+  position: sticky;
+  top: 0; 
+  z-index: 1000; 
 }

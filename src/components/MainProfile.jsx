@@ -12,7 +12,7 @@ import Formazione from "./Fomazione";
 import Competenze from "./Competenze";
 
 const MainProfile = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
 
   const [showExp, setShowExp] = useState(false);
   const dispatch = useDispatch();

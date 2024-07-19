@@ -5,9 +5,9 @@ import { editFetchProfile, editUserAction } from "../redux/actions";
 
 const ModalUserEdit = ({ profileMe = { profileMe } }) => {
   const dispatch = useDispatch();
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setInputValue(prevState => ({
+    setInputValue((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -41,7 +41,7 @@ const ModalUserEdit = ({ profileMe = { profileMe } }) => {
     }
   }, [profileMe]);
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(editUserAction(inputValue));
     dispatch(editFetchProfile(inputValue));
@@ -88,7 +88,7 @@ const ModalUserEdit = ({ profileMe = { profileMe } }) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email address*</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
@@ -99,7 +99,7 @@ const ModalUserEdit = ({ profileMe = { profileMe } }) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Username*</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="username"
@@ -132,7 +132,7 @@ const ModalUserEdit = ({ profileMe = { profileMe } }) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput7">
-              <Form.Label>Area</Form.Label>
+              <Form.Label>Area*</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="area"
