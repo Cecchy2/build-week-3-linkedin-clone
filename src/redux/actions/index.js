@@ -270,9 +270,9 @@ export const getJobs = () => {
   };
 };
 
-export const getComments = (postId) => {
+export const getComments = () => {
   return async (dispatch) => {
-    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/${postId}`;
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/`;
     try {
       const resp = await fetch(baseEndpoint, {
         headers: {
@@ -289,6 +289,7 @@ export const getComments = (postId) => {
     }
   };
 };
+
 export const searchJobs = (query) => {
   return async (dispatch) => {
     const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`;
