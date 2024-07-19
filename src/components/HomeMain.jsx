@@ -101,24 +101,27 @@ const HomeMain = () => {
                     </Button> */}
                   </Col>
                   <Col xs={12} md={10}>
-                    <InputGroup>
+                    <Form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        dispatch(createComment(comment));
+                        setComment({ comment: "", rate: "1", elementId: "" });
+                      }}
+                    >
                       <Form.Control
                         className=" rounded-5"
                         aria-label="Default"
-                        aria-describedby="inputGroup-sizing-default"
+                        type="text"
                         placeholder="crea un post"
                         value={comment.comment}
                         style={{ textDecoration: "none" }}
                         onChange={e => setComment({ ...comment, comment: e.target.value, elementId: post._id })}
                       />
-                    </InputGroup>
-                    <Button
-                      className={!comment.comment ? "d-none" : "d-block rounded-5 py-0 m-3"}
-                      type="submit"
-                      onClick={() => dispatch(createComment(comment))}
-                    >
-                      Pubblica
-                    </Button>
+
+                      <Button className={!comment.comment ? "d-none" : "d-block rounded-5 py-0 m-3"} type="submit">
+                        Pubblica
+                      </Button>
+                    </Form>
                   </Col>
                 </Row>
                 <h5>Commenti</h5>
