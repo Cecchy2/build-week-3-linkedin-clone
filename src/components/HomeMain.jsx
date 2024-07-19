@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Image, InputGroup, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, getComments, getPosts } from "../redux/actions";
+import { createComment, deletePost, getComments, getPosts } from "../redux/actions";
 import ModalPostCreate from "./ModalPostCreate";
 import ModalPostEdit from "./ModalPostEdit";
-import { TbMessage } from "react-icons/tb";
+// import { TbMessage } from "react-icons/tb";
 
 const HomeMain = () => {
   const profileMe = useSelector(state => state.userProfile.meUser);
   const postsList = useSelector(state => state.postsList.posts);
   const dispatch = useDispatch();
-  const [selectedPost, setSelectedPost] = useState(null);
+  // const [selectedPost, setSelectedPost] = useState(null);
 
   const [comment, setComment] = useState({
     comment: "",
-    rate: "",
-    postId: "",
+    rate: "1",
+    elementId: "",
   });
 
   const commentsList = useSelector(state => state.commentsList.comments);
@@ -27,14 +27,14 @@ const HomeMain = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const handlePostClick = (postId) => {
-    if (selectedPost === postId) {
-      setSelectedPost(null);
-    } else {
-      setSelectedPost(postId);
-      dispatch(getComments(postId));
-    }
-  };
+  // const handlePostClick = postId => {
+  //   if (selectedPost === postId) {
+  //     setSelectedPost(null);
+  //   } else {
+  //     setSelectedPost(postId);
+  //     dispatch(getComments(postId));
+  //   }
+  // };
 
   return (
     <>
@@ -59,7 +59,7 @@ const HomeMain = () => {
                     <Card.Title>{post.username}</Card.Title>
                   </Container>
                   <Container className="p-0 d-flex justify-content-end">
-                    {profileMe._id === post.user._id ? (
+                    {profileMe._id === post._id ? (
                       <>
                         <ModalPostEdit userId={post._id} postText={post.text} />
                         <Button className="bg-transparent border border-0">
@@ -88,25 +88,52 @@ const HomeMain = () => {
               </Card.Body>
               <Container>
                 <Row>
-                  <Col>
-                    <Button
+                  <Col xs={12} md={2}>
+                    <Image className="rounded-circle" src={profileMe.image} width="50" height="50" />
+                    {/* <Button
                       variant="custom"
                       onClick={() => {
-                        handlePostClick(setselectedPost());
+                        handlePostClick(selectedPost);
+                        
                       }}
                     >
                       <TbMessage />
+                    </Button> */}
+                  </Col>
+                  <Col xs={12} md={10}>
+                    <InputGroup>
+                      <Form.Control
+                        className=" rounded-5"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        placeholder="crea un post"
+                        value={comment.comment}
+                        style={{ textDecoration: "none" }}
+                        onChange={e => setComment({ ...comment, comment: e.target.value, elementId: post._id })}
+                      />
+                    </InputGroup>
+                    <Button
+                      className={!comment.comment ? "d-none" : "d-block rounded-5 py-0 m-3"}
+                      type="submit"
+                      onClick={() => dispatch(createComment(comment))}
+                    >
+                      Pubblica
                     </Button>
                   </Col>
                 </Row>
+                <h5>Commenti</h5>
                 {commentsList
-                  .filter((comment) => comment._id === post._id)
-                  .map((comment) => {
+                  .filter(comment => comment.elementId === post._id)
+                  .map(comment => {
                     return (
-                      <div key={comment._id}>
-                        <h5>{comment.author}</h5>
-                        <p>{comment.comment}</p>
-                      </div>
+                      <Container key={comment._id}>
+                        <ListGroup className="bg-secondary rounded-4 my-2">
+                          <ListGroupItem>
+                            <h5>{comment.author}</h5>
+                            <p>{comment.comment}</p>
+                          </ListGroupItem>
+                        </ListGroup>
+                      </Container>
                     );
                   })}
               </Container>
