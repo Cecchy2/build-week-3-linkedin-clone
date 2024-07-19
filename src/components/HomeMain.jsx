@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Image, InputGroup, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Image, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, deletePost, getComments, getPosts } from "../redux/actions";
+import { createComment, deleteComment, deletePost, getComments, getPosts } from "../redux/actions";
 import ModalPostCreate from "./ModalPostCreate";
 import ModalPostEdit from "./ModalPostEdit";
 // import { TbMessage } from "react-icons/tb";
@@ -136,6 +136,29 @@ const HomeMain = () => {
                             <p>{comment.comment}</p>
                           </ListGroupItem>
                         </ListGroup>
+                        {profileMe._id === comment.elementId ? (
+                          <>
+                            {/* <ModalPostEdit userId={post._id} postText={post.text} /> */}
+                            <Button className="bg-transparent border border-0">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="15"
+                                height="15"
+                                fill="black"
+                                className="bi bi-trash-fill"
+                                viewBox="0 0 16 16"
+                                onClick={() => {
+                                  dispatch(deleteComment(comment._id));
+                                  dispatch(getComments());
+                                }}
+                              >
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                              </svg>
+                            </Button>
+                          </>
+                        ) : (
+                          <></>
+                        )}
                       </Container>
                     );
                   })}

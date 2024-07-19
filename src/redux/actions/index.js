@@ -292,6 +292,28 @@ export const createComment = comment => {
   };
 };
 
+export const deleteComment = commentId => {
+  return async dispatch => {
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/${commentId}`;
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+
+        dispatch(getPosts());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const searchJobs = query => {
   return async dispatch => {
     const baseEndpoint = `https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`;
