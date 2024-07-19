@@ -39,8 +39,8 @@ const MainProfile = () => {
                 bottone
               </Button>
               <Image
-                className="w-100"
-                src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
+                className="w-100 object-fit-cover"
+                src={profileMe.image}
                 alt="profile banner"
                 style={{ maxHeight: "25vh" }}
               />
