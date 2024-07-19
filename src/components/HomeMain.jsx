@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createComment, deleteComment, deletePost, getComments, getPosts } from "../redux/actions";
 import ModalPostCreate from "./ModalPostCreate";
 import ModalPostEdit from "./ModalPostEdit";
+import { TbMessage } from "react-icons/tb";
 // import { TbMessage } from "react-icons/tb";
 
 const HomeMain = () => {
@@ -11,15 +12,13 @@ const HomeMain = () => {
   const postsList = useSelector(state => state.postsList.posts);
   const commentsList = useSelector(state => state.commentsList.comments);
   const dispatch = useDispatch();
-  // const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const [comment, setComment] = useState({
     comment: "",
     rate: "1",
     elementId: "",
   });
-
-  const commentsList = useSelector(state => state.commentsList.comments);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -33,8 +32,6 @@ const HomeMain = () => {
       dispatch(getComments(postId));
     }
   };
-
-  const postComments = commentsList.filter(comment => comment.postId === selectedPost);
 
   return (
     <>
@@ -85,6 +82,13 @@ const HomeMain = () => {
               </Container>
               <Card.Text>{post.text}</Card.Text>
             </Card.Body>
+            <Row>
+              <Col>
+                <Button variant="custom" onClick={() => handlePostClick(post._id)}>
+                  <TbMessage />
+                </Button>
+              </Col>
+            </Row>
             <Container>
               {selectedPost === post._id && (
                 <>
