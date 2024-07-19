@@ -7,6 +7,7 @@ import { FcLibrary } from "react-icons/fc";
 import { FcGlobe } from "react-icons/fc";
 import { FcShop } from "react-icons/fc";
 import { FcVoicePresentation } from "react-icons/fc";
+import Footer from './Footer'
 
 const JobsComponent = () => {
   const dispatch = useDispatch();
@@ -72,9 +73,16 @@ const JobsComponent = () => {
               <div dangerouslySetInnerHTML={{ __html: selectedJob.description }}></div>
             </div>
           </Col>
+        
+          
         )}
+        <Col xs={12} md={2} className="px-0 ms-3"> 
+        <Footer/>
+        </Col>
       </Row>
+
     </Container>
+    
   );
 };
 

@@ -5,7 +5,7 @@ import { faBriefcase, faCog, faStar, faInfoCircle, faPen } from "@fortawesome/fr
 const JobsLeftAside = () => {
   return (
     <>
-      <div className="bg-white p-3 rounded mb-3 p-0" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
+      <div className="sticky bg-white p-3 rounded mb-3 p-0" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" }}>
         <Row className="mb-2">
           <Col>
             <Button variant="custom" className="w-100 d-flex align-items-center custom-button text-start p-0">
