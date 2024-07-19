@@ -21,9 +21,9 @@ const AsideProfile = () => {
 
         {listProfiles.length > 0 &&
           listProfiles.slice(24, 28).map((profile) => (
-            <Container key={profile._id} className="p-0">
+            <Container key={profile._id} className="p-3">
               <Row className="align-items-center">
-                <Col xs={3} className="p-0">
+                <Col xs={3}>
                   <Image
                     src={profile.image}
                     roundedCircle
@@ -31,16 +31,20 @@ const AsideProfile = () => {
                     style={{ width: "55px", height: "55px", objectFit: "cover" }}
                   />
                 </Col>
-                <Col xs={9}>
+                <Col xs={9} className="d-flex justify-content-center">
                   <p className="text-black fw-bold mb-0">
                     {profile.name} {profile.surname} <br />
                     <span className="text-secondary">{profile.title}</span>
                   </p>
                 </Col>
               </Row>
-              <div className="btn-msg mt-2">
-                <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-              </div>
+              <Row>
+                <Col className="d-flex justify-content-center">
+                  <div className="btn-msg mt-2">
+                    <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
+                  </div>
+                </Col>
+              </Row>
               <hr />
             </Container>
           ))}
@@ -53,7 +57,7 @@ const AsideProfile = () => {
         </div>
         {listProfiles.length > 0 &&
           listProfiles.slice(40, 45).map((profile) => (
-            <Container key={profile._id} className="p-0">
+            <Container key={profile._id} className="p-3">
               <Row className="align-items-center">
                 <Col xs={3} className="p-0">
                   <Image
@@ -63,16 +67,20 @@ const AsideProfile = () => {
                     style={{ width: "55px", height: "55px", objectFit: "cover" }}
                   />
                 </Col>
-                <Col xs={9}>
+                <Col xs={9} className="d-flex justify-content-center">
                   <p className="text-black fw-bold mb-0">
                     {profile.name} {profile.surname} <br />
                     <span className="text-secondary">{profile.title}</span>
                   </p>
                 </Col>
               </Row>
-              <div className="btn-msg mt-2">
-                <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
-              </div>
+              <Row>
+                <Col className="d-flex justify-content-center">
+                  <div className="btn-msg mt-2">
+                    <i className="fa fa-paper-plane me-2" aria-hidden="true"></i>Messaggio
+                  </div>
+                </Col>
+              </Row>
               <hr />
             </Container>
           ))}

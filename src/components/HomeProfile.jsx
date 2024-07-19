@@ -6,7 +6,7 @@ const HomeProfile = () => {
   return (
     <Container fluid className="px-3">
       <Row className="justify-content-center">
-        <Col xs={12} md={8} lg={7}>
+        <Col xs={12} md={8} lg={6}>
           <MainProfile />
         </Col>
         <Col xs={12} md={4} lg={3}>

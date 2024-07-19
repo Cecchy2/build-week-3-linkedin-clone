@@ -445,3 +445,10 @@ margin-left: 20px;
 .line-truncate-2 {
   font-size: 0.8rem;
 }
+.bigger-icon{
+  font-size: 2rem;
+}
+
+.bigger-icon:hover{
+  background-color: #d1d0d0;
+}

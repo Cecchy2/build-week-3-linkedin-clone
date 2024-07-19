@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Col, Button } from "react-bootstrap";
-import Footer from "./Footer"
+import { Button } from "react-bootstrap";
+import Footer from "./Footer";
 
 const Notizie = () => {
   const [mostraAltro, setMostraAltro] = useState(false);
@@ -65,7 +65,7 @@ const Notizie = () => {
           {mostraAltro ? "Nascondi altro" : "Mostra altro"}
         </Button>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

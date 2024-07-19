@@ -1,8 +1,12 @@
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
 import { getJobs } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import JobsLeftAside from "./JobsLeftAside";
+import { FcLibrary } from "react-icons/fc";
+import { FcGlobe } from "react-icons/fc";
+import { FcShop } from "react-icons/fc";
+import { FcVoicePresentation } from "react-icons/fc";
 
 const JobsComponent = () => {
   const dispatch = useDispatch();
@@ -29,6 +33,20 @@ const JobsComponent = () => {
 
         <Col xs={12} md={6} className="px-1">
           <Container className="bg-white p-3 rounded">
+            <h4>Esplora le offerte di lavoro</h4>
+            <Button variant="link" className="bigger-icon me-5">
+              <FcLibrary />
+            </Button>
+            <Button variant="link" className="bigger-icon me-5">
+              <FcGlobe />
+            </Button>
+            <Button variant="link" className="bigger-icon me-5">
+              <FcShop />
+            </Button>
+            <Button variant="link" className="bigger-icon me-5">
+              <FcVoicePresentation />
+            </Button>
+            <hr />
             {jobs
               .slice()
               .reverse()
