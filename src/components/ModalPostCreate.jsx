@@ -125,23 +125,22 @@ const ModalPostCreate = () => {
               onChange={e => setPost({ ...post, text: e.target.value })}
             />
           </InputGroup>
-          <Image
-            className="object-fit-cover m-2"
-            src={selectedImage ? URL.createObjectURL(selectedImage) : <></>}
-            width="450"
-            height="250"
-          />
+          {selectedImage && (
+            <Image
+              className="object-fit-cover m-2"
+              src={selectedImage ? URL.createObjectURL(selectedImage) : <></>}
+              width="450"
+              height="250"
+            />
+          )}
           <Modal.Body className="border border-top-1 d-flex justify-content-between">
             <Form>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Carica una nuova immagine</Form.Label>
                 <Form.Control type="file" onChange={handleImageChange} />
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Carica
-              </Button>
             </Form>
-            <Button className="rounded-pill" disabled={!post.text} type="submit" onClick={() => setLgShow(false)}>
+            <Button className="rounded-5" disabled={!post.text} type="submit" onClick={() => setLgShow(false)}>
               Pubblica
             </Button>
           </Modal.Body>
