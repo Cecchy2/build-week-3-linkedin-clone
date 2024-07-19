@@ -182,20 +182,20 @@ export const getPosts = () => {
   };
 };
 
-export const createPosts = post => {
+export const createComments = comment => {
   return async dispatch => {
-    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/posts`;
+    const baseEndpoint = `https://striveschool-api.herokuapp.com/api/comments/`;
     try {
       const resp = await fetch(baseEndpoint, {
         method: "POST",
-        body: JSON.stringify(post),
+        body: JSON.stringify(comment),
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
       if (resp.ok) {
-        const result = await resp.json(post);
+        const result = await resp.json(comment);
         console.log(result);
         dispatch(getPosts());
       }
