@@ -452,3 +452,9 @@ margin-left: 20px;
 .bigger-icon:hover{
   background-color: #d1d0d0;
 }
+.sticky {
+  
+  position: sticky;
+  top: 0; 
+  z-index: 1000; 
+}

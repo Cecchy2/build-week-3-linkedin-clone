@@ -7,8 +7,8 @@ import ModalPostEdit from "./ModalPostEdit";
 import { TbMessage } from "react-icons/tb";
 
 const HomeMain = () => {
-  const profileMe = useSelector((state) => state.userProfile.meUser);
-  const postsList = useSelector((state) => state.postsList.posts);
+  const profileMe = useSelector(state => state.userProfile.meUser);
+  const postsList = useSelector(state => state.postsList.posts);
   const dispatch = useDispatch();
   const [commentOn, setCommentOn] = useState();
 
@@ -33,9 +33,10 @@ const HomeMain = () => {
         </Row>
       </Container>
       <Container>
-        {[...postsList].reverse().map((post) => {
+        {[...postsList].reverse().map(post => {
           return (
             <Card className="mt-3" key={post._id}>
+              <Image className="img-fluid w-100 overflow-hidden" src={post.image} />
               <Card.Body>
                 <Container className="d-flex justify-content-between aling-items-center p-0">
                   <Container className="p-0">
@@ -44,7 +45,7 @@ const HomeMain = () => {
                   <Container className="p-0 d-flex justify-content-end">
                     {profileMe._id === post.user._id ? (
                       <>
-                        <ModalPostEdit userId={post._id} />
+                        <ModalPostEdit userId={post._id} postText={post.text} />
                         <Button className="bg-transparent border border-0">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +56,7 @@ const HomeMain = () => {
                             viewBox="0 0 16 16"
                             onClick={() => {
                               dispatch(deletePost(post._id));
+                              dispatch(getPosts());
                             }}
                           >
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
