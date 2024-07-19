@@ -102,6 +102,36 @@ export const createExp = (userId, data) => {
         const result = await resp.json();
         console.log(result);
         dispatch(getExp(userId));
+        return result;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const uploadExpImage = (userId, expId, file) => {
+  return async (dispatch) => {
+    const baseEndpoint = ` https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`;
+    const formData = new FormData();
+    formData.append("experience", file);
+
+    try {
+      const resp = await fetch(baseEndpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log(result);
+        dispatch(getExp(userId));
+        return result;
       } else {
         throw new Error();
       }
