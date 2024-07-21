@@ -24,6 +24,10 @@ const JobsComponent = () => {
     setSelectedJob(job);
   };
 
+  const handleSliceMore = () => {
+    setSliceMore(sliceMore + 20);
+  };
+
   return (
     <Container className="mt-4">
       <Row>
@@ -49,7 +53,7 @@ const JobsComponent = () => {
               <FcVoicePresentation />
             </Button>
             <hr />
-            {jobs.slice(0, { sliceMore }).map((job, index) => (
+            {jobs.slice(0, sliceMore).map((job, index) => (
               <div key={job._id} onClick={() => handleCardClick(job)} className="mb-3">
                 <h5>{job.title}</h5>
                 <h6 className="text-muted">{job.company_name}</h6>
@@ -60,6 +64,9 @@ const JobsComponent = () => {
                 {index < jobs.length - 1 && <hr />}
               </div>
             ))}
+            <Button className="d-block ms-auto" onClick={handleSliceMore}>
+              altri...
+            </Button>
           </Container>
         </Col>
 
