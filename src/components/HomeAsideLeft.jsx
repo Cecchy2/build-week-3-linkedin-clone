@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileMe } from "../redux/actions";
 
 const HomeAsideLeft = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
   console.log(profileMe);
 
@@ -18,7 +18,7 @@ const HomeAsideLeft = () => {
         <div className="p-0 position-relative">
           <Image
             className="img-fluid w-100"
-            src="https://media.licdn.com/dms/image/D4D16AQFsGlm6VDoeXg/profile-displaybackgroundimage-shrink_350_1400/0/1720601266129?e=1726704000&v=beta&t=4S9lvM6oCsEmZvwmBWICewK5cjTLixOITQDewadEhug"
+            src={profileMe?.image}
             alt="profile banner"
             style={{ maxHeight: "25vh" }}
           />
