@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 import { QUERY, searchJobs } from "../redux/actions";
 
 function MyNavbar() {
-  const profileMe = useSelector(state => state.userProfile.meUser);
-  const query = useSelector(state => state.jobList.query);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
+  const query = useSelector((state) => state.jobList.query);
   const dispatch = useDispatch();
 
   const [searchExpanded, setSearchExpanded] = useState(false);
@@ -31,11 +31,11 @@ function MyNavbar() {
     };
   }, []);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: QUERY, payload: e.target.value });
   };
 
-  const handleSubmitSearch = e => {
+  const handleSubmitSearch = (e) => {
     e.preventDefault();
     dispatch(searchJobs(query));
   };
@@ -114,13 +114,7 @@ function MyNavbar() {
             </Nav.Link>
             <Nav.Link href="#me" className="nav-item-custom">
               <span>
-                <img
-                  width="30"
-                  src="https://media.licdn.com/dms/image/C5603AQEsE-ujh9vJ1w/profile-displayphoto-shrink_100_100/0/1619603516362?e=1726704000&v=beta&t=BJ5CPVL_8Mr5SGuxa-PZ_mRF5EjekPnP5F2TqyfM45E"
-                  height="30"
-                  alt="Umberto Amoroso"
-                  className="profile-photo"
-                />{" "}
+                <img width="30" src={profileMe?.image} height="30" alt="Umberto Amoroso" className="profile-photo" />{" "}
               </span>
 
               <Dropdown align="end" title="Dropdown" id="dropdown-menu-align-end">

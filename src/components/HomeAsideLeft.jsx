@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileMe } from "../redux/actions";
 
 const HomeAsideLeft = () => {
-  const profileMe = useSelector(state => state.userProfile.meUser);
+  const profileMe = useSelector((state) => state.userProfile.meUser);
   const dispatch = useDispatch();
   console.log(profileMe);
 
