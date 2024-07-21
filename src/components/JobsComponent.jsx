@@ -54,14 +54,30 @@ const JobsComponent = () => {
             </Button>
             <hr />
             {jobs.slice(0, sliceMore).map((job, index) => (
-              <div key={job._id} onClick={() => handleCardClick(job)} className="mb-3">
-                <h5>{job.title}</h5>
-                <h6 className="text-muted">{job.company_name}</h6>
-                <div className="d-flex">
-                  <p className="mb-1">{job.job_type}</p>
-                  <p className="ms-auto mb-1">{job.candidate_required_location}</p>
-                </div>
-                {index < jobs.length - 1 && <hr />}
+              <div key={job._id} onClick={() => handleCardClick(job)} className="mb-3 d-flex">
+                <Row>
+                  <Col xs={3}>
+                    {job.image ? (
+                      <img src="job.image" alt="logo azienda" className="object-fit-cover w-100" />
+                    ) : (
+                      <img
+                        src="https://media.gettyimages.com/id/1180187740/it/foto/vista-aerea-della-folla-collegata-da-linee.jpg?s=1024x1024&w=gi&k=20&c=etJZ_jJeSSCb1yZQX61UTS5PAW_djBkhDQUbsNhtUjw="
+                        alt="logo azienda"
+                        className="object-fit-cover w-100"
+                      />
+                    )}
+                  </Col>
+                  <Col xs={9}>
+                    <h5>{job.title}</h5>
+                    <h6 className="text-muted">{job.company_name}</h6>
+                    <div className="d-flex">
+                      <p className="mb-1">{job.job_type}</p>
+                      <p className="ms-auto mb-1">{job.candidate_required_location}</p>
+
+                      {index < jobs.length - 1 && <hr />}
+                    </div>
+                  </Col>
+                </Row>
               </div>
             ))}
             <Button className="d-block ms-auto" onClick={handleSliceMore}>
