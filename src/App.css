@@ -259,9 +259,6 @@ p > span {
   height: 70px;
 }
 
-.messageTool.open {
-  bottom: 0;
-}
 
 .dropdown-menu-custom {
   display: none;
